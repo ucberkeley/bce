@@ -1,0 +1,7 @@
+# R, RStudio
+msg="BCE: Installing RStudio..."
+echo "$msg"
+RSTUDIO_URL=http://download1.rstudio.org/rstudio-0.98.1091-amd64.deb
+curl -L -O ${RSTUDIO_URL} && \
+dpkg -i $(basename ${RSTUDIO_URL}) && \
+( echo DONE ; etckeeper commit "$msg" ) || echo FAIL

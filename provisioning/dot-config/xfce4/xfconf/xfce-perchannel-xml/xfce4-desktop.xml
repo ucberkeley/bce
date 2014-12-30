@@ -35,6 +35,12 @@
           <property name="color-style" type="int" value="0"/>
           <property name="image-style" type="int" value="0"/>
           <property name="last-image" type="string" value="/usr/share/xfce4/backdrops/xubuntu-wallpaper.png"/>
+          <property name="color1" type="array">
+            <value type="uint" value="0"/>
+            <value type="uint" value="12850"/>
+            <value type="uint" value="25186"/>
+            <value type="uint" value="65535"/>
+          </property>
         </property>
         <property name="workspace1" type="empty">
           <property name="color-style" type="int" value="0"/>

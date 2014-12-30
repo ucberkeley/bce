@@ -15,66 +15,80 @@
 #  - seaborn > husl moss statsmodels
 #  - ipython notebook < pyzmq libzmq3-dev
 
-# Note that for a number of packages below, we don't specify versions. These are
-# unlikely to be used in core examples, and generally the benefit of having more
-# recent code is high
+# Note that for a number of packages below, we don't specify versions. These
+# are unlikely to be used in core examples, and generally the benefit of
+# having more recent code is high
 
-apiclient
-BeautifulSoup
-boilerpipe
-cluster
-Cython>=0.21,<0.22
-envoy
-ez-setup
-Facebook
-feedparser
-Flask
-geopy
-google-api-python-client
-ipython[notebook]>=2,<3
-ipythonblocks
-Jinja2
-lxml
-Markdown
-# There appears to be a problem installing dateutil
-matplotlib>=1.3,<1.5
+JPype1==0.5.7
+husl==4.0.1
+werkzeug==0.9.6
+cssselect==0.9.1
+queuelib==1.2.2
+six==1.8.0
+w3lib==1.10.0
+twisted==14.0.2
+markupsafe==0.23
+docutils==0.12
+pygments==2.0.1
+backports.ssl-match-hostname==3.4.0.2
+nose==1.3.4
+pyparsing==2.0.3
+tornado==4.0.2
+charade==1.0.3
+pytz==2014.10
+numpy==1.9.1
+scipy==0.14.0
+ipython[notebook]==2.3.1
+apiclient==1.0.2
+BeautifulSoup==3.2.1
+boilerpipe==1.2.0.0
+cluster==1.2.2
+Cython==0.21.1
+envoy==0.0.3
+ez-setup==0.9
+facebook==0.0
+feedparser==5.1.3
+flask==0.10.1
+geopy==1.6.1
+google-api-python-client==1.3.1
+ipythonblocks==1.6.1
+jinja2==2.7.3
+lxml==3.4.1
+markdown==2.5.2
 # A < 2.0 version of pyparsing is necessary for pydot to work in py2.7
 # But matplotlib requires 2+. So, we use the (not broken) apt package
 # for pydot BEFORE installing this:
-pyparsing
-networkx==1.9
-nltk>=2.0,<2.1
-nose
-numpy>=1.9,<1.10
-oauth
-oauth2
-pandas>=0.15,<0.16
-patsy>=0.3,<0.4
+networkx==1.9.1
+nltk==3.0.0
+oauth==1.0.1
+oauth2==1.5.211
+pandas==0.15.2
+patsy==0.3.0
 # Pelican doesn't keep old versions on PyPI!
-pelican
-prettytable
-PyGithub
-pymongo
-pytest
-PyYAML
-pyzmq
-queuelib
-readline
+pelican==3.5.0
+prettytable==0.7.2
+PyGithub==1.25.2
+pymongo==2.7.2
+pytest==2.6.4
+PyYAML==3.11
+pyzmq==14.4.1
+readline==6.2.4.1
 # Requests 2.4.3 breaks Ubuntu's python-pip (2.3.0 was OK)
 # Another note, apt's python-pip installs requests 2.2.1
 # Going forwards, however, it's hard to prevent installation of newer versions
 # of requests. So, we'll install pip using the script:
 # https://bootstrap.pypa.io/get-pip.py
-requests
-rpy2>=2.4,<2.5
-scikit-learn>=0.15.2,<0.16
-scipy>=0.14,<0.15
-Scrapy==0.22.2
-seaborn
-sklearn-pandas
-Sphinx
-twitter
-twitter-text-py
-virtualenv
-prettyplotlib
-Pillow>=2.5,<2.6
+requests==2.5.1
+rpy2==2.5.4
+scikit-learn==0.15.2
+scrapy==0.24.4
+seaborn==0.5.1
+sklearn_pandas==0.0.9
+sphinx==1.2.3
+twitter==1.15.0
+twitter-text-py==2.0.2
+virtualenv==12.0.4
+prettyplotlib==0.1.7
+Pillow==2.6.1
+matplotlib==1.4.2
+statsmodels==0.6.1

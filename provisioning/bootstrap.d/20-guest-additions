@@ -1,0 +1,28 @@
+echo "BCE: Installing build utilities..."
+# This is more robust - redundancy is not a problem!
+$APT_GET install build-essential dkms xserver-xorg dmidecode curl \
+    software-properties-common && \
+echo DONE || echo FAIL
+
+# An alternative method would be to manually share the directory on the host
+# which actually contains VBoxGuestAdditions.iso. On a Mac that is
+# /Applications/VirtualBox.app/Contents/MacOS/. Just like with the host user's
+# home directory however, there's no convenient variable representing this
+# location within the Shared Folders configuration.
+
+# There's also a `vboxmanage guestcontrol updateadditions` command,
+# but that doesn't seem to work from within Packer.
+
+if [ "${PACKER_BUILDER_TYPE}" == "virtualbox-iso" ]; then
+    msg="BCE: Installing Guest Additions..."
+    echo "$msg"
+    # Currently, we attach the Guest additions iso when using Packer.
+    # The guest extensions end up as a second CD/DVD drive
+    # (/dev/cdrom (aka /dev/sr0) is the Ubuntu ISO)
+    mount /dev/sr1 /mnt && \
+    /mnt/VBoxLinuxAdditions.run -- --force
+    # XXX We break logical chaining here, because it's never working!
+    eject /mnt && \
+    ( echo DONE ; etckeeper commit "$msg" ) || echo FAIL
+    #echo DONE: $msg || echo "FAIL (but not really?):" $msg
+fi

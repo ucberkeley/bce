@@ -1,0 +1,12 @@
+msg="BCE: configure etckeeper with git..."
+echo $msg
+# Track system changes
+$APT_GET install git etckeeper && \
+sed -i -e '/^VCS/s/^/#/' -e '/="git"/s/^#//' /etc/etckeeper/etckeeper.conf && \
+cd /etc && \
+# XXX - after we're done being the BCE provisioner, should we disable this
+# config? i.e., at the end of this script?
+git config --global user.name "BCE provisioner" && \
+git config --global user.email "bce@lists.berkeley.edu" && \
+etckeeper init && \
+echo DONE: $msg || echo FAIL: $msg

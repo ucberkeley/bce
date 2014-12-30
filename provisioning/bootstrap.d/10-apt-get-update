@@ -1,0 +1,4 @@
+msg="BCE: Updating apt cache..."
+echo $msg
+$APT_GET update > /dev/null && \
+echo DONE: $msg || echo FAIL: $msg

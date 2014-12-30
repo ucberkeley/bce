@@ -1,0 +1,59 @@
+msg="BCE: Configure ${BCE_USER} user"
+echo "$msg"
+if [ "${PACKER_BUILDER_TYPE}" == "virtualbox-iso" ]; then
+	# Our user is created in the debian-installer phase
+	adduser ${BCE_USER} vboxsf
+else
+	# Avoid interactive prompts in user creation
+	adduser --disabled-password --gecos "" ${BCE_USER} && \
+	echo ${BCE_USER}:${BCE_USER} | chpasswd
+fi && \
+# Enable our user to login without a password
+adduser ${BCE_USER} nopasswdlogin && \
+( echo DONE ; etckeeper commit "$msg" ) || echo FAIL
+
+# Create a convenient place on the desktop for people to mount
+# their Shared Directories.
+msg="BCE: Configure ${BCE_USER} (and other) desktops"
+echo "$msg"
+if [ "${PACKER_BUILDER_TYPE}" == "amazon-ebs" ]; then
+    # We are initially copying files to the (pre-existing) ubuntu user
+    cp -r /home/ubuntu/.config /home/${BCE_USER}/.config && \
+    chmod 755 /home/ubuntu/setup_ipython_notebook.sh && \
+    cp /home/ubuntu/setup_ipython_notebook.sh /home/${BCE_USER} && \
+    chown -R ${BCE_USER}:${BCE_USER} /home/${BCE_USER}
+else
+    chmod 755 /home/${BCE_USER}/setup_ipython_notebook.sh
+fi && \
+
+# XXX - This may also be appropriate for VMware
+# This provides obvious access to shared folders in VBox
+if [ "${PACKER_BUILDER_TYPE}" == "virtualbox-iso" ]; then
+  sudo -u ${BCE_USER} mkdir /home/${BCE_USER}/Desktop && \
+  sudo -u ${BCE_USER} ln -s /media /home/${BCE_USER}/Desktop/Shared
+fi && \
+echo DONE || echo FAIL
+
+# Automatically login at boot
+if [ "${PACKER_BUILDER_TYPE}" == "virtualbox-iso" ]; then
+	msg="BCE: Automatically login ${BCE_USER} at boot"
+	( cat <<EOF > /etc/lightdm/lightdm.conf
+[SeatDefaults]
+autologin-user=${BCE_USER}
+autologin-user-timeout=0
+EOF
+	) && \
+	( echo DONE ; etckeeper commit "$msg" ) || echo FAIL
+fi
+
+## For if/when we don't want a display manager
+#     msg="BCE: Use an upstart service to automatically login ${BCE_USER} at boot"
+#     echo "$msg"
+#     ( cat <<EOF > /etc/init/bce-${BCE_USER}-desktop.conf && \
+# # Run startx on tty7 as our user
+# start on runlevel [23]
+# stop on runlevel [!23]
+# respawn
+# exec /bin/openvt -fwc 7 -- /bin/su -c /usr/bin/startx ${BCE_USER}
+# EOF
+# )

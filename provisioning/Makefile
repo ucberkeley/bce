@@ -4,7 +4,7 @@
 # See: http://mywiki.wooledge.org/BashFAQ/055
 # ps - Bash is just a crazy sorthand for some C code
 
-JSON=BCE-14.04-amd64.json
+JSON=BCE-14.10-amd64.json
 
 all: vbox ec2
 
@@ -12,4 +12,5 @@ ec2:
 	packer build -only=amazon-ebs     $(JSON) 2>&1 | tee packer-$@-out.log
 
 vbox:
+	export PACKER_LOG=1 PACKER_LOG_PATH=packer.log
 	packer build -only=virtualbox-iso $(JSON) 2>&1 | tee packer-$@-out.log

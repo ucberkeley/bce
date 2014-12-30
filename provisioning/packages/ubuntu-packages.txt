@@ -73,6 +73,8 @@ gedit-r-plugin
 gedit-latex-plugin
 gedit-source-code-browser-plugin
 
+vim
+
 # Minimal XFCE4 environment
 
 thunar-vcs-plugin
@@ -88,3 +90,6 @@ xubuntu-default-settings
 
 # Maybe also xfce4-mount-plugin? Doesn't seem to fix the problem with
 # not auto-mounting VBox shared folders.
+
+# The default theme has hot-pink highlights?!
+murrine-themes

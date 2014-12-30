@@ -1,0 +1,13 @@
+msg="BCE: Installing add-on R packages..."
+echo "$msg"
+Rscript -e "pkgs <- scan('/tmp/packages/R-packages.txt', what = 'character'); \
+install.packages(pkgs, repos = 'http://cran.cnr.berkeley.edu')" && \
+echo DONE: $msg || echo FAIL: $msg
+
+msg="BCE: Adding R to Development menu..."
+echo "$msg"
+sed -i \
+	-e '/^Categories=/s/Graphics;//' \
+	-e '/^Categories=/s/=/=Development;/' \
+	/usr/share/applications/R.desktop && \
+echo DONE: $msg || echo FAIL: $msg

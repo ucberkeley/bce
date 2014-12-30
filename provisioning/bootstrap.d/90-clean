@@ -1,0 +1,7 @@
+msg="BCE: Removing unneeded X11 packages"
+echo "$msg"
+$APT_GET --purge remove xscreensaver xscreensaver-data && \
+echo DONE: $msg || echo FAIL: $msg
+
+# Clean up the image before we export it
+$APT_GET clean
