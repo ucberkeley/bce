@@ -1,0 +1,80 @@
+# **< = requires package ; > = pulls in**
+#
+#  - boilerpipe < default-jre default-jdk
+#  - boilerpipe > JPype1 charade
+#  - rpy2 < liblzma-dev
+#  - pyyaml < libyaml-dev
+#  - pandas > dateutil pytz numpy
+#  - ipython > tornado pyparsing nose backports.ssl-match-hostname
+#  - sphinx > Pygments docutils Jinja2 markupsafe
+#  - scrapy > Twisted w3lib queuelib cssselect
+#  - scrapy < libxslt1-dev libssl-dev
+#  - flask > Werkzeug itsdangerous
+#  - ipythonblocks < ez_setup
+#  - seaborn < patsy
+#  - seaborn > husl moss statsmodels
+#  - ipython notebook < pyzmq libzmq3-dev
+
+# Note that for a number of packages below, we don't specify versions. These are
+# unlikely to be used in core examples, and generally the benefit of having more
+# recent code is high
+
+apiclient
+BeautifulSoup
+boilerpipe
+cluster
+Cython>=0.21,<0.22
+envoy
+ez-setup
+Facebook
+feedparser
+Flask
+geopy
+google-api-python-client
+ipython[notebook]>=2,<3
+ipythonblocks
+Jinja2
+lxml
+Markdown
+# There appears to be a problem installing dateutil
+matplotlib>=1.3,<1.5
+# A < 2.0 version of pyparsing is necessary for pydot to work in py2.7
+# But matplotlib requires 2+. So, we use the (not broken) apt package
+# for pydot BEFORE installing this:
+pyparsing
+networkx==1.9
+nltk>=2.0,<2.1
+nose
+numpy>=1.9,<1.10
+oauth
+oauth2
+pandas>=0.15,<0.16
+patsy>=0.3,<0.4
+# Pelican doesn't keep old versions on PyPI!
+pelican
+prettytable
+PyGithub
+pymongo
+pytest
+PyYAML
+pyzmq
+queuelib
+readline
+# Requests 2.4.3 breaks Ubuntu's python-pip (2.3.0 was OK)
+# Another note, apt's python-pip installs requests 2.2.1
+# Going forwards, however, it's hard to prevent installation of newer versions
+# of requests. So, we'll install pip using the script:
+# https://bootstrap.pypa.io/get-pip.py
+requests
+rpy2>=2.4,<2.5
+scikit-learn>=0.15.2,<0.16
+scipy>=0.14,<0.15
+Scrapy==0.22.2
+seaborn
+sklearn-pandas
+Sphinx
+twitter
+twitter-text-py
+virtualenv
+prettyplotlib
+Pillow>=2.5,<2.6

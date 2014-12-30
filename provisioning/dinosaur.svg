@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.4, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1"
+	 id="svg7384" inkscape:version="0.47 r22583" sodipodi:docname="computer-symbolic.svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:dc="http://purl.org/dc/elements/1.1/"
+	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16px" height="16px"
+	 viewBox="0 0 16 16" enable-background="new 0 0 16 16" xml:space="preserve">
+<sodipodi:namedview  id="namedview88" inkscape:pageopacity="1" inkscape:snap-grids="true" inkscape:snap-to-guides="true" inkscape:window-height="690" inkscape:current-layer="layer10" inkscape:snap-global="true" inkscape:bbox-paths="false" inkscape:pageshadow="2" inkscape:window-width="1310" inkscape:window-maximized="0" inkscape:guide-bbox="true" inkscape:window-y="24" inkscape:snap-bbox="true" inkscape:window-x="54" inkscape:snap-nodes="false" inkscape:object-nodes="true" bordercolor="#666666" showborder="false" guidetolerance="10" pagecolor="#555753" inkscape:cy="1.9877666" borderopacity="1" objecttolerance="10" showgrid="false" showguides="true" inkscape:cx="15.507" inkscape:zoom="11.313708" gridtolerance="10">
+	
+		<inkscape:grid  id="grid4866" type="xygrid" snapvisiblegridlinesonly="true" visible="true" enabled="true" empspacing="2" spacingy="1px" spacingx="1px">
+		</inkscape:grid>
+</sodipodi:namedview>
+<title  id="title9167">Gnome Symbolic Icon Theme</title>
+<g id="layer9" transform="translate(-162,-338)" inkscape:groupmode="layer" inkscape:label="status">
+</g>
+<g id="layer11" transform="translate(-162,-338)" inkscape:groupmode="layer" inkscape:label="apps">
+</g>
+<g id="layer12" transform="translate(-162,-338)" inkscape:groupmode="layer" inkscape:label="actions">
+</g>
+<g id="layer13" transform="translate(-162,-338)" inkscape:groupmode="layer" inkscape:label="places">
+</g>
+<g id="layer14" transform="translate(-162,-338)" inkscape:groupmode="layer" inkscape:label="mimetypes">
+</g>
+<g id="layer15" transform="translate(-162,-338)" inkscape:groupmode="layer" inkscape:label="emblems">
+</g>
+<g id="dinosaur2.psd">
+	<g>
+		<path fill="#FFFFFF" stroke="#231F20" stroke-width="0.2191" stroke-miterlimit="10" d="M3.969,12.935"/>
+		<path fill="#B1B0B0" d="M14.917,14.288c-1.021-0.184-2.082,0.034-3.081-0.295c-0.768-0.252-1.427-0.786-2.076-1.248
+			c-0.938-0.668-1.288-1.812-1.897-2.739C6.946,8.614,5.268,8.058,3.888,7.26C3.033,6.766,2.405,6.056,2.298,5.085
+			c-0.113-1.026-0.04-1.198-0.009-2.236c0.004-0.148,0.196-0.327,0.345-0.423c0.154-0.1,0.382-0.082,0.54-0.178
+			c0.17-0.104,0.361-0.254,0.428-0.429c0.216-0.56-0.323-1.326-0.808-1.558C1.269-0.467,0.758,1.67,0.743,2.652
+			C0.727,3.73,0.803,3.933,0.76,5.009c-0.03,0.739-0.221,1.47-0.293,2.209c-0.063,0.64-0.09,1.288-0.078,1.932
+			c0.011,0.584-0.05,1.131,0.061,1.71c0.248,1.288,0.739,1.057,0.546,2.358c-0.079,0.532-0.684,3.281,0.605,2.329
+			c0.796-0.589-0.046-2.423,1.041-2.824c1.274-0.469,2.746,1.158,1.384,2.101c-0.22,0.151-0.788,0.374-0.658,0.748
+			c0.173,0.499,1.325,0.249,1.717,0.287c0.948,0.093-0.257-1.546,0.674-1.784c0.308-0.078,0.525-0.043,0.744,0.088
+			c0.271,0.162,0.561,0.268,0.855,0.39c1.937,0.803,4.728,0.996,6.703,0.166C14.342,14.601,14.664,14.414,14.917,14.288"/>
+	</g>
+</g>
+</svg>

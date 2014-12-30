@@ -1,0 +1,27 @@
+[Configuration]
+ColorForeground=#000000000000
+ColorBackground=#ffffffffffff
+ColorCursor=#000000000000
+ColorSelection=#999999999999
+ColorSelectionUseDefault=FALSE
+ColorPalette=#000000000000;#ffff00000000;#0000ffff0000;#ffffffff0000;#00000000ffff;#ffff0000ffff;#0000ffffffff;#ffffffffffff;#000000000000;#ffff00000000;#0000ffff0000;#ffffffff0000;#00000000ffff;#ffff0000ffff;#0000ffffffff;#ffffffffffff
+FontName=DejaVu Sans Mono 9
+MiscAlwaysShowTabs=FALSE
+MiscBell=FALSE
+MiscBordersDefault=TRUE
+MiscCursorBlinks=FALSE
+MiscCursorShape=TERMINAL_CURSOR_SHAPE_BLOCK
+MiscDefaultGeometry=80x24
+MiscInheritGeometry=FALSE
+MiscMenubarDefault=TRUE
+MiscMouseAutohide=FALSE
+MiscToolbarDefault=FALSE
+MiscConfirmClose=TRUE
+MiscCycleTabs=TRUE
+MiscTabCloseButtons=TRUE
+MiscTabCloseMiddleClick=TRUE
+MiscTabPosition=GTK_POS_TOP
+MiscHighlightUrls=TRUE
+MiscScrollAlternateScreen=TRUE
+TabActivityColor=#262656568080
+
