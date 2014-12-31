@@ -14,3 +14,6 @@ ec2:
 vbox:
 	PACKER_LOG=1 PACKER_LOG_PATH=packer.log \
 	packer build -only=virtualbox-iso $(JSON) 2>&1 | tee packer-$@-out.log
+
+clean:
+	rm -rf build packer-vbox-out.log packer.log
