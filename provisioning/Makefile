@@ -12,5 +12,5 @@ ec2:
 	packer build -only=amazon-ebs     $(JSON) 2>&1 | tee packer-$@-out.log
 
 vbox:
-	export PACKER_LOG=1 PACKER_LOG_PATH=packer.log
+	PACKER_LOG=1 PACKER_LOG_PATH=packer.log \
 	packer build -only=virtualbox-iso $(JSON) 2>&1 | tee packer-$@-out.log
