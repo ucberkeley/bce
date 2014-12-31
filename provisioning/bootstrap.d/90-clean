@@ -1,7 +1,14 @@
-msg="BCE: Removing unneeded X11 packages"
-echo "$msg"
+echo "BCE: Removing unneeded X11 packages"
 $APT_GET --purge remove xscreensaver xscreensaver-data && \
-echo DONE: $msg || echo FAIL: $msg
+echo "  DONE" || echo "  FAIL"
+
+(
+	echo "BCE: Unsetting BCE provisioner as etckeeper user..."
+	cd /etc
+	git config --global user.name "Oski Bear" && \
+	git config --global user.email "oski@bear" && \
+	echo "  DONE" || echo "  FAIL"
+)
 
 # Clean up the image before we export it
 $APT_GET clean
