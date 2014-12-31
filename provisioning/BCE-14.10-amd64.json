@@ -2,7 +2,7 @@
   "builders": [
     {
       "type": "amazon-ebs",
-      "ami_name": "BCE-2015-spring {{timestamp}}",
+      "ami_name": "BCE-2015-spring-preview {{timestamp}}",
       "instance_type": "m3.medium",
       "region": "us-west-1",
       "ami_regions": "us-west-2",
@@ -14,7 +14,7 @@
       }
     },
     {
-      "vm_name": "BCE-2015-spring",
+      "vm_name": "BCE-2015-spring-preview",
       "disk_size": 16000,
       "output_directory": "build",
       "type": "virtualbox-iso",
@@ -48,13 +48,15 @@
       "guest_additions_mode": "attach",
       "vboxmanage": [
         [
-          "modifyvm",        "{{.Name}}",
-          "--memory",        "1024",
-          "--cpus",          "1",
-          "--clipboard",     "bidirectional",
-          "--draganddrop",   "bidirectional",
-          "--vram",          "128",
-          "--accelerate3d",  "on"
+          "modifyvm",          "{{.Name}}",
+          "--memory",          "1024",
+          "--cpus",            "1",
+          "--clipboard",       "bidirectional",
+          "--draganddrop",     "bidirectional",
+          "--vram",            "128",
+          "--accelerate3d",    "on",
+          "--audio",           "alsa",
+          "--audiocontroller", "ac97"
         ]
       ],
       "guest_os_type": "Ubuntu_64",
