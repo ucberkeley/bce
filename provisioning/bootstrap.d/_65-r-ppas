@@ -12,4 +12,4 @@
 # # Prefer rrutter and c2d4u PPAs
 # apt-add-repository -y ppa:marutter/rrutter && \
 # apt-add-repository -y ppa:marutter/c2d4u && \
-# ( echo DONE: $msg ; etckeeper commit "$msg" ) || echo FAIL: $msg
+# ( echo "  DONE" ; etckeeper commit "$msg" ) || echo "  FAIL"

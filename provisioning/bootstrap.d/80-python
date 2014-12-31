@@ -1,5 +1,4 @@
-msg="BCE: Installing Python modules..."
-echo "$msg"
+echo "BCE: Installing Python modules..."
 # We install pip directly from pypa to avoid conflicts with requests
 curl https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py && \
 python /tmp/get-pip.py && \
@@ -9,15 +8,13 @@ for p in $(egrep -v '^$|^#' /tmp/packages/python-requirements.txt); do
 	echo $cmd
 	$cmd
 done && \
-echo DONE: $msg || echo FAIL: $msg
+echo "  DONE" || echo "  FAIL"
 # This isn't as reliable as doing one at a time
 #pip install --upgrade -r /tmp/packages/python-requirements.txt && \
 
-msg="BCE: Creating python panel menu launchers..."
-echo "$msg"
+echo "BCE: Creating python launchers in panel menu..."
 DESKTOP_DIR=/home/${BCE_USER}/.local/share/applications
-sudo -u ${BCE_USER} mkdir -p ${DESKTOP_DIR}
-
+sudo -u ${BCE_USER} mkdir -p ${DESKTOP_DIR} && \
 (
 	sudo -u ${BCE_USER} cat <<EOF > ${DESKTOP_DIR}/ipython.desktop
 [Desktop Entry]
@@ -74,4 +71,4 @@ StartupNotify=true
 NoDisplay=false
 EOF
 ) && \
-echo DONE: $msg || echo FAIL: $msg
+echo "  DONE" || echo "  FAIL"

@@ -4,4 +4,4 @@ sed -i \
 	-e '/GRUB_HIDDEN_TIMEOUT=/ s/^#//' \
 	-e '/^GRUB_CMDLINE_LINUX_DEFAULT=/ s/".*"/"quiet splash"/' \
 	/etc/default/grub && \
-( echo DONE ; etckeeper commit "$msg" ) || echo FAIL
+( echo "  DONE" ; etckeeper commit "$msg" ) || echo "  FAIL"

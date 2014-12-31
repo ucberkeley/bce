@@ -1,5 +1,4 @@
-msg="BCE: Installing Ubuntu packages..."
-echo "$msg"
+echo "BCE: Installing Ubuntu packages..."
 # This ensures we get security updates, etc.
 # Note that this is ALSO done currently by the debian-installer step...
 $APT_GET dist-upgrade && \
@@ -11,4 +10,4 @@ $APT_GET install --no-install-recommends \
 $APT_GET install $(grep '^[^#]' /tmp/packages/ubuntu-packages.txt) && \
 # help avoid running out of disk space
 $APT_GET clean && \
-echo DONE: $msg  || echo FAIL: $msg
+echo "  DONE"  || echo "  FAIL"

@@ -10,12 +10,9 @@ else
 fi && \
 # Enable our user to login without a password
 adduser ${BCE_USER} nopasswdlogin && \
-( echo DONE ; etckeeper commit "$msg" ) || echo FAIL
+( echo "  DONE" ; etckeeper commit "$msg" ) || echo "  FAIL"
 
-# Create a convenient place on the desktop for people to mount
-# their Shared Directories.
-msg="BCE: Configure ${BCE_USER} (and other) desktops"
-echo "$msg"
+echo "BCE: Configure ${BCE_USER} (and other) desktops"
 if [ "${PACKER_BUILDER_TYPE}" == "amazon-ebs" ]; then
     # We are initially copying files to the (pre-existing) ubuntu user
     cp -r /home/ubuntu/.config /home/${BCE_USER}/.config && \
@@ -25,17 +22,17 @@ if [ "${PACKER_BUILDER_TYPE}" == "amazon-ebs" ]; then
 else
     chmod 755 /home/${BCE_USER}/setup_ipython_notebook.sh
 fi && \
+echo "  DONE" || echo "  FAIL"
 
-# XXX - This may also be appropriate for VMware
-# This provides obvious access to shared folders in VBox
+# Create a convenient place on the desktop for people to mount and access
+# their shared directories. This may also be appropriate for VMware.
 if [ "${PACKER_BUILDER_TYPE}" == "virtualbox-iso" ]; then
-  sudo -u ${BCE_USER} mkdir /home/${BCE_USER}/Desktop && \
-  sudo -u ${BCE_USER} ln -s /media /home/${BCE_USER}/Desktop/Shared
-fi && \
-echo DONE || echo FAIL
+	echo "BCE: Configure shared directory for ${PACKER_BUILDER_TYPE}"
+	sudo -u ${BCE_USER} mkdir /home/${BCE_USER}/Desktop && \
+	sudo -u ${BCE_USER} ln -s /media /home/${BCE_USER}/Desktop/Shared && \
+	echo "  DONE" || echo "  FAIL"
 
-# Automatically login at boot
-if [ "${PACKER_BUILDER_TYPE}" == "virtualbox-iso" ]; then
+	# Automatically login at boot
 	msg="BCE: Automatically login ${BCE_USER} at boot"
 	( cat <<EOF > /etc/lightdm/lightdm.conf
 [SeatDefaults]
@@ -43,7 +40,7 @@ autologin-user=${BCE_USER}
 autologin-user-timeout=0
 EOF
 	) && \
-	( echo DONE ; etckeeper commit "$msg" ) || echo FAIL
+	( echo "  DONE" ; etckeeper commit "$msg" ) || echo "  FAIL"
 fi
 
 ## For if/when we don't want a display manager

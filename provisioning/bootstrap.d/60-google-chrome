@@ -7,4 +7,4 @@ curl -L https://dl-ssl.google.com/linux/linux_signing_key.pub | \
     apt-key add - && \
 $APT_GET update > /dev/null && \
 $APT_GET install google-chrome-stable && \
-echo DONE: $msg  || echo FAIL: $msg
+echo "  DONE"  || echo "  FAIL"

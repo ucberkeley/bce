@@ -1,6 +1,5 @@
 # Python stuff
-msg="BCE: Downloading PyCharm to /opt"
-echo "$msg"
+echoh "BCE: Downloading PyCharm to /opt"
 PYCHARM_DIST=pycharm-community-4.0.3
 PYCHARM_URL=http://download.jetbrains.com/python/${PYCHARM_DIST}.tar.gz
 curl -L -O ${PYCHARM_URL} && \
@@ -8,4 +7,4 @@ tar -C /opt -xzf ${PYCHARM_DIST}.tar.gz && \
 chown -R oski:oski /opt/${PYCHARM_DIST} && \
 rm ${PYCHARM_DIST}.tar.gz && \
 ( cd /usr/local/bin && ln -s /opt/${PYCHARM_DIST}/bin/pycharm.sh ) && \
-echo DONE: $msg || echo FAIL: $msg
+echo "  DONE" || echo "  FAIL"
