@@ -93,3 +93,6 @@ xubuntu-default-settings
 
 # The default theme has hot-pink highlights?!
 murrine-themes
+
+# Linguistics
+alsa-utils
