@@ -1,5 +1,5 @@
-if [ "${PACKER_BUILDER_TYPE}" == "amazon-ebs" ]; then
-    echo "BCE: waiting for cloud-init to finish..."
-    while [ ! -f /var/lib/cloud/instance/boot-finished ]; do sleep 1; done
-    echo "  DONE"
-fi
+if [ "${PACKER_BUILDER_TYPE}" != "amazon-ebs" ]; then return ; fi
+
+echo "BCE: waiting for cloud-init to finish..."
+while [ ! -f /var/lib/cloud/instance/boot-finished ]; do sleep 1; done
+echo "  DONE"
