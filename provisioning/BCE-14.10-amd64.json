@@ -82,6 +82,21 @@
     },
     {
       "type": "file",
+      "source": "dot-local",
+      "destination": "/home/oski/.local",
+      "override": {
+        "amazon-ebs": {
+          "destination": "/home/ubuntu/.local"
+        }
+      }
+    },
+    {
+      "type": "file",
+      "source": "plymouth-theme",
+      "destination": "/tmp/bce"
+    },
+    {
+      "type": "file",
       "source": "setup_ipython_notebook.sh",
       "destination": "/home/oski/setup_ipython_notebook.sh",
       "override": {

@@ -9,11 +9,6 @@
 		<Filename>xfhelp4.desktop</Filename>
 	</Exclude>
 	<AppDir>/home/oski/.local/share/applications</AppDir>
-	<Exclude>
-		<Filename>xubuntu-website.desktop</Filename>
-		<Filename>xubuntu-contribute.desktop</Filename>
-		<Filename>xfce4-about.desktop</Filename>
-	</Exclude>
 	<Menu>
 		<Name>Development</Name>
 		<Include>
@@ -81,6 +76,31 @@
 		</Exclude>
 		<AppDir>/home/oski/.local/share/applications</AppDir>
 	</Menu>
+	<Menu>
+		<Name>Graphics</Name>
+		<Exclude>
+			<Filename>libreoffice-draw.desktop</Filename>
+		</Exclude>
+		<AppDir>/home/oski/.local/share/applications</AppDir>
+		<Exclude>
+			<Filename>gv.desktop</Filename>
+		</Exclude>
+	</Menu>
+	<Menu>
+		<Name>Education</Name>
+		<Exclude>
+			<Filename>libreoffice-math.desktop</Filename>
+		</Exclude>
+		<AppDir>/home/oski/.local/share/applications</AppDir>
+	</Menu>
+	<Exclude>
+		<Filename>exo-mail-reader.desktop</Filename>
+		<Filename>xubuntu-website.desktop</Filename>
+		<Filename>exo-web-browser.desktop</Filename>
+		<Filename>xubuntu-contribute.desktop</Filename>
+		<Filename>xfce4-about.desktop</Filename>
+		<Filename>xfce4-session-logout.desktop</Filename>
+	</Exclude>
 	<Layout>
 		<Merge type="menus"/>
 		<Menuname>Accessories</Menuname>
@@ -96,26 +116,13 @@
 		<Menuname>System</Menuname>
 		<Separator/>
 		<Filename>xfce-settings-manager.desktop</Filename>
-		<Separator/>
 		<Filename>xfhelp4.desktop</Filename>
 		<Filename>xubuntu-website.desktop</Filename>
 		<Filename>xubuntu-contribute.desktop</Filename>
 		<Filename>xfce4-about.desktop</Filename>
 		<Filename>xfce4-session-logout.desktop</Filename>
+		<Filename>exo-mail-reader.desktop</Filename>
+		<Filename>exo-web-browser.desktop</Filename>
 		<Merge type="files"/>
 	</Layout>
-	<Menu>
-		<Name>Graphics</Name>
-		<Exclude>
-			<Filename>libreoffice-draw.desktop</Filename>
-		</Exclude>
-		<AppDir>/home/oski/.local/share/applications</AppDir>
-	</Menu>
-	<Menu>
-		<Name>Education</Name>
-		<Exclude>
-			<Filename>libreoffice-math.desktop</Filename>
-		</Exclude>
-		<AppDir>/home/oski/.local/share/applications</AppDir>
-	</Menu>
 </Menu>
