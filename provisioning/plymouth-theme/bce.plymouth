@@ -1,0 +1,9 @@
+[Plymouth Theme]
+Name=BCE
+Description=Berkeley Common Environment
+ModuleName=script
+
+[script]
+ImageDir=/lib/plymouth/themes/bce
+ScriptFile=/lib/plymouth/themes/bce/bce.script
+
