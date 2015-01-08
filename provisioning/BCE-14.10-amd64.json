@@ -2,7 +2,7 @@
   "builders": [
     {
       "type": "amazon-ebs",
-      "ami_name": "BCE-2015-spring-preview {{timestamp}}",
+      "ami_name": "BCE-2015-spring-preview-2 {{timestamp}}",
       "instance_type": "m3.medium",
       "region": "us-west-1",
       "ami_regions": "us-west-2",
@@ -14,7 +14,7 @@
       }
     },
     {
-      "vm_name": "BCE-2015-spring-preview",
+      "vm_name": "BCE-2015-spring-preview-2",
       "disk_size": 16000,
       "output_directory": "build",
       "type": "virtualbox-iso",
