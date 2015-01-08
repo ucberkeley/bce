@@ -1,5 +1,5 @@
 # Python stuff
-echoh "BCE: Downloading PyCharm to /opt"
+echo "BCE: Downloading PyCharm to /opt"
 PYCHARM_DIST=pycharm-community-4.0.3
 PYCHARM_URL=http://download.jetbrains.com/python/${PYCHARM_DIST}.tar.gz
 curl -L -O ${PYCHARM_URL} && \
