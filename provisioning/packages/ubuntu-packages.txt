@@ -1,14 +1,18 @@
 # Core Python
 
 python-dev
-# Ubuntu's pip conflicts with newer requests, we install with get-pip.py
-# python-pip
+python3.4-dev
+
 python-setuptools
 # Much faster / easier than going the pip way
 python-gtk2-dev
 # pyparsing+pydot (needed for networkx stuff) is currently borked
 # see https://code.google.com/p/pydot/issues/detail?id=81
 python-pydot
+
+# nltk 3.0.0 won't pip install due to setuputils
+# https://github.com/nltk/nltk/issues/824
+python-nltk
 
 # Mostly for networkx
 
