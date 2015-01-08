@@ -1,0 +1,43 @@
+DOC_SCRIPT="/usr/local/bin/update-bce-docs"
+DOC_CACHE="/var/cache/bce-documentation.html"
+DOC_URL="http://ucberkeley.github.io/bce-documentation"
+
+echo "BCE: Creating BCE desktop help icon..."
+DESKTOP_FILE=/home/${BCE_USER}/Desktop/bce-help.desktop
+( sudo -u ${BCE_USER} cat <<EOF > ${DESKTOP_FILE}
+[Desktop Entry]
+Name=Help with BCE
+GenericName=Help with BCE
+Comment=Off-line BCE documentation
+Exec=x-www-browser ${DOC_CACHE}
+Terminal=false
+Type=Application
+StartupNotify=true
+Icon=gnome-help
+Categories=X-XFCE;X-Xfce-Toplevel;
+NoDisplay=false
+EOF
+) && \
+chmod +x ${DESKTOP_FILE} && \
+echo "  DONE" || echo "  FAIL"
+
+msg="BCE: Creating BCE desktop help icon..."
+( cat <<EOF > /etc/cron.d/update-bce-docs
+# Retrieve and cache a valid copy of BCE documentation for off-line access.
+
+@reboot root ${DOC_SCRIPT}
+EOF
+) && \
+( echo "  DONE" ; etckeeper commit "$msg" ) || echo "  FAIL"
+
+echo "BCE: Creating update-bce-docs script..."
+( cat <<EOF > ${DOC_SCRIPT}
+#!/bin/sh
+
+# We bail (-f) on error so as not to overwrite a valid cache
+curl -f -L -o ${DOC_CACHE} ${DOC_URL}
+EOF
+) && \
+chmod +x ${DOC_SCRIPT} && \
+${DOC_SCRIPT} && \
+echo "  DONE" || echo "  FAIL"
