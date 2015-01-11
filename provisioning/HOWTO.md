@@ -5,6 +5,10 @@ Both approaches outlined below will retrieve a minimal Ubuntu 14.04 box and prov
 
 Note that to create a VM for VirtualBox, you'll need a recent version of VirtualBox (in particular the default version on Ubuntu 12.04 is too old - you'll need to install the Ubuntu virtualbox-4.3 package). 
 
+Requirements
+=============================
+* Packer - installation instructions are at https://www.packer.io/intro/getting-started/setup.html
+
 Creating BCE VMs with Packer
 =============================
 
