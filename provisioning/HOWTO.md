@@ -14,13 +14,13 @@ Creating BCE VMs with Packer
 
 For a Virtualbox VM, run:
 
-    $ BCE_PROVISION=BCE packer build BCE-14.04-amd64.json
+    $ make vbox
 
 This creates a virtual machine in the OVA format that can be imported into Virtualbox on Windows, Mac, or UNIX.
 
 To create an Amazon EC2 AMI, set your Amazon security credentials in 'BCE-14.04-amd64-ec2.json' and then run:
 
-    $ BCE_PROVISION=BCE packer build BCE-14.04-amd64-ec2.json
+    $ make ec2
 
 Note that currently when you start up a VM from the resulting AMI, you'll need to first login as the 'ubuntu' user and set up SSH keys for the 'oski' user, which is the user provisioned by BCE.
 
