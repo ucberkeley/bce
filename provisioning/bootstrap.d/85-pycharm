@@ -1,4 +1,4 @@
-# Python stuff
+# Pycharm
 echo "BCE: Downloading PyCharm to /opt"
 PYCHARM_DIST=pycharm-community-4.0.3
 PYCHARM_URL=http://download.jetbrains.com/python/${PYCHARM_DIST}.tar.gz
@@ -7,4 +7,21 @@ tar -C /opt -xzf ${PYCHARM_DIST}.tar.gz && \
 chown -R oski:oski /opt/${PYCHARM_DIST} && \
 rm ${PYCHARM_DIST}.tar.gz && \
 ( cd /usr/local/bin && ln -s /opt/${PYCHARM_DIST}/bin/pycharm.sh ) && \
+echo "  DONE" || echo "  FAIL"
+
+echo "BCE: Create PyCharm launcher in panel menu..."
+(
+	sudo -H -u ${BCE_USER} cat <<EOF > ${DESKTOP_DIR}/pycharm.desktop
+[Desktop Entry]
+Name=PyCharm
+Comment=PyCharm IDE
+Exec=/opt/${PYCHARM_DIST}/bin/pycharm.sh
+Icon=/opt/${PYCHARM_DIST}/bin/pycharm.png
+Terminal=true
+Type=Application
+Categories=Development;
+StartupNotify=true
+NoDisplay=false
+EOF
+) && \
 echo "  DONE" || echo "  FAIL"
