@@ -16,4 +16,4 @@ vbox:
 	packer build -only=virtualbox-iso $(JSON) 2>&1 | tee packer-$@-out.log
 
 clean:
-	rm -rf build packer-*-out.log packer.log
+	rm -rf build packer_cache packer-*-out.log packer.log
