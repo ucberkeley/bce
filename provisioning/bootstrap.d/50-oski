@@ -43,6 +43,8 @@ EOF
 	( echo "  DONE" ; etckeeper commit "$msg" ) || echo "  FAIL"
 fi
 
+export DESKTOP_DIR=/home/${BCE_USER}/.local/share/applications
+
 ## For if/when we don't want a display manager
 #     msg="BCE: Use an upstart service to automatically login ${BCE_USER} at boot"
 #     echo "$msg"
