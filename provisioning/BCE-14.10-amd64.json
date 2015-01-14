@@ -1,8 +1,13 @@
 {
+  "variables": {
+      "bce_host_audio": "alsa",
+      "bce_user": "oski"
+   },
+
   "builders": [
     {
       "type": "amazon-ebs",
-      "ami_name": "BCE-2015-spring-preview-2 {{timestamp}}",
+      "ami_name": "BCE-2015-spring {{timestamp}}",
       "instance_type": "m3.medium",
       "region": "us-west-1",
       "ami_regions": "us-west-2",
@@ -14,7 +19,7 @@
       }
     },
     {
-      "vm_name": "BCE-2015-spring-preview-2",
+      "vm_name": "BCE-2015-spring",
       "disk_size": 16000,
       "output_directory": "build",
       "type": "virtualbox-iso",
@@ -55,40 +60,35 @@
           "--draganddrop",     "bidirectional",
           "--vram",            "128",
           "--accelerate3d",    "on",
-          "--audio",           "alsa",
+          "--audio",           "{{user `bce_host_audio`}}",
           "--audiocontroller", "ac97"
+        ],
+        [
+          "setextradata",      "{{.Name}}",
+          "GUI/SuppressMessages",
+          "remindAboutAutoCapture,remindAboutWrongColorDepth,remindAboutMouseIntegrationOn,remindAboutMouseIntegrationOff,confirmInputCapture,confirmGoingFullscreen"
         ]
       ],
       "guest_os_type": "Ubuntu_64",
       "iso_checksum": "0c1ebea31c3523cfe9a4ffed8bcf6c7d23dfb97b",
       "iso_checksum_type": "sha1",
       "iso_url": "http://releases.ubuntu.com/14.10/ubuntu-14.10-server-amd64.iso",
-      "ssh_username": "oski",
-      "ssh_password": "oski",
+      "ssh_username": "{{user `bce_user`}}",
+      "ssh_password": "{{user `bce_user`}}",
       "ssh_wait_timeout": "3000s",
-      "shutdown_command": "echo 'oski' | sudo -S shutdown -P now"
+      "shutdown_command": "echo '{{user `bce_user`}}' | sudo -S shutdown -P now"
     }
   ],
   "provisioners": [
     {
       "type": "file",
       "source": "dot-config",
-      "destination": "/home/oski/.config",
-      "override": {
-        "amazon-ebs": {
-          "destination": "/home/ubuntu/.config"
-        }
-      }
+      "destination": "/home/{{user `bce_user`}}/.config"
     },
     {
       "type": "file",
       "source": "dot-local",
-      "destination": "/home/oski/.local",
-      "override": {
-        "amazon-ebs": {
-          "destination": "/home/ubuntu/.local"
-        }
-      }
+      "destination": "/home/{{user `bce_user`}}/.local"
     },
     {
       "type": "file",
@@ -97,13 +97,13 @@
     },
     {
       "type": "file",
-      "source": "setup_ipython_notebook.sh",
-      "destination": "/home/oski/setup_ipython_notebook.sh",
-      "override": {
-        "amazon-ebs": {
-          "destination": "/home/ubuntu/setup_ipython_notebook.sh"
-        }
-      }
+      "source": "guest-scripts/setup_ipython_notebook.sh",
+      "destination": "/home/{{user `bce_user`}}/setup_ipython_notebook.sh"
+    },
+    {
+      "type": "file",
+      "source": "guest-scripts/update-bce-docs",
+      "destination": "/tmp/update-bce-docs"
     },
     {
       "type": "file",
@@ -120,17 +120,12 @@
       "script": "bootstrap-bce.sh",
       "environment_vars": ["DEBIAN_PRIORITY=high",
                            "DEBIAN_FRONTEND=noninteractive"],
-      "execute_command": "echo 'oski' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'",
-      "override": {
-        "amazon-ebs": {
-          "execute_command": "echo 'ubuntu' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'"
-        }
-      }
+      "execute_command": "echo '{{user `bce_user`}}' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'"
     },
     {
       "type": "file",
-      "source": "packer-vbox-out.log",
-      "destination": "/var/tmp/packer-vbox-out.log"
+      "source": "packer-vbox.log",
+      "destination": "/var/tmp/packer-vbox.log"
     }
   ]
 }
