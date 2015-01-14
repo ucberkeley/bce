@@ -1,0 +1,14 @@
+# Track system changes
+echo "BCE: configure etckeeper with git..."
+$APT_GET install git && \
+$APT_GET install etckeeper && \
+sed -i -e '/^VCS/s/^/#/' -e '/="git"/s/^#//' /etc/etckeeper/etckeeper.conf && \
+(
+	# We disable this in the last boostrap step, after we're done being the BCE
+	# provisioner.
+	cd /etc && \
+	etckeeper init && \
+	git config --global user.name "BCE provisioner" && \
+	git config --global user.email "bce@lists.berkeley.edu"
+) && \
+echo "  DONE" || echo "  FAIL"

@@ -1,0 +1,3 @@
+echo "BCE: Updating apt cache..."
+$APT_GET update > /dev/null && \
+echo "  DONE" || echo "  FAIL"

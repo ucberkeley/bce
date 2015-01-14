@@ -1,0 +1,5 @@
+# XXX - we should also set sensible defaults for gedit
+msg="BCE: Set a 4-space tabstop for nano"
+echo "$msg"
+sed -i -e '/# set tabsize 8/s/.*/set tabsize 4/' /etc/nanorc && \
+( echo "  DONE" ; etckeeper commit "$msg" ) || echo "  FAIL"

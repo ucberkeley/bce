@@ -1,0 +1,13 @@
+echo "BCE: Installing Ubuntu packages..."
+# This ensures we get security updates, etc.
+# Note that this is ALSO done currently by the debian-installer step...
+$APT_GET dist-upgrade && \
+# The grep bit allows us to have comments in the packages file
+# We install no-recommends first, to avoid them getting pulled in by the other
+# installs
+$APT_GET install --no-install-recommends \
+    $(grep '^[^#]' /tmp/packages/ubuntu-packages-norecommends.txt) && \
+$APT_GET install $(grep '^[^#]' /tmp/packages/ubuntu-packages.txt) && \
+# help avoid running out of disk space
+$APT_GET clean && \
+echo "  DONE"  || echo "  FAIL"

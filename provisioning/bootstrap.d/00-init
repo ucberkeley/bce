@@ -1,0 +1,13 @@
+START_TIME=$(date '+%s')
+
+# apt in general is probably too verbose for our useage - it's hard to detect
+# where actual failures may have occurred. Maybe we can reduce verbosity?
+export APT_GET="apt-get -q -y"
+# APT_GET="apt-get -qq -y"
+
+# This is also referenced in the packer json and in preseed.cfg
+export BCE_USER=oski
+
+# Make the BCE version available to downstream
+export BCE_VERSION="2015-spring"
+echo "BCE_VERSION=${BCE_VERSION}" >> /etc/environment

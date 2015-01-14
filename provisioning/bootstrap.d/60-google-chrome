@@ -1,0 +1,10 @@
+# Google Chrome
+msg="BCE: Installing google chrome..."
+echo "$msg"
+echo "deb http://dl.google.com/linux/chrome/deb/ stable main" > \
+    /etc/apt/sources.list.d/google-chrome.list && \
+curl -L https://dl-ssl.google.com/linux/linux_signing_key.pub | \
+    apt-key add - && \
+$APT_GET update > /dev/null && \
+$APT_GET install google-chrome-stable && \
+echo "  DONE"  || echo "  FAIL"

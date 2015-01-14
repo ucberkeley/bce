@@ -1,0 +1,4 @@
+msg="BCE: Disable sudo password for those in the sudo group"
+echo "$msg"
+printf "%%sudo\tALL=(ALL:ALL) NOPASSWD: ALL\n" > /etc/sudoers.d/nopasswd && \
+( echo "  DONE" ; etckeeper commit "$msg" ) || echo "  FAIL"

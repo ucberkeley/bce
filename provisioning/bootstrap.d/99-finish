@@ -1,0 +1,4 @@
+END_TIME=$(date '+%s')
+
+ELAPSED_SECS=$((END_TIME-START_TIME))
+printf "Elapsed time: %s minutes\n" $((ELAPSED_SECS/60))

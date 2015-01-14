@@ -1,0 +1,95 @@
+function pip_install () {
+	PYTHON="$1"
+	PIP="$2"
+	REQS_FILE="$3"
+	echo "BCE: Installing ${PYTHON} modules from ${REQS_FILE} using ${PIP}..."
+	${PYTHON} /tmp/get-pip.py && \
+	for p in $(egrep -v '^$|^#' ${REQS_FILE}); do
+		echo "============================================================"
+		cmd="${PIP} install --log /home/${BCE_USER}/.cache/pip/${PIP}-${p}.log --upgrade $p"
+		echo $cmd
+		$cmd
+	done && \
+	echo "  DONE" || echo "  FAIL"
+}
+
+# Silence warnings that this doesn't exist
+sudo -H -u oski mkdir -p /home/${BCE_USER}/.cache/pip/log
+
+# We install pip directly from pypa to avoid conflicts with requests
+echo "BCE: Fetching get-pip.py..."
+curl https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py && \
+echo "  DONE" || echo "  FAIL"
+
+# Install the packages, one by one
+pip_install python    pip  /tmp/packages/python-requirements.txt
+pip_install python3.4 pip3 /tmp/packages/python3-requirements.txt
+
+# pip3 automatically changes 'pip' and 'ipython' to their v3 versions. We undo
+# that. I'm copying rather than linking because that is what pip does.
+echo "BCE: Using version 2 for pip and for ipython's executables."
+for b in pip ipython ipcluster ipcontroller ipengine iptest ; do
+	rm /usr/local/bin/${b} && \
+	cp -p /usr/local/bin/${b}2 /usr/local/bin/${b}
+done && \
+echo "  DONE" || echo "  FAIL"
+
+echo "BCE: Creating python launchers in panel menu..."
+sudo -H -u ${BCE_USER} mkdir -p ${DESKTOP_DIR} && \
+(
+	sudo -H -u ${BCE_USER} cat <<EOF > ${DESKTOP_DIR}/ipython.desktop
+[Desktop Entry]
+Name=IPython
+Comment=IPython Interpreter
+Exec=/usr/local/bin/ipython
+Icon=/usr/local/lib/python2.7/dist-packages/IPython/html/static/base/images/favicon.ico
+Terminal=true
+Type=Application
+Categories=Development;
+StartupNotify=true
+NoDisplay=false
+EOF
+) && \
+(
+	sudo -H -u ${BCE_USER} cat <<EOF > ${DESKTOP_DIR}/ipython-notebook.desktop
+[Desktop Entry]
+Name=IPython Notebook
+Comment=IPython Notebook
+Exec=/usr/local/bin/ipython notebook
+Icon=/usr/local/lib/python2.7/dist-packages/IPython/html/static/base/images/favicon.ico
+Terminal=true
+Type=Application
+Categories=Development;
+StartupNotify=true
+NoDisplay=false
+EOF
+) && \
+(
+	sudo -H -u ${BCE_USER} cat <<EOF > ${DESKTOP_DIR}/python2.7.desktop
+[Desktop Entry]
+Name=Python 2.7
+Comment=Python 2.7
+Exec=/usr/bin/python2.7
+Icon=/usr/share/pixmaps/python2.7.xpm
+Terminal=true
+Type=Application
+Categories=Development;
+StartupNotify=true
+NoDisplay=false
+EOF
+) && \
+(
+	sudo -H -u ${BCE_USER} cat <<EOF > ${DESKTOP_DIR}/python3.4.desktop
+[Desktop Entry]
+Name=Python 3.4
+Comment=Python 3.4
+Exec=/usr/bin/python3.4
+Icon=/usr/share/pixmaps/python3.4.xpm
+Terminal=true
+Type=Application
+Categories=Development;
+StartupNotify=true
+NoDisplay=false
+EOF
+) && \
+echo "  DONE" || echo "  FAIL"

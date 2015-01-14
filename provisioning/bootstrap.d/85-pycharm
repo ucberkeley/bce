@@ -1,0 +1,31 @@
+# Pycharm
+echo "BCE: Downloading PyCharm to /opt"
+PYCHARM_DIST=pycharm-community-4.0.4
+PYCHARM_URL=http://download.jetbrains.com/python/${PYCHARM_DIST}.tar.gz
+curl -L -O ${PYCHARM_URL} && \
+tar -C /opt -xzf ${PYCHARM_DIST}.tar.gz && \
+chown -R oski:oski /opt/${PYCHARM_DIST} && \
+rm ${PYCHARM_DIST}.tar.gz && \
+( cd /usr/local/bin && ln -s /opt/${PYCHARM_DIST}/bin/pycharm.sh ) && \
+echo "  DONE" || echo "  FAIL"
+
+# This gets overwritten by itself if the user accepts the defaults when
+# prompted on first launch.
+echo "BCE: Create PyCharm launcher in panel menu..."
+(
+	cat <<EOF > /usr/share/applications/jetbrains-pycharm-ce.desktop
+[Desktop Entry]
+Version=0.1
+Type=Application
+Name=PyCharm Community Edition
+Icon=/opt/${PYCHARM_DIST}/bin/pycharm.png
+Exec="/opt/${PYCHARM_DIST}/bin/pycharm.sh" %f
+Comment=PyCharm Installation
+Categories=Development;IDE;
+Terminal=false
+StartupWMClass=jetbrains-pycharm-ce
+StartupNotify=true
+NoDisplay=false
+EOF
+) && \
+echo "  DONE" || echo "  FAIL"

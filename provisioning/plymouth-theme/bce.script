@@ -1,0 +1,133 @@
+win_w = Window.GetWidth();
+win_h = Window.GetHeight();
+half_win_w = win_w / 2;
+half_win_h = win_h / 2;
+
+offset = 0; //win_h / -4;
+
+horizonGlow.image = Image ("space_glow.png");
+size_ratio = horizonGlow.image.GetWidth() / win_w; // used later! todo: this is ugly
+new_height = horizonGlow.image.GetHeight() / size_ratio;
+nh_half = new_height / 2;
+horizonGlow.image = horizonGlow.image.Scale (win_w, new_height);
+horizonGlow.sprite = Sprite (horizonGlow.image);
+horizonGlow.sprite.SetY (half_win_h - nh_half + offset);
+horizonGlow.sprite.SetOpacity (0);
+horizonGlow.sprite.SetZ (-10);
+
+sourceImage = Image ("planet_black.png");
+new_height = sourceImage.GetHeight() / size_ratio;
+scaledImage = sourceImage.Scale (win_w, new_height);
+planetBlack.sprite = Sprite (scaledImage);
+planetBlack.sprite.SetY (half_win_h + offset);
+planetBlack.sprite.SetOpacity (1);
+planetBlack.sprite.SetZ (-9);
+
+sourceImage = Image ("planet_glow.png");
+new_height = sourceImage.GetHeight() / size_ratio;
+scaledImage = sourceImage.Scale (win_w, new_height);
+planetColor.sprite = Sprite (scaledImage);
+planetColor.sprite.SetY ((half_win_h + offset) - 2);
+planetColor.sprite.SetOpacity (0);
+planetColor.sprite.SetZ (2);
+
+sunGlow.image = Image ("sun_glow.png");
+sunGlow.width = sunGlow.image.GetWidth() / size_ratio;
+sunGlow.height = sunGlow.image.GetHeight() / size_ratio;
+sunGlow.image = sunGlow.image.Scale (sunGlow.width, sunGlow.height);
+sunGlow.sprite = Sprite (sunGlow.image);
+sunGlow.sprite.SetX (half_win_w - (sunGlow.height / 2));
+sunGlow.sprite.SetY (half_win_h + offset);
+sunGlow.sprite.SetOpacity (0);
+sunGlow.sprite.SetZ (-20);
+
+topLogo.image = Image ("bce_name.png");
+topLogo.width = topLogo.image.GetWidth() / size_ratio;
+topLogo.height = topLogo.image.GetHeight() / size_ratio;
+topLogo.image = topLogo.image.Scale (topLogo.width, topLogo.height);
+topLogo.x = half_win_w - (topLogo.width / 2);
+topLogo.y = 3 * topLogo.height;
+topLogo.sprite = Sprite (topLogo.image);
+topLogo.sprite.SetX (topLogo.x);
+topLogo.sprite.SetY (topLogo.y);
+topLogo.sprite.SetOpacity (0);
+topLogo.sprite.SetY (20);
+
+bottomLogo.image = Image ("ucb_logo.png");
+bottomLogo.width = bottomLogo.image.GetWidth() / size_ratio;
+bottomLogo.height = bottomLogo.image.GetHeight() / size_ratio;
+bottomLogo.image = bottomLogo.image.Scale (bottomLogo.width, bottomLogo.height);
+bottomLogo.x = half_win_w - (bottomLogo.width / 2);
+bottomLogo.y = win_h - (bottomLogo.height * 2);
+bottomLogo.sprite = Sprite (bottomLogo.image);
+bottomLogo.sprite.SetX (bottomLogo.x);
+bottomLogo.sprite.SetY (bottomLogo.y);
+bottomLogo.sprite.SetOpacity (0);
+
+planetColor.start = 0.1;
+horizonGlow.start = 0.1;
+bottomLogo.start = 0.2;
+topLogo.start = 0.1;
+sunGlow.start = 0.1;
+
+planetColor.end = 0.6;
+horizonGlow.end = 0.6;
+bottomLogo.end = 0.6;
+topLogo.end = 0.6;
+sunGlow.end = 0.4;
+
+horizonGlow.start = 0;
+planetColor.start = 0.2;
+sunGlow.start = 0.21;
+topLogo.start = 0.3;
+bottomLogo.start = 0.8;
+
+sunGlow.end = 0.4;
+planetColor.end = 0.6;
+horizonGlow.end = 0.6;
+bottomLogo.end = 1;
+topLogo.end = 1;
+
+sunGlow.animStart = 0.2;
+sunGlow.animEnd = 0.8;
+sunGlow.startPos = (half_win_h - (sunGlow.height / 4)) + offset;
+sunGlow.endPos = (half_win_h / 2) - (sunGlow.height / 4);
+
+fun remap (val, imin, imax, omin, omax) {
+    return (((val - imin) / (imax - imin)) * (omax - omin)) + omin;
+}
+
+fun progress_callback (d, p) {
+
+    p = (p * 100.0) / 5.0;
+
+    //topLogo.sprite.SetOpacity (p);
+
+    if (p >= sunGlow.start && p <= sunGlow.end) {
+        a = remap (p, sunGlow.start, sunGlow.end, 0, 1);
+        sunGlow.sprite.SetOpacity (a);
+    }
+    if (p >= sunGlow.animStart && p <= sunGlow.animEnd) {
+        a = remap (p, sunGlow.animStart, sunGlow.animEnd, 0, 1);
+        b = sunGlow.startPos - ((sunGlow.startPos - sunGlow.endPos) * a);
+        sunGlow.sprite.SetY (b);
+    }
+    if (p >= horizonGlow.start && p <= horizonGlow.end) {
+        a = remap (p, horizonGlow.start, horizonGlow.end, 0, 1);
+        horizonGlow.sprite.SetOpacity (a);
+    }
+    if (p >= planetColor.start && p <= planetColor.end) {
+        a = remap (p, planetColor.start, planetColor.end, 0, 1);
+        planetColor.sprite.SetOpacity (a);
+    }
+    /* Berkeley logo */ /* GOOD */
+    if (p >= bottomLogo.start && p <= bottomLogo.end) {
+        a = remap (p, bottomLogo.start, bottomLogo.end, 0, 1);
+        bottomLogo.sprite.SetOpacity (a);
+    }
+    if (p >= topLogo.start && p <= topLogo.end) {
+        a = remap (p, topLogo.start, topLogo.end, 0, 1);
+        topLogo.sprite.SetOpacity (a);
+    }
+}
+Plymouth.SetBootProgressFunction(progress_callback);
