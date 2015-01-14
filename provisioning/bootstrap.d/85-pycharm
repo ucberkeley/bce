@@ -1,6 +1,6 @@
 # Pycharm
 echo "BCE: Downloading PyCharm to /opt"
-PYCHARM_DIST=pycharm-community-4.0.3
+PYCHARM_DIST=pycharm-community-4.0.4
 PYCHARM_URL=http://download.jetbrains.com/python/${PYCHARM_DIST}.tar.gz
 curl -L -O ${PYCHARM_URL} && \
 tar -C /opt -xzf ${PYCHARM_DIST}.tar.gz && \
@@ -9,17 +9,21 @@ rm ${PYCHARM_DIST}.tar.gz && \
 ( cd /usr/local/bin && ln -s /opt/${PYCHARM_DIST}/bin/pycharm.sh ) && \
 echo "  DONE" || echo "  FAIL"
 
+# This gets overwritten by itself if the user accepts the defaults when
+# prompted on first launch.
 echo "BCE: Create PyCharm launcher in panel menu..."
 (
-	sudo -H -u ${BCE_USER} cat <<EOF > ${DESKTOP_DIR}/pycharm.desktop
+	cat <<EOF > /usr/share/applications/jetbrains-pycharm-ce.desktop
 [Desktop Entry]
-Name=PyCharm
-Comment=PyCharm IDE
-Exec=/opt/${PYCHARM_DIST}/bin/pycharm.sh
-Icon=/opt/${PYCHARM_DIST}/bin/pycharm.png
-Terminal=false
+Version=0.1
 Type=Application
-Categories=Development;
+Name=PyCharm Community Edition
+Icon=/opt/${PYCHARM_DIST}/bin/pycharm.png
+Exec="/opt/${PYCHARM_DIST}/bin/pycharm.sh" %f
+Comment=PyCharm Installation
+Categories=Development;IDE;
+Terminal=false
+StartupWMClass=jetbrains-pycharm-ce
 StartupNotify=true
 NoDisplay=false
 EOF
