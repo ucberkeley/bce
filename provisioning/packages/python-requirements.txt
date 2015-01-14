@@ -40,7 +40,9 @@ numpy==1.9.1
 scipy==0.14.0
 ipython[notebook]==2.3.1
 apiclient==1.0.2
-BeautifulSoup==3.2.1
+# BeautifulSoup does not install cleanly via pip and currently is not
+# requested by any BCE leader.
+# BeautifulSoup==3.2.1
 boilerpipe==1.2.0.0
 cluster==1.2.2
 Cython==0.21.1
@@ -66,6 +68,7 @@ pandas==0.15.2
 patsy==0.3.0
 # Pelican doesn't keep old versions on PyPI!
 pelican==3.5.0
+plotly==1.5.0
 prettytable==0.7.2
 PyGithub==1.25.2
 pymongo==2.7.2
