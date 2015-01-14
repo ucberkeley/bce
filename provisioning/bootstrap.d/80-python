@@ -25,8 +25,16 @@ echo "  DONE" || echo "  FAIL"
 pip_install python    pip  /tmp/packages/python-requirements.txt
 pip_install python3.4 pip3 /tmp/packages/python3-requirements.txt
 
+# pip3 automatically changes 'pip' and 'ipython' to their v3 versions. We undo
+# that. I'm copying rather than linking because that is what pip does.
+echo "BCE: Using version 2 for pip and for ipython's executables."
+for b in pip ipython ipcluster ipcontroller ipengine iptest ; do
+	rm /usr/local/bin/${b} && \
+	cp -p /usr/local/bin/${b}2 /usr/local/bin/${b}
+done && \
+echo "  DONE" || echo "  FAIL"
+
 echo "BCE: Creating python launchers in panel menu..."
-DESKTOP_DIR=/home/${BCE_USER}/.local/share/applications
 sudo -H -u ${BCE_USER} mkdir -p ${DESKTOP_DIR} && \
 (
 	sudo -H -u ${BCE_USER} cat <<EOF > ${DESKTOP_DIR}/ipython.desktop
