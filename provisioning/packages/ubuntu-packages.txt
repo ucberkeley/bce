@@ -12,7 +12,9 @@ python-pydot
 
 # nltk 3.0.0 won't pip install due to setuputils
 # https://github.com/nltk/nltk/issues/824
-python-nltk
+# Fixed between 2015-spring-preview-2 and 2015-spring ?
+# python-nltk
+python-tk
 
 # Mostly for networkx
 
@@ -78,6 +80,9 @@ gedit-latex-plugin
 gedit-source-code-browser-plugin
 
 vim
+
+# Globus
+tk tcllib
 
 # Minimal XFCE4 environment
 
