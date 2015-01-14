@@ -1,0 +1,12 @@
+#!/bin/bash
+
+BASE_URL="http://ucberkeley.github.io/bce-documentation"
+DOC_CACHE_DIR="/var/cache/bce-documentation"
+DOC_PAGES="index.html help.html laptop-installation.html"
+
+if [ ! -d ${DOC_CACHE_DIR} ]; then mkdir ${DOC_CACHE_DIR} ; fi
+
+for DOC_PAGE in ${DOC_PAGES} ; do
+    # We bail (-f) on error so as not to overwrite a valid cache
+    curl -f -L -o ${DOC_CACHE_DIR}/${DOC_PAGE} ${BASE_URL}/${DOC_PAGE}
+done
