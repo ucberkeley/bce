@@ -18,7 +18,7 @@
         <value type="int" value="4"/>
         <value type="int" value="6"/>
         <value type="int" value="7"/>
-        <value type="int" value="11"/>
+        <value type="int" value="14"/>
       </property>
       <property name="background-style" type="uint" value="0"/>
       <property name="background-alpha" type="uint" value="80"/>
@@ -78,10 +78,14 @@
         <value type="string" value="13953449483.desktop"/>
       </property>
     </property>
-    <property name="plugin-11" type="string" value="actions"/>
     <property name="plugin-12" type="string" value="launcher">
       <property name="items" type="array">
         <value type="string" value="13953450035.desktop"/>
+      </property>
+    </property>
+    <property name="plugin-14" type="string" value="launcher">
+      <property name="items" type="array">
+        <value type="string" value="14212014661.desktop"/>
       </property>
     </property>
   </property>
