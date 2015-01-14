@@ -1,6 +1,5 @@
 DOC_SCRIPT="/usr/local/bin/update-bce-docs"
-DOC_CACHE="/var/cache/bce-documentation.html"
-DOC_URL="http://ucberkeley.github.io/bce-documentation"
+DOC_CACHE_DIR="/var/cache/bce-documentation"
 
 echo "BCE: Creating BCE desktop help icon..."
 DESKTOP_FILE=/home/${BCE_USER}/Desktop/bce-help.desktop
@@ -9,7 +8,7 @@ DESKTOP_FILE=/home/${BCE_USER}/Desktop/bce-help.desktop
 Name=Help with BCE
 GenericName=Help with BCE
 Comment=Off-line BCE documentation
-Exec=x-www-browser ${DOC_CACHE}
+Exec=x-www-browser ${DOC_CACHE_DIR}/help.html
 Terminal=false
 Type=Application
 StartupNotify=true
@@ -30,14 +29,8 @@ EOF
 ) && \
 ( echo "  DONE" ; etckeeper commit "$msg" ) || echo "  FAIL"
 
-echo "BCE: Creating update-bce-docs script..."
-( cat <<EOF > ${DOC_SCRIPT}
-#!/bin/sh
-
-# We bail (-f) on error so as not to overwrite a valid cache
-curl -f -L -o ${DOC_CACHE} ${DOC_URL}
-EOF
-) && \
+echo "BCE: Installing update-bce-docs..."
+mv /tmp/update-bce-docs ${DOC_SCRIPT} && \
 chmod +x ${DOC_SCRIPT} && \
 ${DOC_SCRIPT} && \
 echo "  DONE" || echo "  FAIL"
