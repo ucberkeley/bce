@@ -9,6 +9,10 @@ Requirements
 =============================
 * Packer - installation instructions are at https://www.packer.io/intro/getting-started/setup.html
 
+* Caches of python, R, and other packages are maintained in the BCE box.com account. These may be needed if the online sources are removed.
+
+ - [2015-spring](https://berkeley.box.com/s/da93os20nee71hscbf5x6vtl6oprajbt)
+
 Creating BCE VMs with Packer
 =============================
 
@@ -29,15 +33,14 @@ Amazon credentials can be set on the command line or by editing the BCE json fil
 
 More information on building to ec2 is available on the [packer ec2 help page](https://www.packer.io/docs/builders/amazon-ebs.html)
 
-Note that currently when you start up a VM from the resulting AMI, you'll need to first login as the 'ubuntu' user and set up SSH keys for the 'oski' user, which is the user provisioned by BCE.
+Note that currently when you start up a VM from the resulting AMI, you will
+need to first login as the 'ubuntu' user and set up SSH keys for the 'oski'
+user, which is the user provisioned by BCE.
 
-Notes/TODO on provisioning
-==========================
+Notes on provisioning
+=====================
 
-I'm still having trouble using the guest additions that are already available
-from the VirtualBox install.
-
-Note that it should be possible to attach the bundled ISO for guest additions
+Regarding guest additions, it should be possible to attach the bundled ISO
 using something like the following in the JSON "vboxmanage" section:
 
 ```json
@@ -53,11 +56,11 @@ using something like the following in the JSON "vboxmanage" section:
 
 For which you should also switch "guest_additions_mode" to "disable."
 
-But for some reason, I get the complaint:
+However Dav reported the error:
 
     VBoxManage: error: Invalid UUID or filename "additions"
 
-Strangely, this DOES work if I execute it during provisioning:
+Strangely, this does work if he executes it during provisioning:
 
     vboxmanage storageattach "BCE-xubuntu-14.04-amd64" --storagectl "IDE Controller" --port 1 --device 0 --type dvddrive --medium additions
 
