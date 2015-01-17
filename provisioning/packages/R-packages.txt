@@ -16,6 +16,7 @@ glmnet
 gridExtra
 gtable
 inline
+ISLR
 iterators
 kernlab
 knitr
