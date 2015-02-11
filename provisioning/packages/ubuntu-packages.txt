@@ -105,3 +105,5 @@ murrine-themes
 
 # Linguistics
 alsa-utils
+
+waagent

@@ -1,4 +1,5 @@
 JSON=BCE-14.10-amd64.json
+JSON_TEST=BCE-14.10-amd64-withazure.json
 
 # Detect host operating system
 UNAME := $(shell uname)
@@ -19,6 +20,12 @@ ec2:
         -var bce_host_audio=none \
         -var bce_user=ubuntu \
 		$(JSON) 2>&1 | tee packer-$@.log
+
+azure:
+	packer build -only=azure \
+        -var bce_host_audio=none \
+        -var bce_user=packer \
+		$(JSON_TEST) 2>&1 | tee packer-$@.log
 
 vbox:
 	PACKER_LOG=1 PACKER_LOG_PATH=packer.log \

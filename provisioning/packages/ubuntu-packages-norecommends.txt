@@ -6,3 +6,5 @@ texlive-latex-recommended
 # This is auto-installed via texlive-latex-recommended
 # Uncomment here if we revert to installing recommends from that package
 # texlive-pstricks
+
+network-manager
