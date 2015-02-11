@@ -1,0 +1,26 @@
+Free_Trial-2-9-2015-credentials.publishsettings
+
+how do 
+azure account import
+
+#apt-get install golang # too old
+apt-get install mercurial meld
+
+wget -P $HOME/downloads https://storage.googleapis.com/golang/go1.3.1.linux-amd64.tar.gz
+sudo tar -C /opt -xzf $HOME/downloads/go1.3.1.linux-amd64.tar.gz
+
+mkdir $HOME/go
+export PATH=$PATH:/opt/go/bin
+export GOROOT=/opt/go
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
+
+go get github.com/MSOpenTech/packer-azure/packer/builder/azure/driver_restapi
+go get github.com/hashicorp/yamux
+go get github.com/hashicorp/go-msgpack/codec
+
+go install -tags 'restapi' github.com/MSOpenTech/packer-azure/packer/plugin/packer-builder-azure
+
+cp $GOPATH/bin/packer-builder-azure .
+
+# not clear how the management certificate that I think I generated at https://manage.windowsazure.com/publishsettings/index?client=xplat (packer-azure instructions provided the link) got loaded into the Azure account but it seems to be there now
