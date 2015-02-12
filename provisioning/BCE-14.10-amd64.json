@@ -7,7 +7,7 @@
   "builders": [
     {
       "type": "amazon-ebs",
-      "ami_name": "BCE-2015-spring-test {{timestamp}}",
+      "ami_name": "BCE-2015-spring {{timestamp}}",
       "instance_type": "m3.medium",
       "region": "us-west-1",
       "ami_regions": "us-west-2",
@@ -19,7 +19,19 @@
       }
     },
     {
-      "vm_name": "BCE-2015-spring-test",
+        "type": "azure",
+        "publish_settings_path": "Free_Trial-2-9-2015-credentials.publishsettings",
+        "subscription_name": "Free Trial",
+        "storage_account": "berkeleyscf",
+        "storage_account_container": "images",
+        "os_type": "Linux",
+        "os_image_label": "Ubuntu Server 14.10",
+        "location": "West US",
+        "instance_size": "Small",
+        "user_image_label": "BCE-2015-spring-{{timestamp}}"
+    },  
+    {
+      "vm_name": "BCE-2015-spring",
       "disk_size": 16000,
       "output_directory": "build",
       "type": "virtualbox-iso",

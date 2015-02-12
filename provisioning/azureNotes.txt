@@ -1,7 +1,13 @@
-Free_Trial-2-9-2015-credentials.publishsettings
+# Notes for building Azure image on a Linux Ubuntu 14.04 build machine
+# - Chris Paciorek 2/11/15
+# this is more or less shell code 
 
-how do 
-azure account import
+
+git clone https://github.com/MSOpenTech/packer-azure
+
+# credentials file following instructions in packer-azure README.md
+# http://go.microsoft.com/fwlink/?LinkId=254432
+# this gives me Free_Trial-2-9-2015-credentials.publishsettings
 
 #apt-get install golang # too old
 apt-get install mercurial meld
@@ -24,3 +30,12 @@ go install -tags 'restapi' github.com/MSOpenTech/packer-azure/packer/plugin/pack
 cp $GOPATH/bin/packer-builder-azure .
 
 # not clear how the management certificate that I think I generated at https://manage.windowsazure.com/publishsettings/index?client=xplat (packer-azure instructions provided the link) got loaded into the Azure account but it seems to be there now
+
+# now build the azure image
+make azure
+
+# need to publish the image from the Azure storage container to VM Depot
+# https://vmdepot.msopentech.com/List/Index
+# click on "Publish"; login (I happened to use my personal yahoo account)
+# provide URL (e.g., https://berkeleyscf.blob.core.windows.net/images/BCE-2015-spring-test-1423620126_2015-February-10_18-2-os-2015-02-11.vhd) 
+# having trouble with it accepting the URL
