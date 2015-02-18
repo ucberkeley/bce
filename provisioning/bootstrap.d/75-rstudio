@@ -1,7 +1,7 @@
 # RStudio
 echo "BCE: Installing RStudio..."
 if [ "${USE_SAVED_PKG_SRC}" != "True" ]; then 
-   RSTUDIO_URL=http://download1.rstudio.org/rstudio-0.98.1091-amd64.deb
+   RSTUDIO_URL=http://download1.rstudio.org/rstudio-0.98.1091-amd64.deb && \
    RSTUDIO_DEB=$(basename ${RSTUDIO_URL}) && \
    curl -L -O ${RSTUDIO_URL}
 else
