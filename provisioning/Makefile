@@ -1,6 +1,6 @@
 JSON=BCE-14.10-amd64.json
 
-USE_SAVED_PKG_SRC=False
+USE_SAVED_PKG_SRC=True
 PKG_SRC_FILE=/tmp/2015-spring-package-cache.zip
 
 # Detect host operating system

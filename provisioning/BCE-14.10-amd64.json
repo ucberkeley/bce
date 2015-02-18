@@ -2,6 +2,8 @@
   "variables": {
       "bce_host_audio": "alsa",
       "bce_user": "oski"
+      "use_saved_pkg_src": "False",
+      "pkg_src_file": "/dev/null"
    },
 
   "builders": [
