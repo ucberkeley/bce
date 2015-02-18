@@ -2,7 +2,11 @@
 echo "BCE: Downloading PyCharm to /opt"
 PYCHARM_DIST=pycharm-community-4.0.4
 PYCHARM_URL=http://download.jetbrains.com/python/${PYCHARM_DIST}.tar.gz
-curl -L -O ${PYCHARM_URL} && \
+if [ "${USE_SAVED_PKG_SRC}" == "True" ]; then
+   mv /tmp/${PYCHARM_DIST}.tar.gz .
+else
+        curl -L -O ${PYCHARM_URL}
+fi && \
 tar -C /opt -xzf ${PYCHARM_DIST}.tar.gz && \
 chown -R oski:oski /opt/${PYCHARM_DIST} && \
 rm ${PYCHARM_DIST}.tar.gz && \

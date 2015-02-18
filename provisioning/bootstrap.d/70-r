@@ -1,7 +1,14 @@
 msg="BCE: Installing add-on R packages..."
 echo "$msg"
-Rscript -e "pkgs <- scan('/tmp/packages/R-packages.txt', what = 'character'); \
-install.packages(pkgs, repos = 'http://cran.cnr.berkeley.edu')" && \
+if [ "${USE_SAVED_PKG_SRC}" == "True" ]; then 
+#   pkgs=$(cat /tmp/packages/R-packages.txt) && \
+#   for pkg in $pkgs; do
+       R CMD INSTALL /tmp/R/*
+#   done 
+else
+        Rscript -e "pkgs <- scan('/tmp/packages/R-packages.txt', what = 'character'); \ 
+        install.packages(pkgs, repos = 'http://cran.cnr.berkeley.edu')" 
+fi && \
 echo "  DONE" || echo "  FAIL"
 
 echo "BCE: Adding R to Development menu..."

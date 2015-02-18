@@ -7,7 +7,7 @@
   "builders": [
     {
       "type": "amazon-ebs",
-      "ami_name": "BCE-2015-spring {{timestamp}}",
+      "ami_name": "BCE-2015-spring",
       "instance_type": "m3.medium",
       "region": "us-west-1",
       "ami_regions": "us-west-2",
@@ -128,10 +128,16 @@
       "destination": "/tmp/bootstrap.d"
     },
     {
+      "type": "file",
+      "source": "{{user `pkg_src_file`}}",
+      "destination": "/tmp/pkg-src"
+    },
+    {
       "type": "shell",
       "script": "bootstrap-bce.sh",
       "environment_vars": ["DEBIAN_PRIORITY=high",
-                           "DEBIAN_FRONTEND=noninteractive"],
+                           "DEBIAN_FRONTEND=noninteractive",
+                           "USE_SAVED_PKG_SOURCE={{user `use_saved_pkg_src`}}"],
       "execute_command": "echo '{{user `bce_user`}}' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'"
     },
     {

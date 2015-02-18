@@ -2,10 +2,16 @@ function pip_install () {
 	PYTHON="$1"
 	PIP="$2"
 	REQS_FILE="$3"
+        USE_SAVED_PKG_SRC="$4"
 	echo "BCE: Installing ${PYTHON} modules from ${REQS_FILE} using ${PIP}..."
 	${PYTHON} /tmp/get-pip.py && \
 	for p in $(egrep -v '^$|^#' ${REQS_FILE}); do
 		echo "============================================================"
+                if [ "${USE_SAVED_PKG_SRC}" == "True" ]; then
+                   v=$(echo "$p" | cut -d"=" -f3)
+                   p=/tmp/python/$(echo "$p" | cut -d"=" -f1) 
+                   p=${p}-${v}*
+                fi
 		cmd="${PIP} install --log /home/${BCE_USER}/.cache/pip/${PIP}-${p}.log --upgrade $p"
 		echo $cmd
 		$cmd
@@ -16,14 +22,17 @@ function pip_install () {
 # Silence warnings that this doesn't exist
 sudo -H -u oski mkdir -p /home/${BCE_USER}/.cache/pip/log
 
+if [ "${USE_SAVED_PKG_SRC}" != "True" ]; then 
 # We install pip directly from pypa to avoid conflicts with requests
-echo "BCE: Fetching get-pip.py..."
-curl https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py && \
-echo "  DONE" || echo "  FAIL"
+  echo "BCE: Fetching get-pip.py..."  
+  curl https://bootstrap.pypa.io/get-pip.py -o /tmp/get-pip.py && \
+  echo "  DONE" || echo "  FAIL"
+fi
+# otherwise get-pip.py will already be in /tmp from 41-get-pkg-src
 
 # Install the packages, one by one
-pip_install python    pip  /tmp/packages/python-requirements.txt
-pip_install python3.4 pip3 /tmp/packages/python3-requirements.txt
+pip_install python    pip  /tmp/packages/python-requirements.txt ${USE_SAVED_PKG_SRC}
+pip_install python3.4 pip3 /tmp/packages/python3-requirements.txt  ${USE_SAVED_PKG_SRC}
 
 # pip3 automatically changes 'pip' and 'ipython' to their v3 versions. We undo
 # that. I'm copying rather than linking because that is what pip does.

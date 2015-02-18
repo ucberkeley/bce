@@ -11,3 +11,5 @@ export BCE_USER=oski
 # Make the BCE version available to downstream
 export BCE_VERSION="2015-spring"
 echo "BCE_VERSION=${BCE_VERSION}" >> /etc/environment
+
+export USE_SAVED_PKG_SOURCE=False
