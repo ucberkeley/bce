@@ -1,7 +1,8 @@
 msg="BCE: Installing add-on R packages..."
 echo "$msg"
-if [ "${USE_SAVED_PKG_SRC}" == "True" ]; then 
-   R CMD INSTALL /tmp/R/*
+if [ "${USE_SAVED_PKG_SRC}" == "True" ]; then
+        cd /tmp/R
+        Rscript -e "install.packages(list.files(), repos = NULL)"
 else
         Rscript -e "pkgs <- scan('/tmp/packages/R-packages.txt', what = 'character'); \ 
         install.packages(pkgs, repos = 'http://cran.cnr.berkeley.edu')" 
