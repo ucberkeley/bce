@@ -2,11 +2,12 @@ function pip_install () {
 	PYTHON="$1"
 	PIP="$2"
 	REQS_FILE="$3"
+        LOG_DIR="$4"
 	echo "BCE: Installing ${PYTHON} modules from ${REQS_FILE} using ${PIP}..."
 	${PYTHON} /tmp/get-pip.py && \
 	for p in $(egrep -v '^$|^#' ${REQS_FILE}); do
 		echo "============================================================"
-		cmd="sudo -H -u ${BCE_USER} ${PIP} install --log /home/${BCE_USER}/.cache/pip/${PIP}-${p}.log --upgrade $p"
+		cmd="${PIP} install --log ${LOG_DIR}/${PIP}-${p}.log --upgrade $p"
 		echo $cmd
 		$cmd
 	done && \
@@ -14,7 +15,8 @@ function pip_install () {
 }
 
 # Silence warnings that this doesn't exist
-sudo -H -u ${BCE_USER} mkdir -p /home/${BCE_USER}/.cache/pip/log
+LOG_DIR=/var/log/python_install/.cache/pip/log
+mkdir -p ${LOG_DIR}
 
 if [ "${USE_SAVED_PKG_SRC}" != "True" ]; then 
 # We install pip directly from pypa to avoid conflicts with requests
@@ -30,8 +32,8 @@ if [ "${USE_SAVED_PKG_SRC}" == "True" ]; then
 else
    ext=""
 fi
-pip_install python    pip  /tmp/packages/python-requirements${ext}.txt 
-pip_install python3.4 pip3 /tmp/packages/python3-requirements${ext}.txt
+pip_install python    pip  /tmp/packages/python-requirements${ext}.txt ${LOG_DIR}
+pip_install python3.4 pip3 /tmp/packages/python3-requirements${ext}.txt ${LOG_DIR}
 
 # pip3 automatically changes 'pip' and 'ipython' to their v3 versions. We undo
 # that. I'm copying rather than linking because that is what pip does.
