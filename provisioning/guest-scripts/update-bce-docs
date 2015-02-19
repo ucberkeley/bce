@@ -1,8 +1,8 @@
 #!/bin/bash
 
-BASE_URL="http://ucberkeley.github.io/bce-documentation"
+BASE_URL="http://bce.berkeley.edu"
 DOC_CACHE_DIR="/var/cache/bce-documentation"
-DOC_PAGES="index.html help.html laptop-installation.html"
+DOC_PAGES="index.html help.html install.html use.html downloads.html"
 
 if [ ! -d ${DOC_CACHE_DIR} ]; then mkdir ${DOC_CACHE_DIR} ; fi
 

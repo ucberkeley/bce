@@ -6,7 +6,7 @@ function pip_install () {
 	${PYTHON} /tmp/get-pip.py && \
 	for p in $(egrep -v '^$|^#' ${REQS_FILE}); do
 		echo "============================================================"
-		cmd="${PIP} install --log /home/${BCE_USER}/.cache/pip/${PIP}-${p}.log --upgrade $p"
+		cmd="sudo -H -u ${BCE_USER} ${PIP} install --log /home/${BCE_USER}/.cache/pip/${PIP}-${p}.log --upgrade $p"
 		echo $cmd
 		$cmd
 	done && \
@@ -14,7 +14,7 @@ function pip_install () {
 }
 
 # Silence warnings that this doesn't exist
-sudo -H -u oski mkdir -p /home/${BCE_USER}/.cache/pip/log
+sudo -H -u ${BCE_USER} mkdir -p /home/${BCE_USER}/.cache/pip/log
 
 if [ "${USE_SAVED_PKG_SRC}" != "True" ]; then 
 # We install pip directly from pypa to avoid conflicts with requests
