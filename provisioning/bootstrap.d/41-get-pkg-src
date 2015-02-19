@@ -1,8 +1,10 @@
 if [ "${USE_SAVED_PKG_SRC}" == "True" ]; then 
    echo "BCE: unzipping source package files..."  
+   cd /tmp && \
+   mkdir /tmp/pkg-src && \
+   mv pkgs.zip /tmp/pkg-src && \
    cd /tmp/pkg-src && \
-   unzip *zip && \
-   PKG_SRC_DIR=$(basename *zip .zip)   # this relies on knowing how Box sets up folders in downloaded zip file
-   mv ${PKG_SRC_DIR}/* /tmp && \
+   unzip pkgs.zip && \
+   mv */* /tmp && \
    echo "  DONE"  || echo "  FAIL"
 fi
