@@ -7,7 +7,7 @@ function pip_install () {
 	${PYTHON} /tmp/get-pip.py && \
 	for p in $(egrep -v '^$|^#' ${REQS_FILE}); do
 		echo "============================================================"
-		cmd="${PIP} install --log ${LOG_DIR}/${PIP}-${p}.log --upgrade -r ${REQS_FILE} $p"
+		cmd="${PIP} install --log ${LOG_DIR}/${PIP}-${p}.log --upgrade -r ${REQS_FILE} $(echo $p | cut -d'=' -f1)"
 		echo $cmd
 		$cmd
 	done && \

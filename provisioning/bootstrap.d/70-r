@@ -6,7 +6,7 @@ if [ "${USE_SAVED_PKG_SRC}" == "True" ]; then
         pkgs <- list.files(); pkgs <- pkgs[grep('tar.gz', pkgs)]; \
         pkgs <- gsub('_[0-9].*tar.gz', '', pkgs); \
         pkgs <- gsub('-[0-9].*tar.gz', '', pkgs); \
-        install.packages(pkgs, contrib.url = 'file:///tmp/R/')"
+        install.packages(pkgs, contriburl = 'file:///tmp/R/')"
 else
         Rscript -e "pkgs <- scan('/tmp/packages/R-packages.txt', what = 'character'); \ 
         install.packages(pkgs, repos = 'http://cran.cnr.berkeley.edu')" 
