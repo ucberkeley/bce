@@ -2,7 +2,11 @@ msg="BCE: Installing add-on R packages..."
 echo "$msg"
 if [ "${USE_SAVED_PKG_SRC}" == "True" ]; then
         cd /tmp/R
-        Rscript -e "install.packages(list.files(), repos = NULL)"
+        Rscript -e "library(tools); write_PACKAGES('/tmp/R/'); \
+        pkgs <- list.files(); pkgs <- pkgs[grep('tar.gz', pkgs)]; \
+        pkgs <- gsub('_[0-9].*tar.gz', '', pkgs); \
+        pkgs <- gsub('-[0-9].*tar.gz', '', pkgs); \
+        install.packages(pkgs, contrib.url = 'file:///tmp/R/')"
 else
         Rscript -e "pkgs <- scan('/tmp/packages/R-packages.txt', what = 'character'); \ 
         install.packages(pkgs, repos = 'http://cran.cnr.berkeley.edu')" 
@@ -15,3 +19,4 @@ sed -i \
 	-e '/^Categories=/s/=/=Development;/' \
 	/usr/share/applications/R.desktop && \
 echo "  DONE" || echo "  FAIL"
+

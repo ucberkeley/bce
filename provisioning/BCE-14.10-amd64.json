@@ -9,7 +9,7 @@
   "builders": [
     {
       "type": "amazon-ebs",
-      "ami_name": "BCE-2015-spring-test2",
+      "ami_name": "BCE-2015-spring",
       "instance_type": "m3.medium",
       "region": "us-west-1",
       "ami_regions": "us-west-2",
