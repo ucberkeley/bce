@@ -3,16 +3,26 @@ function pip_install () {
 	PIP="$2"
 	REQS_FILE="$3"
         LOG_DIR="$4"
+        USE_SAVED_PKG_SRC="$5"
 	echo "BCE: Installing ${PYTHON} modules from ${REQS_FILE} using ${PIP}..."
 	${PYTHON} /tmp/get-pip.py && \
+        if [ "${USE_SAVED_PKG_SRC}" == "True" ]; then 
+           numpy=$(grep numpy ${REQS_FILE})
+           HOME=/root ${PIP} install --log ${LOG_DIR}/${PIP}-numpy.log ${numpy}
+# numpy first - check that it works w/o dependencies
+           HOME=/root ${PIP} install --log ${LOG_DIR}/${PIP}-all.log -r ${REQS_FILE}
+        else 
 	for p in $(egrep -v '^$|^#' ${REQS_FILE}); do
 		echo "============================================================"
-		cmd="${PIP} install --log ${LOG_DIR}/${PIP}-${p}.log --upgrade -r ${REQS_FILE} $(echo $p | cut -d'=' -f1)"
+		cmd="HOME=/root ${PIP} install --log ${LOG_DIR}/${PIP}-${p}.log --upgrade -r ${REQS_FILE} $p
 		echo $cmd
 		$cmd
-	done && \
+	done
+        fi && \
 	echo "  DONE" || echo "  FAIL"
 }
+
+# sudo -H pip install --log python.log -r python-requirements-full.txt
 
 # Silence warnings that this doesn't exist
 LOG_DIR=/var/log/python_install/.cache/pip/log
@@ -32,8 +42,8 @@ if [ "${USE_SAVED_PKG_SRC}" == "True" ]; then
 else
    ext=""
 fi
-pip_install python    pip  /tmp/packages/python-requirements${ext}.txt ${LOG_DIR}
-pip_install python3.4 pip3 /tmp/packages/python3-requirements${ext}.txt ${LOG_DIR}
+pip_install python    pip  /tmp/packages/python-requirements${ext}.txt ${LOG_DIR} ${USE_SAVED_PKG_SRC}
+pip_install python3.4 pip3 /tmp/packages/python3-requirements${ext}.txt ${LOG_DIR} ${USE_SAVED_PKG_SRC}
 
 # pip3 automatically changes 'pip' and 'ipython' to their v3 versions. We undo
 # that. I'm copying rather than linking because that is what pip does.

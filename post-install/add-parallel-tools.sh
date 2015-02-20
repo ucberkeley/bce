@@ -4,7 +4,7 @@ apt-get update
 apt-get install -y libopenblas-base libopenmpi-dev openmpi-bin
 
 # install parallelization packages for Python
-pip install multiprocessing
+pip install multiprocessing mpi4py
 
 ppVersion=1.6.4
 cd /tmp
