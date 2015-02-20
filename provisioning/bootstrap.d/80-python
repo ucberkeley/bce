@@ -5,24 +5,23 @@ function pip_install () {
         LOG_DIR="$4"
         USE_SAVED_PKG_SRC="$5"
 	echo "BCE: Installing ${PYTHON} modules from ${REQS_FILE} using ${PIP}..."
+        # NOTE: use of HOME=/root does not prevent message about /home/ubuntu/.cache and use of -H
 	${PYTHON} /tmp/get-pip.py && \
         if [ "${USE_SAVED_PKG_SRC}" == "True" ]; then 
+           # install numpy first as scipy fails when all in reqs file
            numpy=$(grep numpy ${REQS_FILE})
            HOME=/root ${PIP} install --log ${LOG_DIR}/${PIP}-numpy.log ${numpy}
-# numpy first - check that it works w/o dependencies
            HOME=/root ${PIP} install --log ${LOG_DIR}/${PIP}-all.log -r ${REQS_FILE}
         else 
-	for p in $(egrep -v '^$|^#' ${REQS_FILE}); do
-		echo "============================================================"
-		cmd="HOME=/root ${PIP} install --log ${LOG_DIR}/${PIP}-${p}.log --upgrade -r ${REQS_FILE} $p
-		echo $cmd
-		$cmd
-	done
+        	for p in $(egrep -v '^$|^#' ${REQS_FILE}); do
+	        	echo "============================================================"
+		        cmd="HOME=/root ${PIP} install --log ${LOG_DIR}/${PIP}-${p}.log --upgrade -r ${REQS_FILE} $p"
+		        echo $cmd
+		        $cmd
+	         done
         fi && \
 	echo "  DONE" || echo "  FAIL"
 }
-
-# sudo -H pip install --log python.log -r python-requirements-full.txt
 
 # Silence warnings that this doesn't exist
 LOG_DIR=/var/log/python_install/.cache/pip/log

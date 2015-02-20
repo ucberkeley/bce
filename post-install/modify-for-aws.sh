@@ -1,3 +1,8 @@
+#!/bin/bash
+
+# run this script as: sudo bash modify-for-aws.sh
+# it will take a minute or two to complete
+
 # setup oski user with admin privileges and for passwordless SSH
 adduser oski sudo
 cp -pr /home/ubuntu/.ssh /home/oski

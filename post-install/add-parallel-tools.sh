@@ -1,4 +1,8 @@
 #!/bin/bash
+
+# run this script as: sudo bash add-parallel-tools.sh
+# it will take a minute or two to complete
+
 # install fast linear algebra package and MPI functionality
 apt-get update
 apt-get install -y libopenblas-base libopenmpi-dev openmpi-bin
