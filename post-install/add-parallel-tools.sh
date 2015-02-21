@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # copy this file to (or paste the contents into) a
-# text file on the VM
+# text file called add-parallel-tools.sh on the VM
 # run this script as follows: 
 #   sudo bash add-parallel-tools.sh
 # it will take a couple minutes to complete

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # copy this file to (or paste the contents into) a
-# text file on the VM
+# text file called modify-for-aws.sh on the VM
 # run this script as: 
 #    sudo bash modify-for-aws.sh
 # it will take a minute or two to complete
