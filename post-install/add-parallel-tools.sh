@@ -1,14 +1,15 @@
 #!/bin/bash
 
-# run this script as: sudo bash add-parallel-tools.sh
-# it will take a minute or two to complete
+# run this script as follows: 
+#   sudo bash add-parallel-tools.sh
+# it will take a couple minutes to complete
 
 # install fast linear algebra package and MPI functionality
 apt-get update
 apt-get install -y libopenblas-base libopenmpi-dev openmpi-bin
 
 # install parallelization packages for Python
-pip install multiprocessing mpi4py
+HOME=/root pip install multiprocessing mpi4py
 
 ppVersion=1.6.4
 cd /tmp

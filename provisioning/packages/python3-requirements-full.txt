@@ -26,7 +26,7 @@ pyzmq==14.4.1
 readline==6.2.4.1
 requests==2.5.1
 rpy2==2.5.4
-scikit_learn
+scikit_learn==0.15.2
 scipy==0.14.0
 seaborn==0.5.1
 setuptools==11.3.1
