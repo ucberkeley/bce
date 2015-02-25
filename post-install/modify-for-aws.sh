@@ -6,6 +6,9 @@
 #    sudo bash modify-for-aws.sh
 # it will take a minute or two to complete
 
+export DEBIAN_PRIORITY=high
+export DEBIAN_FRONTEND=noninteractive
+
 # setup oski user with admin privileges and for passwordless SSH
 adduser oski sudo
 if [ ! -e /home/oski/.ssh ]; then 

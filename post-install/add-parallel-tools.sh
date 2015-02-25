@@ -6,6 +6,9 @@
 #   sudo bash add-parallel-tools.sh
 # it will take a couple minutes to complete
 
+export DEBIAN_PRIORITY=high
+export DEBIAN_FRONTEND=noninteractive
+
 # install fast linear algebra package and MPI functionality
 apt-get update
 apt-get install -y libopenblas-base libopenmpi-dev openmpi-bin
@@ -32,3 +35,4 @@ pbdMPI
 EOF
 
 Rscript -e "pkgs <- scan('/tmp/R-packages.txt', what = 'char'); install.packages(pkgs, repos = 'http://cran.cnr.berkeley.edu')"
+
