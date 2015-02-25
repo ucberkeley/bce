@@ -7,7 +7,7 @@
 # it will take a minute or two to complete
 
 # setup oski user with admin privileges and for passwordless SSH
-if [ ! -e /home/oski ]; then 
+if ! id -u oski >/dev/null 2>&1; then 
     adduser oski sudo
     cp -pr /home/ubuntu/.ssh /home/oski
     chown -R oski:oski /home/oski/.ssh
