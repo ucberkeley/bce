@@ -17,5 +17,5 @@ if [ ! -e /home/oski/.ssh ]; then
 fi
 
 # add a few useful software packages
-apt-get update
-apt-get install -y mosh byobu screen tmux git-annex
+# apt-get update
+# apt-get install -y mosh git-annex # issue with email/user info; check with Aaron Culich
