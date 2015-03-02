@@ -17,5 +17,7 @@ if [ ! -e /home/oski/.ssh ]; then
 fi
 
 # add a few useful software packages
-# apt-get update
-# apt-get install -y mosh git-annex # issue with email/user info; check with Aaron Culich
+git config --global user.email "bce@lists.berkeley.edu"
+git config --global user.name "BCE Release Team"
+apt-get update
+apt-get install -y mosh git-annex 
