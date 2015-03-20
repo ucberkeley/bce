@@ -16,3 +16,4 @@ for node in $nodes; do
 done
 
 sudo -u oski echo -e "master\n$nodes" > .hosts
+chown -R oski:oski .hosts
