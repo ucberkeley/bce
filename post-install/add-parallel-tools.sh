@@ -31,6 +31,7 @@ rm bce-openmpi-${MPI_VERSION}.tgz
 echo /usr/local/openmpi/lib > /etc/ld.so.conf.d/openmpi.conf
 ldconfig
 echo 'export PATH=${PATH}:/usr/local/openmpi/bin' >> /etc/bash.bashrc
+sudo -u oski export PATH=${PATH}:/usr/local/openmpi/bin
 
 # install parallelization packages for Python
 HOME=/root pip install multiprocessing mpi4py
