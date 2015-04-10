@@ -21,7 +21,11 @@ apt-get install -y libopenblas-base # libopenmpi-dev openmpi-bin
 MPI_VERSION=1.8.4
 mkdir /usr/local/openmpi
 cd /usr/local/openmpi
-wget http://www.stat.berkeley.edu/~paciorek/transfer/bce-openmpi-${MPI_VERSION}.tgz
+# get openmpi from permanent BCE repository
+wget -O bce-openmpi-${MPI_VERSION}.tgz https://googledrive.com/host/0B9npFE3iDymgbTBZUGRBV3VYOEE
+# temporary location (should still work if needed)
+# wget http://www.stat.berkeley.edu/~paciorek/transfer/bce-openmpi-${MPI_VERSION}.tgz
+
 tar -xvzf bce-openmpi-${MPI_VERSION}.tgz
 rm bce-openmpi-${MPI_VERSION}.tgz
 echo /usr/local/openmpi/lib > /etc/ld.so.conf.d/openmpi.conf

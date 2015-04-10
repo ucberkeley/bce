@@ -23,4 +23,5 @@ make all install 2>&1 | tee ../make_all_install.log
 cd ${INSTALL_DIR}
 tar -cvzf /tmp/bce-openmpi-${MPI_VERSION}.tgz .
 
-# set up code to upload tarball to google drive
+# for now manually upload to google drive: login to gdrive under paciorek@berkeley.edu as +paciorek, select SPA-BCE and upload to Downloads folder
+# ideally would set up code to upload tarball to google drive
