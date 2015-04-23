@@ -33,6 +33,8 @@ default-jdk
 
 curl
 libcurl4-gnutls-dev
+libopenblas-base
+libopenblas-dev
 sqlite3
 
 # libjpeg8 libraries (including -dev, and there are several) are pulled in by R
