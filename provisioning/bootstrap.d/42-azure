@@ -1,12 +1,12 @@
-if [ "${PACKER_BUILDER_TYPE}" == "azure" ]; then 
-
-   echo "BCE: preventing network-manager install..."
-   $APT_GET remove network-manager
-   echo "  DONE"  || echo "  FAIL"
-
-   echo "BCE: Installing waagent..."
-   APT_GET install waagent && \
-   echo "  DONE"  || echo "  FAIL"
-
-
+if [ "${PACKER_BUILDER_TYPE}" != "azure" ]; then 
+	echo "  SKIP"
+	return
 fi
+
+echo "BCE: Uninstalling network-manager..."
+${APT_GET} remove network-manager && \
+echo "  DONE"  || echo "  FAIL"
+
+echo "BCE: Installing waagent..."
+${APT_GET} install waagent && \
+echo "  DONE"  || echo "  FAIL"
