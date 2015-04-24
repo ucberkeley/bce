@@ -2,6 +2,7 @@ R_REPO="http://mran.revolutionanalytics.com/snapshot/2015-04-23/"
 R_PKGS="/tmp/packages/R-packages.txt"
 
 U_CODE=$(lsb_release -c -s)
+U_CODE="utopic" # vivid does not exist on CRAN at the moment.
 
 msg="BCE: Configure apt repository for R packages."
 echo "$msg"
@@ -10,6 +11,12 @@ echo "deb ${R_REPO}/bin/linux/ubuntu ${U_CODE}/" >> \
 gpg --keyserver keyserver.ubuntu.com --recv-key E084DAB9 && \
 gpg -a --export E084DAB9 | sudo apt-key add - && \
 ( echo "  DONE" ; etckeeper commit "$msg" ) || echo "  FAIL"
+
+msg="BCE: Install R."
+echo "$msg"
+$APT_GET update > /dev/null && \
+$APT_GET install r-recommended && \
+echo "  DONE" || echo "  FAIL"
 
 msg="BCE: Define our R repository."
 echo "$msg"
