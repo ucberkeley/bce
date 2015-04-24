@@ -1,0 +1,11 @@
+if [ "${PACKER_BUILDER_TYPE}" != "amazon-ebs" ]; then
+	echo "  SKIP"
+	return
+fi
+
+msg="BCE: Symlinking /etc/init.d/nfs to /etc/init.d/nfs-kernel-server..."
+echo $msg
+$APT_GET install nfs-kernel-server && \
+ln -s /etc/init.d/nfs-kernel-server /etc/init.d/nfs && \
+ln -s /lib/init/upstart-job /etc/init.d/portmap && \
+echo "   DONE" || echo "   FAIL"
