@@ -1,0 +1,59 @@
+echo "BCE: Creating python launchers in panel menu..."
+sudo -H -u ${BCE_USER} mkdir -p ${DESKTOP_DIR} && \
+(
+	sudo -H -u ${BCE_USER} cat <<EOF > ${DESKTOP_DIR}/ipython.desktop
+[Desktop Entry]
+Name=IPython
+Comment=IPython Interpreter
+Exec=/usr/local/bin/ipython
+Icon=/usr/local/lib/python2.7/dist-packages/IPython/html/static/base/images/favicon.ico
+Terminal=true
+Type=Application
+Categories=Development;
+StartupNotify=true
+NoDisplay=false
+EOF
+) && \
+(
+	sudo -H -u ${BCE_USER} cat <<EOF > ${DESKTOP_DIR}/ipython-notebook.desktop
+[Desktop Entry]
+Name=IPython Notebook
+Comment=IPython Notebook
+Exec=/usr/local/bin/ipython notebook
+Icon=/usr/local/lib/python2.7/dist-packages/IPython/html/static/base/images/favicon.ico
+Terminal=true
+Type=Application
+Categories=Development;
+StartupNotify=true
+NoDisplay=false
+EOF
+) && \
+(
+	sudo -H -u ${BCE_USER} cat <<EOF > ${DESKTOP_DIR}/python2.7.desktop
+[Desktop Entry]
+Name=Python 2.7
+Comment=Python 2.7
+Exec=/usr/bin/python2.7
+Icon=/usr/share/pixmaps/python2.7.xpm
+Terminal=true
+Type=Application
+Categories=Development;
+StartupNotify=true
+NoDisplay=false
+EOF
+) && \
+(
+	sudo -H -u ${BCE_USER} cat <<EOF > ${DESKTOP_DIR}/python3.4.desktop
+[Desktop Entry]
+Name=Python 3.4
+Comment=Python 3.4
+Exec=/usr/bin/python3.4
+Icon=/usr/share/pixmaps/python3.4.xpm
+Terminal=true
+Type=Application
+Categories=Development;
+StartupNotify=true
+NoDisplay=false
+EOF
+) && \
+echo "  DONE" || echo "  FAIL"
