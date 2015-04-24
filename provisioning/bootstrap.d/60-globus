@@ -1,0 +1,29 @@
+# 
+echo "BCE: Downloading globusonline..."
+GLOBUS_FILE=globusconnect-latest.tgz 
+curl -L -o /tmp/${GLOBUS_FILE} \
+	https://s3.amazonaws.com/connect.globusonline.org/linux/stable/${GLOBUS_FILE} && \
+echo "BCE: Extracting globusonline..."
+tar xz -C /opt -f /tmp/${GLOBUS_FILE} && \
+DIST_NAME=$(tar tzf /tmp/${GLOBUS_FILE} | head -n 1) && \
+( cd /opt ; ln -s ${DIST_NAME} globusconnectpersonal ) && \
+( cd /usr/local/bin ; ln -s /opt/globusconnectpersonal/globusconnect ) && \
+echo "  DONE"  || echo "  FAIL"
+
+echo "BCE: Creating Globus Connect launcher in panel menu..."
+sudo -H -u ${BCE_USER} mkdir -p ${DESKTOP_DIR} && \
+(
+    sudo -H -u ${BCE_USER} cat <<EOF > ${DESKTOP_DIR}/globusconnect.desktop
+[Desktop Entry]
+Name=Globus Connect
+Comment=Globus Connect Personal
+Exec=/usr/local/bin/globusconnect
+Icon=/opt/globusconnectpersonal/gonew.gif
+Terminal=false
+Type=Application
+Categories=Network;Internet;
+StartupNotify=true
+NoDisplay=false
+EOF
+) && \
+echo "  DONE"  || echo "  FAIL"
