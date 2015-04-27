@@ -1,12 +1,9 @@
 # Pycharm
 echo "BCE: Downloading PyCharm to /opt"
-PYCHARM_DIST=pycharm-community-4.0.4
+#PYCHARM_DIST=pycharm-community-4.0.6
+PYCHARM_DIST=pycharm-educational-1.0.1
 PYCHARM_URL=http://download.jetbrains.com/python/${PYCHARM_DIST}.tar.gz
-if [ "${USE_SAVED_PKG_SRC}" == "True" ]; then
-   mv /tmp/${PYCHARM_DIST}.tar.gz .
-else
-        curl -L -O ${PYCHARM_URL}
-fi && \
+curl -L -O ${PYCHARM_URL}
 tar -C /opt -xzf ${PYCHARM_DIST}.tar.gz && \
 chown -R oski:oski /opt/${PYCHARM_DIST} && \
 rm ${PYCHARM_DIST}.tar.gz && \
@@ -21,7 +18,7 @@ echo "BCE: Create PyCharm launcher in panel menu..."
 [Desktop Entry]
 Version=0.1
 Type=Application
-Name=PyCharm Community Edition
+Name=PyCharm Educational Edition
 Icon=/opt/${PYCHARM_DIST}/bin/pycharm.png
 Exec="/opt/${PYCHARM_DIST}/bin/pycharm.sh" %f
 Comment=PyCharm Installation
