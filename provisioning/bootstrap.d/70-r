@@ -1,8 +1,8 @@
-R_REPO="http://mran.revolutionanalytics.com/snapshot/2015-04-23/"
+R_REPO="http://mran.revolutionanalytics.com/snapshot/2015-04-27"
 R_PKGS="/tmp/packages/R-packages.txt"
 
-U_CODE=$(lsb_release -c -s)
 U_CODE="utopic" # vivid does not exist on CRAN at the moment.
+#U_CODE=$(lsb_release -c -s)
 
 msg="BCE: Configure apt repository for R packages."
 echo "$msg"
