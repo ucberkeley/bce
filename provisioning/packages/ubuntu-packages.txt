@@ -1,41 +1,23 @@
+# Needed with Anaconda?
 # Core Python
-
-python-dev
-python3.4-dev
-
-python-setuptools
+#python-dev
+#python3.4-dev
 # Much faster / easier than going the pip way
-python-gtk2-dev
-# pyparsing+pydot (needed for networkx stuff) is currently borked
-# see https://code.google.com/p/pydot/issues/detail?id=81
-python-pydot
-
-# nltk 3.0.0 won't pip install due to setuputils
-# https://github.com/nltk/nltk/issues/824
-# Fixed between 2015-spring-preview-2 and 2015-spring ?
-# python-nltk
-python-tk
+#python-gtk2-dev
 
 # Mostly for networkx
-
 graphviz
 
-# Core R
-
-r-recommended
-
 # Core java
-
 default-jre
 default-jdk
 
 # Utilities / libs
-
 curl
+sqlite3
 libcurl4-gnutls-dev
 libopenblas-base
 libopenblas-dev
-sqlite3
 
 # libjpeg8 libraries (including -dev, and there are several) are pulled in by R
 # Why do we need libjpeg62? Esp. if we're not pulling in the -dev libraries?
@@ -52,7 +34,6 @@ libxslt1-dev
 liblzma-dev
 
 # Document processing stuff
-
 pandoc
 fonts-mathjax
 texlive
@@ -64,43 +45,34 @@ texlive-fonts-recommended
 nodejs
 
 # Viewing and editing the web, documents
-
 firefox
 libreoffice
 xpdf
 evince
 gv
 
-# General purpose, lightweight text editor
-# Some of these plugins are probably not useful
-
+# General purpose, lightweight text editor. Some of these plugins are probably
+# not useful
 gedit
 gedit-plugins
 gedit-developer-plugins
 gedit-r-plugin
 gedit-latex-plugin
 gedit-source-code-browser-plugin
-
 vim
 
 # Globus
 tk tcllib
 
 # Minimal XFCE4 environment
-
 thunar-vcs-plugin
 thunar-archive-plugin
 thunar-media-tags-plugin
 gigolo
-
 lightdm
-xrdp
 xfce4
 xfce4-terminal
 xubuntu-default-settings
-
-# Maybe also xfce4-mount-plugin? Doesn't seem to fix the problem with
-# not auto-mounting VBox shared folders.
 
 # The default theme has hot-pink highlights?!
 murrine-themes
@@ -108,3 +80,6 @@ murrine-themes
 # Linguistics
 alsa-utils
 
+# System
+# gdebi makes installing .deb files easier
+gdebi-core
