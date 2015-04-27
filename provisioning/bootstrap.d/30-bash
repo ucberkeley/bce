@@ -1,0 +1,21 @@
+msg="BCE: Configure bash history"
+echo "$msg"
+(
+	cat << 'EOF' >> /home/${BCE_USER}/.bashrc
+# Not bash or zsh?
+[ -n "$BASH_VERSION" -o -n "$ZSH_VERSION" ] || return 0
+
+# Not an interactive shell?
+[[ $- == *i* ]] || return 0
+
+# BCE: Preserve shell history
+export HISTTIMEFORMAT="%F %T "
+export HISTIGNORE="function prompt_command:history"
+
+if [ ! -d $HOME/.bash_history.d ]; then mkdir $HOME/.bash_history.d ; fi
+_tty="$(tty)"
+if [ $? -eq 0 -a -n "${_tty}" ]; then _tty="$(basename $_tty)" ; fi
+export HISTFILE=${HOME}/.bash_history.d/${_tty}
+EOF
+) && \
+echo "  DONE" || echo "  FAIL"
