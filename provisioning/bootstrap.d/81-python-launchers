@@ -1,3 +1,5 @@
+MINICONDA="/home/${BCE_USER}/miniconda"
+
 echo "BCE: Creating python launchers in panel menu..."
 sudo -H -u ${BCE_USER} mkdir -p ${DESKTOP_DIR} && \
 (
@@ -5,8 +7,8 @@ sudo -H -u ${BCE_USER} mkdir -p ${DESKTOP_DIR} && \
 [Desktop Entry]
 Name=IPython
 Comment=IPython Interpreter
-Exec=/usr/local/bin/ipython
-Icon=/usr/local/lib/python2.7/dist-packages/IPython/html/static/base/images/favicon.ico
+Exec=${MINICONDA}/bin/ipython
+Icon=${MINICONDA}/lib/python2.7/site-packages/IPython/html/static/base/images/favicon.ico
 Terminal=true
 Type=Application
 Categories=Development;
@@ -19,8 +21,8 @@ EOF
 [Desktop Entry]
 Name=IPython Notebook
 Comment=IPython Notebook
-Exec=/usr/local/bin/ipython notebook
-Icon=/usr/local/lib/python2.7/dist-packages/IPython/html/static/base/images/favicon.ico
+Exec=${MINICONDA}/bin/ipython notebook
+Icon=${MINICONDA}/lib/python2.7/site-packages/IPython/html/static/base/images/favicon.ico
 Terminal=true
 Type=Application
 Categories=Development;
@@ -33,7 +35,7 @@ EOF
 [Desktop Entry]
 Name=Python 2.7
 Comment=Python 2.7
-Exec=/usr/bin/python2.7
+Exec=${MINICONDA}/bin/python
 Icon=/usr/share/pixmaps/python2.7.xpm
 Terminal=true
 Type=Application
@@ -47,7 +49,7 @@ EOF
 [Desktop Entry]
 Name=Python 3.4
 Comment=Python 3.4
-Exec=/usr/bin/python3.4
+Exec=/bin/bash -c 'source activate py34; python'
 Icon=/usr/share/pixmaps/python3.4.xpm
 Terminal=true
 Type=Application
