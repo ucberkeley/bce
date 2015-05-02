@@ -1,6 +1,6 @@
 # RStudio
 echo "BCE: Installing RStudio..."
-RSTUDIO_URL=http://download1.rstudio.org/rstudio-0.98.1091-amd64.deb
+RSTUDIO_URL=http://download1.rstudio.org/rstudio-0.98.1103-amd64.deb
 RSTUDIO_DEB=$(basename ${RSTUDIO_URL}) && \
 curl -L -O ${RSTUDIO_URL} && \
 dpkg -i ${RSTUDIO_DEB} && \
