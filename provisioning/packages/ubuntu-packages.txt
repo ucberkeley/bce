@@ -19,6 +19,9 @@ libcurl4-gnutls-dev
 libopenblas-base
 libopenblas-dev
 
+# davclark, https://github.com/ucberkeley/bce/issues/16
+git-annex
+
 # libjpeg8 libraries (including -dev, and there are several) are pulled in by R
 # Why do we need libjpeg62? Esp. if we're not pulling in the -dev libraries?
 libjpeg62
