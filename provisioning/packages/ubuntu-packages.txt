@@ -16,15 +16,18 @@ default-jdk
 curl
 sqlite3
 libcurl4-gnutls-dev
+
+# paciorek
 libopenblas-base
 libopenblas-dev
 
 # davclark, https://github.com/ucberkeley/bce/issues/16
+# culich, ph290
 git-annex
 
 # libjpeg8 libraries (including -dev, and there are several) are pulled in by R
 # Why do we need libjpeg62? Esp. if we're not pulling in the -dev libraries?
-libjpeg62
+#libjpeg62
 
 # For more complete Pillow (the new PIL) support
 libtiff5-dev
@@ -37,7 +40,6 @@ libxslt1-dev
 liblzma-dev
 
 # Document processing stuff
-pandoc
 fonts-mathjax
 texlive
 texlive-latex-base
@@ -60,7 +62,6 @@ gedit
 gedit-plugins
 gedit-developer-plugins
 gedit-r-plugin
-gedit-latex-plugin
 gedit-source-code-browser-plugin
 vim
 
@@ -71,7 +72,6 @@ tk tcllib
 thunar-vcs-plugin
 thunar-archive-plugin
 thunar-media-tags-plugin
-gigolo
 lightdm
 xfce4
 xfce4-terminal
