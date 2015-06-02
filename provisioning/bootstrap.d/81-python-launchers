@@ -5,9 +5,23 @@ sudo -H -u ${BCE_USER} mkdir -p ${DESKTOP_DIR} && \
 (
 	sudo -H -u ${BCE_USER} cat <<EOF > ${DESKTOP_DIR}/ipython.desktop
 [Desktop Entry]
-Name=IPython
-Comment=IPython Interpreter
+Name=IPython 2.7
+Comment=IPython 2.7 Interpreter
 Exec=${MINICONDA}/bin/ipython
+Icon=${MINICONDA}/lib/python2.7/site-packages/IPython/html/static/base/images/favicon.ico
+Terminal=true
+Type=Application
+Categories=Development;
+StartupNotify=true
+NoDisplay=false
+EOF
+) && \
+(
+	sudo -H -u ${BCE_USER} cat <<EOF > ${DESKTOP_DIR}/ipython3.4.desktop
+[Desktop Entry]
+Name=IPython 3.4
+Comment=IPython 3.4 Interpreter
+Exec=/bin/bash -c 'source activate py34; ipython'
 Icon=${MINICONDA}/lib/python2.7/site-packages/IPython/html/static/base/images/favicon.ico
 Terminal=true
 Type=Application
@@ -19,9 +33,23 @@ EOF
 (
 	sudo -H -u ${BCE_USER} cat <<EOF > ${DESKTOP_DIR}/ipython-notebook.desktop
 [Desktop Entry]
-Name=IPython Notebook
-Comment=IPython Notebook
+Name=IPython 2.7 Notebook
+Comment=IPython 2.7 Notebook
 Exec=${MINICONDA}/bin/ipython notebook
+Icon=${MINICONDA}/lib/python2.7/site-packages/IPython/html/static/base/images/favicon.ico
+Terminal=true
+Type=Application
+Categories=Development;
+StartupNotify=true
+NoDisplay=false
+EOF
+) && \
+(
+	sudo -H -u ${BCE_USER} cat <<EOF > ${DESKTOP_DIR}/ipython3.4-notebook.desktop
+[Desktop Entry]
+Name=IPython 3.4 Notebook
+Comment=IPython 3.4 Notebook
+Exec=/bin/bash -c 'source activate py34; ipython notebook'
 Icon=${MINICONDA}/lib/python2.7/site-packages/IPython/html/static/base/images/favicon.ico
 Terminal=true
 Type=Application
