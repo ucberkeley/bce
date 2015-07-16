@@ -9,7 +9,7 @@
       "type": "amazon-ebs",
       "ami_name": "BCE-2015-summer-preview",
       "instance_type": "m3.medium",
-      "region": "us-west-1",
+      "region": "us-west-2",
       "ami_regions": "us-west-2",
       "source_ami": "ami-01717d44",
       "ssh_username": "ubuntu",
