@@ -9,7 +9,7 @@ export APT_GET="apt-get -q -y"
 export BCE_USER=oski
 
 # Make the BCE version available to downstream
-export BCE_VERSION="2015-spring"
+export BCE_VERSION="2015-summer"
 echo "BCE_VERSION=${BCE_VERSION}" >> /etc/environment
 
 echo "Environment:"
