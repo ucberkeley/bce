@@ -7,11 +7,11 @@
   "builders": [
     {
       "type": "amazon-ebs",
-      "ami_name": "BCE-2015-summer-preview",
+      "ami_name": "BCE-2015-summer",
       "instance_type": "m3.medium",
-      "region": "us-west-1",
-      "ami_regions": "us-west-2",
-      "source_ami": "ami-01717d44",
+      "region": "us-west-2",
+      "ami_regions": "us-west-1",
+      "source_ami": "ami-25d4ee15",
       "ssh_username": "ubuntu",
       "tags": {
           "OS_Version": "Ubuntu",
