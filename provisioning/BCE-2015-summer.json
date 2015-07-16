@@ -11,7 +11,7 @@
       "instance_type": "m3.medium",
       "region": "us-west-2",
       "ami_regions": "us-west-1",
-      "source_ami": "ami-25d4ee15",
+      "source_ami": "ami-414c4c71",
       "ssh_username": "ubuntu",
       "tags": {
           "OS_Version": "Ubuntu",
