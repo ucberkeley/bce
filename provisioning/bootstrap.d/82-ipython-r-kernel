@@ -1,0 +1,13 @@
+# https://github.com/IRkernel/IRkernel
+#
+msg="BCE: Install IR packages."
+echo "$msg"
+Rscript -e \
+	"install.packages(c('rzmq','repr','IRkernel','IRdisplay'), repos = c('http://irkernel.github.io/', getOption('repos')), type = 'source')" && \
+echo "  DONE" || echo "  FAIL"
+
+msg="BCE: Install IR kernel spec."
+echo "$msg"
+sudo -H -u ${BCE_USER} env PATH=/home/${BCE_USER}/miniconda/bin:${PATH} \
+	Rscript -e "IRkernel::installspec()" && \
+echo "  DONE" || echo "  FAIL"
