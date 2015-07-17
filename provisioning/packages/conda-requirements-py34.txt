@@ -1,5 +1,5 @@
-binstar==0.10.3
-cffi==0.9.2
+binstar==0.10.4
+cffi==1.1.0
 clyent==0.3.4
 cryptography==0.8.2
 cssselect==0.9.1
@@ -20,11 +20,11 @@ numpy==1.9.2
 pandas==0.16.0
 patchelf==0.6
 pillow==2.8.1
-pip==6.1.1
+pip==7.0.1
 ptyprocess==0.4
 pyasn1==0.1.7
 pycosat==0.6.1
-pycparser==2.12
+pycparser==2.13
 pygments==2.0.2
 pymongo==2.8
 pyopenssl==0.15.1
@@ -38,7 +38,7 @@ requests==2.6.2
 scikit-learn==0.16.1
 scipy==0.15.1
 seaborn==0.5.1
-setuptools==15.1
+setuptools==17.0
 sip==4.16.5
 six==1.9.0
 ssl_match_hostname==3.4.0.2
