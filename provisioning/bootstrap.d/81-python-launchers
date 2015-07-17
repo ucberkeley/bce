@@ -21,7 +21,7 @@ EOF
 [Desktop Entry]
 Name=IPython 3.4
 Comment=IPython 3.4 Interpreter
-Exec=/bin/bash -c 'source activate py34; ipython'
+Exec=${MINICONDA}/envs/py34/bin/ipython
 Icon=${MINICONDA}/lib/python2.7/site-packages/IPython/html/static/base/images/favicon.ico
 Terminal=true
 Type=Application
@@ -33,25 +33,11 @@ EOF
 (
 	sudo -H -u ${BCE_USER} cat <<EOF > ${DESKTOP_DIR}/ipython-notebook.desktop
 [Desktop Entry]
-Name=IPython 2.7 Notebook
-Comment=IPython 2.7 Notebook
+Name=IPython Notebook
+Comment=IPython Notebook
 Exec=${MINICONDA}/bin/ipython notebook
 Icon=${MINICONDA}/lib/python2.7/site-packages/IPython/html/static/base/images/favicon.ico
-Terminal=true
-Type=Application
-Categories=Development;
-StartupNotify=true
-NoDisplay=false
-EOF
-) && \
-(
-	sudo -H -u ${BCE_USER} cat <<EOF > ${DESKTOP_DIR}/ipython3.4-notebook.desktop
-[Desktop Entry]
-Name=IPython 3.4 Notebook
-Comment=IPython 3.4 Notebook
-Exec=/bin/bash -c 'source activate py34; ipython notebook'
-Icon=${MINICONDA}/lib/python2.7/site-packages/IPython/html/static/base/images/favicon.ico
-Terminal=true
+Terminal=false
 Type=Application
 Categories=Development;
 StartupNotify=true
@@ -77,7 +63,7 @@ EOF
 [Desktop Entry]
 Name=Python 3.4
 Comment=Python 3.4
-Exec=/bin/bash -c 'source activate py34; python'
+Exec=${MINICONDA}/envs/py34/bin/python
 Icon=/usr/share/pixmaps/python3.4.xpm
 Terminal=true
 Type=Application
