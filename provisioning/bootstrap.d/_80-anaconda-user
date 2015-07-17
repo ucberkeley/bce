@@ -57,7 +57,7 @@ source ${HOME}/miniconda/bin/activate ${HOME}/miniconda
 
 # These can only be in the root environment
 echo "BCE: Installing python 2.7 packages with conda..."
-conda install --yes conda==3.11.0 conda-build==1.12 conda-env==2.1.4
+conda install --yes conda==3.13.0 conda-build==1.13.0 conda-env==2.1.4
 
 for p in $(cat /tmp/packages/conda-requirements-py27.txt); do
 	conda install --yes ${p}
@@ -74,4 +74,12 @@ for p in $(cat /tmp/packages/conda-requirements-py34.txt); do
 done && \
 echo "  DONE" || echo "  FAIL"
 
+echo "BCE: Update IPython profile to include Python 3.4 kernel..."
+ipython kernelspec install-self --user && \
+echo "  DONE" || echo "  FAIL"
+
 manual_install_conda_packages 3.4
+
+echo "BCE: Deleting binstar token..."
+rm -f "${HOME}/.config/binstar/https%3A%2F%2Fapi.binstar.org.token" && \
+echo "  DONE" || echo "  FAIL"
