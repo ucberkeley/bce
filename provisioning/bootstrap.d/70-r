@@ -20,7 +20,11 @@ echo "  DONE" || echo "  FAIL"
 
 msg="BCE: Define our R repository."
 echo "$msg"
-echo "options(repos = list(CRAN = '${R_REPO}'))" >> /etc/R/Rprofile.site && \
+
+# Use HTTPS for RProfile to prevent an error message in RStudio.
+R_REPO_HTTPS = ${R_REPO//http:/^https}:
+
+echo "options(repos = list(CRAN = '${R_REPO_HTTPS}'))" >> /etc/R/Rprofile.site && \
 ( echo "  DONE" ; etckeeper commit "$msg" ) || echo "  FAIL"
 
 msg="BCE: Install R packages."
