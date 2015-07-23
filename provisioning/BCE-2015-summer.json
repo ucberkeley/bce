@@ -137,7 +137,8 @@
     {
       "type": "file",
       "source": "packer-vbox.log",
-      "destination": "/var/tmp/packer-vbox.log"
+      "destination": "/var/tmp/packer-vbox.log",
+      "only": ["virtualbox-iso"]
     }
   ]
 }
