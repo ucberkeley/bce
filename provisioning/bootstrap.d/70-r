@@ -22,7 +22,7 @@ msg="BCE: Define our R repository."
 echo "$msg"
 
 # Use HTTPS for RProfile to prevent an error message in RStudio.
-R_REPO_HTTPS = ${R_REPO//http:/^https}:
+R_REPO_HTTPS=${R_REPO//http:/https:}
 
 echo "options(repos = list(CRAN = '${R_REPO_HTTPS}'))" >> /etc/R/Rprofile.site && \
 ( echo "  DONE" ; etckeeper commit "$msg" ) || echo "  FAIL"
