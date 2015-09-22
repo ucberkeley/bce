@@ -15,5 +15,5 @@ for node in $nodes; do
     ssh $node bash /tmp/add-parallel-tools.sh >& /home/oski/add-parallel-$node.log
 done
 
-sudo -u oski echo -e "master\n$nodes" > .hosts
-chown -R oski:oski .hosts
+echo -e "master\n$nodes" > /home/oski/.hosts
+chown -R oski:oski /home/oski/.hosts
