@@ -1,0 +1,148 @@
+{
+  "variables": {
+      "bce_host_audio": "alsa",
+      "bce_user": "oski"
+   },
+
+  "builders": [
+    {
+      "type": "amazon-ebs",
+      "ami_name": "BCE-2015-fall",
+      "instance_type": "m3.2xlarge",
+      "region": "us-west-2",
+      "ami_regions": "us-west-1",
+      "source_ami": "ami-414c4c71",
+      "ssh_username": "ubuntu",
+      "tags": {
+          "OS_Version": "Ubuntu",
+          "Release": "Latest"
+      }
+    },
+    {
+        "type": "azure",
+        "publish_settings_path": "Free_Trial-2-9-2015-credentials.publishsettings",
+        "subscription_name": "Free Trial",
+        "storage_account": "berkeleyscf",
+        "storage_account_container": "images",
+        "os_type": "Linux",
+        "os_image_label": "Ubuntu Server 15.10",
+        "location": "West US",
+        "instance_size": "Small",
+        "user_image_label": "BCE-2015-fall-{{timestamp}}"
+    },  
+    {
+      "vm_name": "BCE-2015-fall",
+      "disk_size": 16000,
+      "output_directory": "build",
+      "type": "virtualbox-iso",
+      "headless": "true",
+      "format": "ova",
+      "boot_command": [
+        "<esc><wait>",
+        "<esc><wait>",
+        "<enter><wait>",
+        "/install/vmlinuz",
+        " auto<wait>",
+        " console-setup/ask_detect=false",
+        " console-setup/layoutcode=us",
+        " console-setup/modelcode=pc105<wait>",
+        " debconf/frontend=noninteractive",
+        " debian-installer=en_US",
+        " fb=false",
+        " initrd=/install/initrd.gz<wait>",
+        " kbd-chooser/method=us",
+        " keyboard-configuration/layout=USA",
+        " keyboard-configuration/variant=USA",
+        " locale=en_US<wait>",
+        " netcfg/get_domain=vm",
+        " netcfg/get_hostname=BCE",
+        " noapic<wait>",
+        " preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ubuntu-15.10/preseed.cfg",
+        " --",
+        "<enter><wait>"
+      ],
+      "http_directory": "http",
+      "guest_additions_mode": "attach",
+      "vboxmanage": [
+        [
+          "modifyvm",          "{{.Name}}",
+          "--memory",          "1024",
+          "--cpus",            "1",
+          "--clipboard",       "bidirectional",
+          "--draganddrop",     "bidirectional",
+          "--vram",            "128",
+          "--accelerate3d",    "on",
+          "--audio",           "{{user `bce_host_audio`}}",
+          "--audiocontroller", "ac97",
+          "--vrde",            "on",
+          "--vrdeport",        "8389",
+          "--vrdeaddress",     "127.0.0.1",
+          "--nictype1",        "virtio"
+        ],
+        [
+          "setextradata",      "{{.Name}}",
+          "GUI/SuppressMessages",
+          "remindAboutAutoCapture,remindAboutWrongColorDepth,remindAboutMouseIntegrationOn,remindAboutMouseIntegrationOff,confirmInputCapture,confirmGoingFullscreen"
+        ]
+      ],
+      "guest_os_type": "Ubuntu_64",
+      "iso_checksum": "150157f39dd5e4bee7114f58ca5588814c04c390",
+      "iso_checksum_type": "sha1",
+      "iso_url": "http://cdimage.ubuntu.com/ubuntu-server/daily/current/wily-server-amd64.iso",
+      "ssh_username": "{{user `bce_user`}}",
+      "ssh_password": "{{user `bce_user`}}",
+      "ssh_wait_timeout": "6000s",
+      "shutdown_command": "echo '{{user `bce_user`}}' | sudo -S shutdown -P now"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "file",
+      "source": "dot-config",
+      "destination": "/home/{{user `bce_user`}}/.config"
+    },
+    {
+      "type": "file",
+      "source": "dot-local",
+      "destination": "/home/{{user `bce_user`}}/.local"
+    },
+    {
+      "type": "file",
+      "source": "plymouth-theme",
+      "destination": "/tmp/bce"
+    },
+    {
+      "type": "file",
+      "source": "guest-scripts/setup_ipython_notebook.sh",
+      "destination": "/home/{{user `bce_user`}}/setup_ipython_notebook.sh"
+    },
+    {
+      "type": "file",
+      "source": "guest-scripts/update-bce-docs",
+      "destination": "/tmp/update-bce-docs"
+    },
+    {
+      "type": "file",
+      "source": "packages",
+      "destination": "/tmp/packages"
+    },
+    {
+      "type": "file",
+      "source": "bootstrap.d",
+      "destination": "/tmp/bootstrap.d"
+    },
+    {
+      "type": "shell",
+      "script": "bootstrap-bce.sh",
+      "environment_vars": ["DEBIAN_PRIORITY=high",
+                           "DEBIAN_FRONTEND=noninteractive"],
+      "execute_command": "echo '{{user `bce_user`}}' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'"
+    },
+    {
+      "type": "file",
+      "source": "packer-vbox.log",
+      "destination": "/var/tmp/packer-vbox.log",
+      "only": ["virtualbox-iso"]
+    }
+  ]
+}
