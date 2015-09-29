@@ -33,8 +33,10 @@ git-annex
 libtiff5-dev
 libwebp-dev
 
-libyaml-dev
+# For rzmq, IRkernel
 libzmq3-dev
+
+libyaml-dev
 libssl-dev
 libxslt1-dev
 liblzma-dev
