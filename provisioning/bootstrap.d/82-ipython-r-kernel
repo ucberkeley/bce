@@ -1,5 +1,7 @@
 # https://github.com/IRkernel/IRkernel
 #
+# Depends on libzmq3-dev
+
 msg="BCE: Install IR packages."
 echo "$msg"
 Rscript -e \
