@@ -1,4 +1,4 @@
-echo "BCE: Setting apt mirror to kernel.org..."
+echo "BCE: Change to a (usually) faster apt mirror..."
 sed -i -e 's/us.archive.ubuntu.com/mirrors.us.kernel.org/' \
 	/etc/apt/sources.list && \
 echo "  DONE" || echo "  FAIL"
