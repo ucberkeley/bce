@@ -8,10 +8,10 @@ cryptography==0.8.2
 cssselect==0.9.1
 cython==0.22
 dateutil==2.4.1
-ipython==3.1.0
-ipython-notebook=3.1.0
+ipython==4.0.0
 jinja2==2.7.3
 jsonschema==2.4.0
+jupyter==1.0.0
 lxml==3.4.3
 markupsafe==0.23
 matplotlib==1.4.3
