@@ -4,24 +4,27 @@ if [ "${PACKER_BUILDER_TYPE}" == "virtualbox-iso" ]; then
 	# Our user is created in the debian-installer phase
 	adduser ${BCE_USER} vboxsf
 else
-	# Avoid interactive prompts in user creation
-	adduser --disabled-password --gecos "" ${BCE_USER} && \
-	echo ${BCE_USER}:${BCE_USER} | chpasswd
+        ## not needed now that we'll use default user in a given context
+	# # Avoid interactive prompts in user creation
+	# adduser --disabled-password --gecos "" ${BCE_USER} && \
+	# echo ${BCE_USER}:${BCE_USER} | chpasswd
 fi && \
 # Enable our user to login without a password
 adduser ${BCE_USER} nopasswdlogin && \
 ( echo "  DONE" ; etckeeper commit "$msg" ) || echo "  FAIL"
 
+# not needed now that ubuntu is primary BCE EC2 user
 echo "BCE: Configure ${BCE_USER} (and other) desktops"
-if [ "${PACKER_BUILDER_TYPE}" == "amazon-ebs" ]; then
-    # We are initially copying files to the (pre-existing) ubuntu user
-    cp -r /home/ubuntu/.config /home/${BCE_USER}/.config && \
-    chmod 755 /home/ubuntu/setup_ipython_notebook.sh && \
-    cp /home/ubuntu/setup_ipython_notebook.sh /home/${BCE_USER} && \
-    chown -R ${BCE_USER}:${BCE_USER} /home/${BCE_USER}
-else
-    chmod 755 /home/${BCE_USER}/setup_ipython_notebook.sh
-fi && \
+# if [ "${PACKER_BUILDER_TYPE}" == "amazon-ebs" ]; then
+#    # We are initially copying files to the (pre-existing) ubuntu user
+#    cp -r /home/ubuntu/.config /home/${BCE_USER}/.config && \
+#    chmod 755 /home/ubuntu/setup_ipython_notebook.sh && \
+#    cp /home/ubuntu/setup_ipython_notebook.sh /home/${BCE_USER} && \
+#    chown -R ${BCE_USER}:${BCE_USER} /home/${BCE_USER}
+# else
+#    chmod 755 /home/${BCE_USER}/setup_ipython_notebook.sh
+#fi && \
+chmod 755 /home/${BCE_USER}/setup_ipython_notebook.sh && \
 echo "  DONE" || echo "  FAIL"
 
 # Create a convenient place on the desktop for people to mount and access
