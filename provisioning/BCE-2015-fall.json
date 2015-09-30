@@ -87,9 +87,9 @@
         ]
       ],
       "guest_os_type": "Ubuntu_64",
-      "iso_checksum": "150157f39dd5e4bee7114f58ca5588814c04c390",
+      "iso_url": "http://releases.ubuntu.com/15.04/ubuntu-15.04-server-amd64.iso",
+      "iso_checksum": "d10248965c2c749df6bcce9f2f90f16a2e75e843",
       "iso_checksum_type": "sha1",
-      "iso_url": "http://cdimage.ubuntu.com/ubuntu-server/daily/current/wily-server-amd64.iso",
       "ssh_username": "{{user `bce_user`}}",
       "ssh_password": "{{user `bce_user`}}",
       "ssh_wait_timeout": "6000s",
