@@ -137,7 +137,7 @@
       "script": "bootstrap-bce.sh",
       "environment_vars": ["DEBIAN_PRIORITY=high",
                            "DEBIAN_FRONTEND=noninteractive",
-			   "BCE_USER={{user `bce_user`}}"],
+			   "BCE_USER={{user `bce_user`}}",
 			   "BCE_VERSION={{user `bce_version`}}"],
       "execute_command": "echo '{{user `bce_user`}}' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'"
     },
