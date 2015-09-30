@@ -8,7 +8,6 @@ curl -o ${IPYTHON_ICO} \
 	https://raw.githubusercontent.com/ipython/ipython-website/master/_static/favicon.ico
 
 echo "BCE: Creating python launchers in panel menu..."
-sudo -H -u ${BCE_USER} mkdir -p ${DESKTOP_DIR} && \
 (
 	sudo -H -u ${BCE_USER} cat <<EOF > ${DESKTOP_DIR}/ipython.desktop
 [Desktop Entry]
