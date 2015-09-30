@@ -6,7 +6,7 @@ PYCHARM_DIST_SHORT=pycharm-edu-1.0.1 # really
 PYCHARM_URL=http://download.jetbrains.com/python/${PYCHARM_DIST}.tar.gz
 curl -L -O ${PYCHARM_URL}
 tar -C /opt -xzf ${PYCHARM_DIST}.tar.gz && \
-chown -R oski:oski /opt/${PYCHARM_DIST_SHORT} && \
+chown -R ${BCE_USER}:${BCE_USER} /opt/${PYCHARM_DIST_SHORT} && \
 rm ${PYCHARM_DIST}.tar.gz && \
 ( cd /usr/local/bin && ln -s /opt/${PYCHARM_DIST_SHORT}/bin/pycharm.sh ) && \
 echo "  DONE" || echo "  FAIL"

@@ -5,11 +5,14 @@ START_TIME=$(date '+%s')
 export APT_GET="apt-get -q -y"
 # APT_GET="apt-get -qq -y"
 
+# We set this in the packer json
 # This is also referenced in the packer json and in preseed.cfg
-export BCE_USER=oski
+#export BCE_USER=oski
+
+# We set this in the packer json
+# export BCE_VERSION="2015-fall"
 
 # Make the BCE version available to downstream
-export BCE_VERSION="2015-fall"
 echo "BCE_VERSION=${BCE_VERSION}" >> /etc/environment
 
 echo "Environment:"

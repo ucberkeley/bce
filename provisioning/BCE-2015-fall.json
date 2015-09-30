@@ -2,12 +2,13 @@
   "variables": {
       "bce_host_audio": "alsa",
       "bce_user": "oski"
+      "bce_version": "2015-fall"
    },
 
   "builders": [
     {
       "type": "amazon-ebs",
-      "ami_name": "BCE-2015-fall",
+      "ami_name": "BCE-{{user `bce_version`}}",
       "instance_type": "m3.2xlarge",
       "region": "us-west-2",
       "ami_regions": "us-west-1",
@@ -28,10 +29,10 @@
         "os_image_label": "Ubuntu Server 15.10",
         "location": "West US",
         "instance_size": "Small",
-        "user_image_label": "BCE-2015-fall-{{timestamp}}"
+        "user_image_label": "BCE-{{user `bce_version`}}-{{timestamp}}"
     },  
     {
-      "vm_name": "BCE-2015-fall",
+      "vm_name": "BCE-{{user `bce_version`}}",
       "disk_size": 16000,
       "output_directory": "build",
       "type": "virtualbox-iso",
@@ -135,7 +136,9 @@
       "type": "shell",
       "script": "bootstrap-bce.sh",
       "environment_vars": ["DEBIAN_PRIORITY=high",
-                           "DEBIAN_FRONTEND=noninteractive"],
+                           "DEBIAN_FRONTEND=noninteractive",
+			   "BCE_USER={{user `bce_user`}}"],
+			   "BCE_VERSION={{user `bce_version`}}"],
       "execute_command": "echo '{{user `bce_user`}}' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'"
     },
     {

@@ -3,10 +3,10 @@ DOC_CACHE_DIR="/var/cache/bce.berkeley.edu"
 
 echo "BCE: Creating BCE desktop help icon..."
 DESKTOP_FILE=/home/${BCE_USER}/Desktop/bce-help.desktop
-# /home/oski/Desktop may not exist if not on VBox
+# /home/${BCE_USER}/Desktop may not exist if not on VBox
 if [ ! -e /home/${BCE_USER}/Desktop/ ]; then
     mkdir /home/${BCE_USER}/Desktop
-    chown -R oski:oski /home/${BCE_USER}/Desktop
+    chown -R ${BCE_USER}:${BCE_USER} /home/${BCE_USER}/Desktop
 fi
 ( sudo -u ${BCE_USER} cat <<EOF > ${DESKTOP_FILE}
 [Desktop Entry]
