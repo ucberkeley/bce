@@ -1,14 +1,14 @@
 {
   "variables": {
       "bce_host_audio": "alsa",
-      "bce_user": "oski"
+      "bce_user": "oski",
       "bce_version": "2015-fall"
    },
 
   "builders": [
     {
       "type": "amazon-ebs",
-      "ami_name": "BCE-{{user `bce_version`}}",
+      "ami_name": "BCE-{{user `bce_version`}}-preview",
       "instance_type": "m3.2xlarge",
       "region": "us-west-2",
       "ami_regions": "us-west-1",
