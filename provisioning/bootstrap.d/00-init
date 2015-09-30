@@ -15,5 +15,7 @@ export APT_GET="apt-get -q -y"
 # Make the BCE version available to downstream
 echo "BCE_VERSION=${BCE_VERSION}" >> /etc/environment
 
+export DESKTOP_DIR="/home/${BCE_USER}/.local/share/applications"
+
 echo "Environment:"
 env
