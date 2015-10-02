@@ -88,14 +88,6 @@ echo "  DONE" || echo "  FAIL"
 # All of these fail
 # conda install pp
 # conda pipbuild pp
-# pip install --allow-external --allow-unverified pp
 echo "BCE: Installing parallel python..."
 PP_VERSION=1.6.4
 pip install --allow-external pp --allow-unverified pp pp==${PP_VERSION}
-#(
-#	cd /tmp
-#	wget http://www.parallelpython.com/downloads/pp/pp-${PP_VERSION}.tar.gz && \
-#	tar -xvzf pp-${PP_VERSION}.tar.gz && \
-#	cd pp-${PP_VERSION} && \
-#	python setup.py install
-#)
