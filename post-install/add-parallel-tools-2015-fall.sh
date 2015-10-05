@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# This whole script runs as root.
+
 # copy this file to (or paste the contents into) a
 # text file called add-parallel-tools.sh on the VM
 # run this script as follows: 
@@ -32,7 +34,8 @@ echo 'export PATH=${PATH}:/usr/local/openmpi/bin' >> /etc/bash.bashrc
 export PATH=${PATH}:/usr/local/openmpi/bin
 
 # install parallelization packages for Python
-conda install mpi4py
+# conda install mpi4py
+sudo -u ${BCE_USER} conda install --yes --use-local mpi4py
 
 # conda install pp
 # conda pipbuild pp
