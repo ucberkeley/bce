@@ -8,8 +8,8 @@ It will be configured to use the SSL certificate it creates in the
 current directory.
 
 Please type a password to use for the notebook server:"
-sha_str=$(python -c \
-	  'from IPython.lib import passwd; print passwd(raw_input())' )
+sha_str=$(python3 -c \
+	  'from IPython.lib import passwd; print(passwd(input()))' )
 # Just for the vertical space
 echo 
 
@@ -25,6 +25,8 @@ c.NotebookApp.ip = '*'
 c.NotebookApp.open_browser = False
 c.NotebookApp.port = 9999
 c.NotebookApp.certfile = u'$PWD/ipython.pem'
+# Necessary for some versions of Tornado?
+c.NotebookApp.keyfile = u'$PWD/ipython.pem'
 c.NotebookApp.password = u'$sha_str'
 EOF
 

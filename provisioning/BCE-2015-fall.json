@@ -2,18 +2,17 @@
   "variables": {
       "bce_host_audio": "alsa",
       "bce_user": "oski",
-      "use_saved_pkg_src": "False",
-      "pkg_src_file": "/dev/null"
+      "bce_version": "2015-fall"
    },
 
   "builders": [
     {
       "type": "amazon-ebs",
-      "ami_name": "BCE-2015-spring",
-      "instance_type": "m3.medium",
-      "region": "us-west-1",
-      "ami_regions": "us-west-2",
-      "source_ami": "ami-01717d44",
+      "ami_name": "BCE-{{user `bce_version`}}-preview-1",
+      "instance_type": "m3.2xlarge",
+      "region": "us-west-2",
+      "ami_regions": "us-west-1",
+      "source_ami": "ami-414c4c71",
       "ssh_username": "ubuntu",
       "tags": {
           "OS_Version": "Ubuntu",
@@ -27,13 +26,13 @@
         "storage_account": "berkeleyscf",
         "storage_account_container": "images",
         "os_type": "Linux",
-        "os_image_label": "Ubuntu Server 14.10",
+        "os_image_label": "Ubuntu Server 15.10",
         "location": "West US",
         "instance_size": "Small",
-        "user_image_label": "BCE-2015-spring-{{timestamp}}"
+        "user_image_label": "BCE-{{user `bce_version`}}-{{timestamp}}"
     },  
     {
-      "vm_name": "BCE-2015-spring",
+      "vm_name": "BCE-{{user `bce_version`}}",
       "disk_size": 16000,
       "output_directory": "build",
       "type": "virtualbox-iso",
@@ -59,7 +58,7 @@
         " netcfg/get_domain=vm",
         " netcfg/get_hostname=BCE",
         " noapic<wait>",
-        " preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ubuntu-14.10/preseed.cfg",
+        " preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ubuntu-15.10/preseed.cfg",
         " --",
         "<enter><wait>"
       ],
@@ -75,7 +74,11 @@
           "--vram",            "128",
           "--accelerate3d",    "on",
           "--audio",           "{{user `bce_host_audio`}}",
-          "--audiocontroller", "ac97"
+          "--audiocontroller", "ac97",
+          "--vrde",            "on",
+          "--vrdeport",        "8389",
+          "--vrdeaddress",     "127.0.0.1",
+          "--nictype1",        "virtio"
         ],
         [
           "setextradata",      "{{.Name}}",
@@ -84,12 +87,12 @@
         ]
       ],
       "guest_os_type": "Ubuntu_64",
-      "iso_checksum": "0c1ebea31c3523cfe9a4ffed8bcf6c7d23dfb97b",
+      "iso_url": "http://releases.ubuntu.com/15.04/ubuntu-15.04-server-amd64.iso",
+      "iso_checksum": "d10248965c2c749df6bcce9f2f90f16a2e75e843",
       "iso_checksum_type": "sha1",
-      "iso_url": "http://releases.ubuntu.com/14.10/ubuntu-14.10-server-amd64.iso",
       "ssh_username": "{{user `bce_user`}}",
       "ssh_password": "{{user `bce_user`}}",
-      "ssh_wait_timeout": "3000s",
+      "ssh_wait_timeout": "6000s",
       "shutdown_command": "echo '{{user `bce_user`}}' | sudo -S shutdown -P now"
     }
   ],
@@ -130,22 +133,19 @@
       "destination": "/tmp/bootstrap.d"
     },
     {
-      "type": "file",
-      "source": "{{user `pkg_src_file`}}",
-      "destination": "/tmp/pkgs.zip"
-    },
-    {
       "type": "shell",
       "script": "bootstrap-bce.sh",
       "environment_vars": ["DEBIAN_PRIORITY=high",
                            "DEBIAN_FRONTEND=noninteractive",
-                           "USE_SAVED_PKG_SRC={{user `use_saved_pkg_src`}}"],
+			   "BCE_USER={{user `bce_user`}}",
+			   "BCE_VERSION={{user `bce_version`}}"],
       "execute_command": "echo '{{user `bce_user`}}' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'"
     },
     {
       "type": "file",
       "source": "packer-vbox.log",
-      "destination": "/var/tmp/packer-vbox.log"
+      "destination": "/var/tmp/packer-vbox.log",
+      "only": ["virtualbox-iso"]
     }
   ]
 }

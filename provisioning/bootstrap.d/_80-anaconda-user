@@ -1,0 +1,93 @@
+# We run this bootstrap script as $BCE_USER. Otherwise if we were to run
+# separate conda invocations within separate sudos, the "activate" will only
+# exist as long as sudo's subshell.
+
+function manual_install_conda_packages() {
+
+	arg=$1
+
+	pb="singledispatch==3.4.0.3 rpy2==2.5.6 ipythonblocks==1.7.0 chardet==2.3.0"
+	if [ -z "$arg" -o "$arg" == "2" ]; then
+		pb="$pb chardet==2.3.0"
+	fi
+
+	# Not available yet
+	echo "BCE: Installing packages with conda pipbuild..."
+	for pv in $pb ; do
+		p=${pv/==*/}
+		v=${pv/*==/}
+
+		echo "BCE:   ${pv}"
+		conda pipbuild --no-binstar-upload ${p}	--release ${v}
+		conda install --yes --use-local ${pv}
+	done && \
+	echo "  DONE" || echo "  FAIL"
+
+	# These do not pipbuild cleanly
+	PIPINSTALL="sklearn-pandas==0.0.9"
+
+	for pi in ${PIPINSTALL} ; do
+		pip install ${pi}
+	done
+}
+
+# Main
+url="http://repo.continuum.io/miniconda/Miniconda-3.9.1-Linux-x86_64.sh"
+install_script="$(basename ${url})"
+
+if [ ! -f /tmp/${install_script} ]; then
+	echo "BCE: Download ${install_script}..."
+	curl -o /tmp/${install_script} "${url}" && \
+	echo "  DONE" || echo "  FAIL"
+fi
+
+echo "BCE: Install ${install_script}..."
+bash /tmp/${install_script} -b && \
+echo "  DONE" || echo "  FAIL"
+
+# We default to Anaconda. 
+echo "BCE: Prepending miniconda to PATH..."
+(
+	echo
+	echo '# BCE: Added by bootstrap'
+	echo 'export PATH=${HOME}/miniconda/bin:${PATH}'
+) | tee -a ${HOME}/.bashrc ${HOME}/.profile
+
+source ${HOME}/miniconda/bin/activate ${HOME}/miniconda
+
+# These can only be in the root environment
+echo "BCE: Installing python 2.7 packages with conda..."
+conda install --yes conda==3.13.0 conda-build==1.13.0 conda-env==2.1.4
+
+for p in $(cat /tmp/packages/conda-requirements-py27.txt); do
+	conda install --yes ${p}
+done && \
+echo "  DONE" || echo "  FAIL"
+
+manual_install_conda_packages
+
+echo "BCE: Installing python 3.4 packages with conda..."
+conda create --yes -n py34 python=3.4 && \
+source activate py34
+for p in $(cat /tmp/packages/conda-requirements-py34.txt); do
+	conda install --yes ${p}
+done && \
+echo "  DONE" || echo "  FAIL"
+
+echo "BCE: Update IPython profile to include Python 3.4 kernel..."
+ipython kernelspec install-self --user && \
+echo "  DONE" || echo "  FAIL"
+
+manual_install_conda_packages 3.4
+
+echo "BCE: Deleting binstar token..."
+rm -f "${HOME}/.config/binstar/https%3A%2F%2Fapi.binstar.org.token" && \
+echo "  DONE" || echo "  FAIL"
+
+
+# All of these fail
+# conda install pp
+# conda pipbuild pp
+echo "BCE: Installing parallel python..."
+PP_VERSION=1.6.4
+pip install --allow-external pp --allow-unverified pp pp==${PP_VERSION}

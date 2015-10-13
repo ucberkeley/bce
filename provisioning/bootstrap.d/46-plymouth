@@ -1,0 +1,13 @@
+if [ "${PACKER_BUILDER_TYPE}" == "amazon-ebs" ]; then return ; fi
+
+msg="BCE: Configure plymouth"
+echo "$msg"
+cp -a /tmp/bce /lib/plymouth/themes/ && \
+echo "FRAMEBUFFER=y" > /etc/initramfs-tools/conf.d/splash && \
+update-alternatives --install \
+	/lib/plymouth/themes/default.plymouth default.plymouth \
+	/lib/plymouth/themes/bce/bce.plymouth 200 && \
+update-alternatives --set default.plymouth \
+	/lib/plymouth/themes/bce/bce.plymouth && \
+/usr/sbin/update-initramfs -u && \
+( echo "  DONE" ; etckeeper commit "$msg" ) || echo "  FAIL"

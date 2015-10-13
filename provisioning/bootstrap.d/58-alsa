@@ -1,9 +1,11 @@
-for c in Master "Master Mono" PCM ; do
-	echo "BCE: Getting ALSA mixer volumes '$c'..." && \
+if [ "${PACKER_BUILDER_TYPE}" == "virtualbox-iso" ]; then 
+   for c in Master "Master Mono" PCM ; do
+       	echo "BCE: Getting ALSA mixer volumes '$c'..." && \
 	amixer get $c && \
 	echo "BCE: Setting ALSA mixer volumes '$c'..." && \
 	( amixer set "$c" unmute; amixer set "$c" 100% ) > /dev/null  
 	echo "BCE: Getting ALSA mixer volumes '$c'..." && \
 	amixer get $c
-done && \
+    done && \
 echo "  DONE" || echo "  FAIL"
+fi

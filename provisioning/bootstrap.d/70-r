@@ -1,10 +1,39 @@
-msg="BCE: Installing add-on R packages..."
+R_REPO="https://mran.revolutionanalytics.com/snapshot/2015-09-10"
+R_PKGS="/tmp/packages/R-packages.txt"
+
+#U_CODE="utopic"
+U_CODE=$(lsb_release -c -s)
+
+msg="BCE: Configure apt repository for R packages."
 echo "$msg"
-Rscript -e "pkgs <- scan('/tmp/packages/R-packages.txt', what = 'character'); \
-install.packages(pkgs, repos = 'http://cran.cnr.berkeley.edu')" && \
+echo "deb ${R_REPO}/bin/linux/ubuntu ${U_CODE}/" >> \
+	/etc/apt/sources.list.d/mran.list && \
+gpg --keyserver keyserver.ubuntu.com --recv-key E084DAB9 && \
+gpg -a --export E084DAB9 | sudo apt-key add - && \
+( echo "  DONE" ; etckeeper commit "$msg" ) || echo "  FAIL"
+
+msg="BCE: Install R."
+echo "$msg"
+$APT_GET update > /dev/null && \
+$APT_GET install r-base r-recommended && \
 echo "  DONE" || echo "  FAIL"
 
-echo "BCE: Adding R to Development menu..."
+msg="BCE: Define our R repository."
+echo "$msg"
+
+# Use HTTPS for RProfile to prevent an error message in RStudio.
+R_REPO_HTTPS=${R_REPO//http:/https:}
+
+echo "options(repos = list(CRAN = '${R_REPO_HTTPS}'))" >> /etc/R/Rprofile.site && \
+( echo "  DONE" ; etckeeper commit "$msg" ) || echo "  FAIL"
+
+msg="BCE: Install R packages."
+echo "$msg"
+Rscript -e \
+	"install.packages(scan('${R_PKGS}', what='char'), repos='${R_REPO}')" && \
+echo "  DONE" || echo "  FAIL"
+
+echo "BCE: Add R to Development menu."
 sed -i \
 	-e '/^Categories=/s/Graphics;//' \
 	-e '/^Categories=/s/=/=Development;/' \

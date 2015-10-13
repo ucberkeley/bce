@@ -1,8 +1,13 @@
 DOC_SCRIPT="/usr/local/bin/update-bce-docs"
-DOC_CACHE_DIR="/var/cache/bce-documentation"
+DOC_CACHE_DIR="/var/cache/bce.berkeley.edu"
 
 echo "BCE: Creating BCE desktop help icon..."
 DESKTOP_FILE=/home/${BCE_USER}/Desktop/bce-help.desktop
+# /home/${BCE_USER}/Desktop may not exist if not on VBox
+if [ ! -e /home/${BCE_USER}/Desktop/ ]; then
+    mkdir /home/${BCE_USER}/Desktop
+    chown -R ${BCE_USER}:${BCE_USER} /home/${BCE_USER}/Desktop
+fi
 ( sudo -u ${BCE_USER} cat <<EOF > ${DESKTOP_FILE}
 [Desktop Entry]
 Name=Help with BCE
@@ -15,6 +20,7 @@ StartupNotify=true
 Icon=gnome-help
 Categories=X-XFCE;X-Xfce-Toplevel;
 NoDisplay=false
+Path=${DOC_CACHE_DIR}
 EOF
 ) && \
 chmod +x ${DESKTOP_FILE} && \

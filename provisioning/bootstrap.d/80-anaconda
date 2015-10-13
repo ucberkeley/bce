@@ -1,0 +1,5 @@
+# We run this bootstrap script as $BCE_USER. Otherwise if we were to run
+# separate conda invocations within separate sudos, the "activate" will only
+# exist as long as sudo's subshell.
+
+sudo -i -u ${BCE_USER} /bin/bash /tmp/bootstrap.d/_80-anaconda-user

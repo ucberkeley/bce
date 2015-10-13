@@ -1,3 +1,8 @@
+echo "BCE: Change to a (usually) faster apt mirror..."
+sed -i -e 's/us.archive.ubuntu.com/mirrors.us.kernel.org/' \
+	/etc/apt/sources.list && \
+echo "  DONE" || echo "  FAIL"
+
 echo "BCE: Updating apt cache..."
 $APT_GET update > /dev/null && \
 echo "  DONE" || echo "  FAIL"

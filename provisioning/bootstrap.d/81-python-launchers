@@ -1,0 +1,81 @@
+MINICONDA="/home/${BCE_USER}/miniconda"
+
+IPYTHON_ICO="/usr/local/share/pixmaps/ipython.ico"
+
+echo "BCE: Downloading IPython icon..."
+mkdir /usr/local/share/pixmaps/
+curl -o ${IPYTHON_ICO} \
+	https://raw.githubusercontent.com/ipython/ipython-website/master/_static/favicon.ico
+
+echo "BCE: Creating python launchers in panel menu..."
+(
+	sudo -H -u ${BCE_USER} cat <<EOF > ${DESKTOP_DIR}/ipython.desktop
+[Desktop Entry]
+Name=IPython 2.7
+Comment=IPython 2.7 Interpreter
+Exec=${MINICONDA}/bin/ipython
+Icon=${IPYTHON_ICO}
+Terminal=true
+Type=Application
+Categories=Development;
+StartupNotify=true
+NoDisplay=false
+EOF
+) && \
+(
+	sudo -H -u ${BCE_USER} cat <<EOF > ${DESKTOP_DIR}/ipython3.4.desktop
+[Desktop Entry]
+Name=IPython 3.4
+Comment=IPython 3.4 Interpreter
+Exec=${MINICONDA}/envs/py34/bin/ipython
+Icon=${IPYTHON_ICO}
+Terminal=true
+Type=Application
+Categories=Development;
+StartupNotify=true
+NoDisplay=false
+EOF
+) && \
+(
+	sudo -H -u ${BCE_USER} cat <<EOF > ${DESKTOP_DIR}/ipython-notebook.desktop
+[Desktop Entry]
+Name=Jupyter Notebook
+Comment=Jupyter Notebook
+Exec=${MINICONDA}/bin/jupyter notebook
+Icon=${MINICONDA}/lib/python2.7/site-packages/notebook/static/base/images/favicon.ico
+Terminal=false
+Type=Application
+Categories=Development;
+StartupNotify=true
+NoDisplay=false
+EOF
+) && \
+(
+	sudo -H -u ${BCE_USER} cat <<EOF > ${DESKTOP_DIR}/python2.7.desktop
+[Desktop Entry]
+Name=Python 2.7
+Comment=Python 2.7
+Exec=${MINICONDA}/bin/python
+Icon=/usr/share/pixmaps/python2.7.xpm
+Terminal=true
+Type=Application
+Categories=Development;
+StartupNotify=true
+NoDisplay=false
+EOF
+) && \
+(
+	sudo -H -u ${BCE_USER} cat <<EOF > ${DESKTOP_DIR}/python3.4.desktop
+[Desktop Entry]
+Name=Python 3.4
+Comment=Python 3.4
+Exec=${MINICONDA}/envs/py34/bin/python
+Icon=/usr/share/pixmaps/python3.4.xpm
+Terminal=true
+Type=Application
+Categories=Development;
+StartupNotify=true
+NoDisplay=false
+EOF
+) && \
+echo "  DONE" || echo "  FAIL"

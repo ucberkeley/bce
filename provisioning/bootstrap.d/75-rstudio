@@ -1,8 +1,29 @@
-# RStudio
-echo "BCE: Installing RStudio..."
-RSTUDIO_URL=http://download1.rstudio.org/rstudio-0.98.1091-amd64.deb
-RSTUDIO_DEB=$(basename ${RSTUDIO_URL}) && \
-curl -L -O ${RSTUDIO_URL} && \
-dpkg -i ${RSTUDIO_DEB} && \
-rm -f ${RSTUDIO_DEB} && \
-( echo "  DONE" ; etckeeper commit "$msg" ) || echo "  FAIL"
+echo "BCE: Installing RStudio and RStudio Server..."
+RS_V=0.99.484
+
+for URL in \
+	"http://download1.rstudio.org/rstudio-${RS_V}-amd64.deb" \
+	"http://download2.rstudio.org/rstudio-server-${RS_V}-amd64.deb" ; do
+	DEB=$(basename ${URL}) && \
+	curl -L -O ${URL} && \
+	gdebi -n ${DEB} && \
+	rm -f ${DEB} && \
+	( echo "  DONE" ; etckeeper commit "$msg" ) || echo "  FAIL"
+done
+
+echo "BCE: Creating rstudio-server client launcher in panel menu..."
+(
+    sudo -H -u ${BCE_USER} cat <<EOF > ${DESKTOP_DIR}/rstudio-server.desktop
+[Desktop Entry]
+Name=RStudio Server
+Comment=RStudio Server
+Exec=x-www-browser http://localhost:8787
+Icon=rstudio
+Terminal=false
+Type=Application
+Categories=Development;
+StartupNotify=true
+NoDisplay=false
+EOF
+) && \
+echo "  DONE" || echo "  FAIL"
