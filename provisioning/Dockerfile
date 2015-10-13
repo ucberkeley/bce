@@ -20,6 +20,11 @@ RUN useradd $BCE_USER && \
 
 ## Install BCE
 COPY . /tmp
+COPY dot-config /home/$BCE_USER/.config
+COPY dot-local /home/$BCE_USER/.local
+COPY plymouth-theme /tmp/bce
+COPY guest-scripts/setup_ipython_notebook.sh /home/$BCE_USER/setup_ipython_notebook.sh
+COPY guest-scripts/update-bce-docs /tmp/update-bce-docs
 RUN cd /tmp && \
 	DEBIAN_FRONTEND=noninteractive && DEBIAN_PRIORITY=high \
 	apt-get update -qq && apt-get install -yq --no-install-recommends \
