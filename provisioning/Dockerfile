@@ -35,7 +35,12 @@ RUN cd /tmp && \
 		lsb-release \
 		nano \
 		sudo && \
-	bash bootstrap-bce.sh 
+    debconf-set-selections < debconf.selections && \
+    . /tmp/bootstrap-bce.sh 
+
+
+## Consider: adding jupyter and rstudio-server to path
+## Extending with more R packages
 
 EXPOSE 8888
 EXPOSE 8787
