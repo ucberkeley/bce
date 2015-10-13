@@ -1,0 +1,12 @@
+keyboard-configuration keyboard-configuration/layout select English (US)
+keyboard-configuration keyboard-configuration/variant select English (US)
+d-i console-setup/ask_detect boolean false
+d-i console-setup/layoutcode string us
+d-i console-setup/modelcode string pc105
+debconf debconf/frontend select noninteractive
+d-i debian-installer/locale string en_US
+kdb-chooser kbd-chooser/method select us
+d-i netcfg/get_domain string vm
+d-i netcfg/get_hostname string BCE
+d-i preseed/url string http://{{ .HTTPIP }}:{{ .HTTPPort }}/ubuntu-15.10/preseed.cfg
+

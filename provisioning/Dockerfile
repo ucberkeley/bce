@@ -1,8 +1,36 @@
-FROM ubuntu:14.04
+FROM ubuntu:15.04
 MAINTAINER Carl Boettiger <cboettig@gmail.com>
 
+## Set environment
+ENV TERM xterm
+ENV BCE_USER oski
+ENV BCE_VERSION 2015-fall
+
+## Set Locales
+RUN locale-gen en_US.UTF-8  
+ENV LANG en_US.UTF-8  
+ENV LANGUAGE en_US:en  
+ENV LC_ALL en_US.UTF-8 
+
+## Create user
+RUN useradd $BCE_USER && \
+	mkdir /home/$BCE_USER \
+	&& chown $BCE_USER:$BCE_USER /home/$BCE_USER
+
+
+## Install BCE
 COPY . /tmp
-RUN cd /tmp && bash bootstrap-bce.sh
+RUN cd /tmp && \
+	DEBIAN_FRONTEND=noninteractive && DEBIAN_PRIORITY=high \
+	apt-get update -qq && apt-get install -yq --no-install-recommends \
+		apt-transport-https \
+		ca-certificates \
+		debconf-utils \
+		etckeeper \
+		lsb-release \
+		nano \
+		sudo && \
+	bash bootstrap-bce.sh 
 
 EXPOSE 8888
 EXPOSE 8787
