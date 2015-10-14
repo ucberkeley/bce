@@ -1,4 +1,4 @@
-R_REPO="https://mran.revolutionanalytics.com/snapshot/2015-09-10"
+R_REPO="https://mran.revolutionanalytics.com/snapshot/2015-10-07"
 R_PKGS="/tmp/packages/R-packages.txt"
 
 #U_CODE="utopic"

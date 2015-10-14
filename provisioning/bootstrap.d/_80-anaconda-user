@@ -84,10 +84,14 @@ echo "BCE: Deleting binstar token..."
 rm -f "${HOME}/.config/binstar/https%3A%2F%2Fapi.binstar.org.token" && \
 echo "  DONE" || echo "  FAIL"
 
-
 # All of these fail
 # conda install pp
 # conda pipbuild pp
 echo "BCE: Installing parallel python..."
 PP_VERSION=1.6.4
-pip install --allow-external pp --allow-unverified pp pp==${PP_VERSION}
+pip install --allow-external pp --allow-unverified pp pp==${PP_VERSION} && \
+echo "  DONE" || echo "  FAIL"
+
+echo "BCE: Remove cached packages and tarballs..."
+conda clean --yes --tarballs --packages && \
+echo "  DONE" || echo "  FAIL"

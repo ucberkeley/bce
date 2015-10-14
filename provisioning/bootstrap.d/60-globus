@@ -11,7 +11,7 @@ DIST_NAME=$(tar tzf /tmp/${GLOBUS_FILE} | head -n 1) && \
 echo "  DONE"  || echo "  FAIL"
 
 echo "BCE: Creating Globus Connect launcher in panel menu..."
-sudo -H -u ${BCE_USER} mkdir -p ${DESKTOP_DIR} && \
+install -d -o ${BCE_USER} -g ${BCE_USER} ${DESKTOP_DIR} && \
 (
     sudo -H -u ${BCE_USER} cat <<EOF > ${DESKTOP_DIR}/globusconnect.desktop
 [Desktop Entry]

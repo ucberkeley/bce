@@ -1,5 +1,7 @@
+APT_MIRROR=mirrors.ocf.berkeley.edu
+
 echo "BCE: Change to a (usually) faster apt mirror..."
-sed -i -e 's/us.archive.ubuntu.com/mirrors.us.kernel.org/' \
+sed -i -e "s/us.archive.ubuntu.com/${APT_MIRROR}/" \
 	/etc/apt/sources.list && \
 echo "  DONE" || echo "  FAIL"
 
