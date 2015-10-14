@@ -1,10 +1,3 @@
-# Needed with Anaconda?
-# Core Python
-#python-dev
-#python3.4-dev
-# Much faster / easier than going the pip way
-#python-gtk2-dev
-
 # Mostly for networkx
 graphviz
 
@@ -24,10 +17,6 @@ libopenblas-dev
 # davclark, https://github.com/ucberkeley/bce/issues/16
 # culich, ph290
 git-annex
-
-# libjpeg8 libraries (including -dev, and there are several) are pulled in by R
-# Why do we need libjpeg62? Esp. if we're not pulling in the -dev libraries?
-#libjpeg62
 
 # For more complete Pillow (the new PIL) support
 libtiff5-dev
@@ -88,3 +77,7 @@ alsa-utils
 # System
 # gdebi makes installing .deb files easier
 gdebi-core
+
+# For vpn connections
+network-manager-openconnect
+network-manager-openconnect-gnome
