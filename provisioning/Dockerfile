@@ -35,8 +35,9 @@ RUN cd /tmp && \
 		lsb-release \
 		nano \
 		sudo && \
-    debconf-set-selections < debconf.selections && \
-    . /tmp/bootstrap-bce.sh 
+	bzr whoami "Oski Bear <oski@berkeley.edu>" && \
+	debconf-set-selections < debconf.selections && \
+	bash /tmp/bootstrap-bce.sh 
 
 
 ## Consider: adding jupyter and rstudio-server to path
