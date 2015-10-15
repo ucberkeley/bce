@@ -29,6 +29,7 @@ ec2:
 		$(JSON) 2>&1 | tee packer-$@.log 
 
 azure:
+	PACKER_LOG=100 PACKER_LOG_PATH=packer.log PACKER_NO_COLOR=1 \
 	packer build -only=azure \
         -var bce_host_audio=none \
         -var bce_user=packer \
