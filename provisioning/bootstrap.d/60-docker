@@ -1,4 +1,11 @@
 echo "BCE: Install Docker..."
+
+if [ "${PACKER_BUILDER_TYPE}" == "amazon-ebs" ]; then
+	echo "BCE: Install aufs kernel module..."
+	${APT_GET} install linux-image-extra-virtual && \
+	echo "  DONE."  || echo "  FAIL."
+fi
+
 # https://blog.docker.com/2015/07/new-apt-and-yum-repos/
 apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 \
 	--recv-keys 58118E89F3A912897C070ADBF76221572C52609D && \
