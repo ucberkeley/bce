@@ -22,7 +22,11 @@ endif
 
 all: vbox ec2
 
+# https://www.packer.io/docs/builders/amazon.html
+# Set AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY environment variables or
+# enter creds in ~/.aws/credentials.
 ec2:
+	PACKER_LOG=100 PACKER_LOG_PATH=packer.log PACKER_NO_COLOR=1 \
 	packer build -only=amazon-ebs \
         -var bce_host_audio=none \
         -var bce_user=ubuntu \
