@@ -8,7 +8,7 @@
   "builders": [
     {
       "type": "amazon-ebs",
-      "ami_name": "BCE-{{user `bce_version`}}-preview-tmp",
+      "ami_name": "BCE-{{user `bce_version`}}-preview2",
       "instance_type": "m3.2xlarge",
       "region": "us-west-2",
       "ami_regions": "us-west-1",
