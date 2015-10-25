@@ -4,6 +4,15 @@ if [ "${PACKER_BUILDER_TYPE}" == "amazon-ebs" ]; then
 	echo "BCE: Install aufs kernel module..."
 	${APT_GET} install linux-image-extra-virtual && \
 	echo "  DONE."  || echo "  FAIL."
+
+	msg="BCE: Add aufs to /etc/modules..."
+	echo $msg
+	echo aufs >> /etc/modules && \
+	msg="BCE: Running depmod..."
+	depmod -a && \
+	msg="BCE: Running modprobe..."
+	modprobe aufs && \
+	( echo "  DONE" ; etckeeper commit "$msg" ) || echo "  FAIL"
 fi
 
 # https://blog.docker.com/2015/07/new-apt-and-yum-repos/
@@ -14,6 +23,12 @@ echo "deb https://apt.dockerproject.org/repo ubuntu-utopic main" >> \
 ${APT_GET} update > /dev/null && \
 ${APT_GET} install docker-engine && \
 echo "  DONE."  || echo "  FAIL."
+
+if [ -d /var/lib/docker/devicemapper ]; then
+	echo "BCE: Removing docker's devicemapper storage"
+	rm -rf /var/lib/docker/devicemapper && \
+	echo "  DONE."  || echo "  FAIL."
+fi
 
 echo "BCE: Add ${BCE_USER} to docker group... "
 /usr/sbin/adduser ${BCE_USER} docker && \

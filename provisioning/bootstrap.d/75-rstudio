@@ -27,3 +27,10 @@ NoDisplay=false
 EOF
 ) && \
 echo "  DONE" || echo "  FAIL"
+
+echo "BCE: Appending rstudio-server to PATH..."
+(
+    echo
+    echo '# BCE: Added by bootstrap'
+    echo 'export PATH=${PATH}:/usr/lib/rstudio-server/bin'
+) | tee -a /home/${BCE_USER}/.bashrc /home/${BCE_USER}/.profile
