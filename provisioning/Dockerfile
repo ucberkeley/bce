@@ -30,6 +30,7 @@ RUN cd /tmp && \
 		apt-transport-https \
 		ca-certificates \
 		debconf-utils \
+    dig \
 		etckeeper \
 		lsb-release \
 		nano \
@@ -41,6 +42,6 @@ RUN cd /tmp && \
 
 ## Consider: adding jupyter and rstudio-server to path
 ## Extending with more R packages
-EXPOSE 8888
+EXPOSE 9999 
 EXPOSE 8787
 
