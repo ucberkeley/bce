@@ -30,7 +30,7 @@ RUN cd /tmp && \
 		apt-transport-https \
 		ca-certificates \
 		debconf-utils \
-    dig \
+                dnsutils \
 		etckeeper \
 		lsb-release \
 		nano \
