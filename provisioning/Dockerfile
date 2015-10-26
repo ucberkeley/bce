@@ -12,25 +12,25 @@ ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US:en  
 ENV LC_ALL en_US.UTF-8 
 
-## Create user
+## Copy over files to the locations expected by the BCE provisioning scripts
+COPY . /tmp 
 RUN useradd $BCE_USER && \
-	mkdir /home/$BCE_USER \
-	&& chown $BCE_USER:$BCE_USER /home/$BCE_USER
+	mkdir /home/$BCE_USER && \
+  mv /tmp/dot-config /home/$BCE_USER/.config && \
+  mv /tmp/dot-local /home/$BCE_USER/.local && \
+  mv /tmp/plymouth-theme /tmp/bce && \
+  mv /tmp/guest-scripts/setup_ipython_notebook.sh /home/$BCE_USER/ && \
+  mv /tmp/guest-scripts/update-bce-docs /tmp/ && \
+  chown -R $BCE_USER:$BCE_USER /home/$BCE_USER
 
-
-## Install BCE
-COPY . /tmp
-COPY dot-config /home/$BCE_USER/.config
-COPY dot-local /home/$BCE_USER/.local
-COPY plymouth-theme /tmp/bce
-COPY guest-scripts/setup_ipython_notebook.sh /home/$BCE_USER/setup_ipython_notebook.sh
-COPY guest-scripts/update-bce-docs /tmp/update-bce-docs
+## Install missing packages, configure debconf.selections and the run provisioner
 RUN cd /tmp && \
 	DEBIAN_FRONTEND=noninteractive && DEBIAN_PRIORITY=high \
 	apt-get update -qq && apt-get install -yq --no-install-recommends \
 		apt-transport-https \
 		ca-certificates \
 		debconf-utils \
+    dig \
 		etckeeper \
 		lsb-release \
 		nano \
@@ -42,7 +42,6 @@ RUN cd /tmp && \
 
 ## Consider: adding jupyter and rstudio-server to path
 ## Extending with more R packages
-
-EXPOSE 8888
+EXPOSE 9999 
 EXPOSE 8787
 

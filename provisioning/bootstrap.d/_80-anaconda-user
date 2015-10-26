@@ -66,6 +66,14 @@ echo "  DONE" || echo "  FAIL"
 
 manual_install_conda_packages
 
+# All of these fail
+# conda install pp
+# conda pipbuild pp
+echo "BCE: Installing parallel python..."
+PP_VERSION=1.6.4
+pip install --allow-external pp --allow-unverified pp pp==${PP_VERSION} && \
+echo "  DONE" || echo "  FAIL"
+
 echo "BCE: Installing python 3.4 packages with conda..."
 conda create --yes -n py34 python=3.4 && \
 source activate py34
@@ -82,14 +90,6 @@ manual_install_conda_packages 3.4
 
 echo "BCE: Deleting binstar token..."
 rm -f "${HOME}/.config/binstar/https%3A%2F%2Fapi.binstar.org.token" && \
-echo "  DONE" || echo "  FAIL"
-
-# All of these fail
-# conda install pp
-# conda pipbuild pp
-echo "BCE: Installing parallel python..."
-PP_VERSION=1.6.4
-pip install --allow-external pp --allow-unverified pp pp==${PP_VERSION} && \
 echo "  DONE" || echo "  FAIL"
 
 echo "BCE: Remove cached packages and tarballs..."
