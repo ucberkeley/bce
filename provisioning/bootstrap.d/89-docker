@@ -8,10 +8,10 @@ if [ "${PACKER_BUILDER_TYPE}" == "amazon-ebs" ]; then
 	msg="BCE: Add aufs to /etc/modules..."
 	echo $msg
 	echo aufs >> /etc/modules && \
-	msg="BCE: Running depmod..."
+	echo "BCE: Running depmod..."
 	depmod -a && \
-	msg="BCE: Running modprobe..."
-	modprobe aufs && \
+	#echo "BCE: Running modprobe..."
+	#modprobe aufs && \
 	( echo "  DONE" ; etckeeper commit "$msg" ) || echo "  FAIL"
 fi
 
