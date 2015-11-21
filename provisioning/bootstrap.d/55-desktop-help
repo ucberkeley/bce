@@ -38,5 +38,11 @@ EOF
 echo "BCE: Installing update-bce-docs..."
 mv /tmp/update-bce-docs ${DOC_SCRIPT} && \
 chmod +x ${DOC_SCRIPT} && \
-${DOC_SCRIPT} && \
-echo "  DONE" || echo "  FAIL"
+echo "BCE: Running update-bce-docs..."
+${DOC_SCRIPT}
+
+case $? in
+	# wget returns 8 even if it is successful on "nothing to do".
+	0|8) echo "  DONE" ;;
+	*)   echo "  FAIL" ;;
+esac
