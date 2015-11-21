@@ -41,7 +41,7 @@ scikit-learn==0.16.1
 scipy==0.16.0
 seaborn==0.6.0
 setuptools==17.0
-sip==4.16.5
+sip==4.16.9
 six==1.9.0
 ssl_match_hostname==3.4.0.2
 terminado==0.5
