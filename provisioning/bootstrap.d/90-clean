@@ -5,8 +5,8 @@ echo "  DONE" || echo "  FAIL"
 (
 	echo "BCE: Unsetting BCE provisioner as etckeeper user..."
 	cd /etc
-	git config --global user.name "Oski Bear" && \
-	git config --global user.email "oski@bear" && \
+	git config --global user.name "BCE" && \
+	git config --global user.email "bce@berkeley.edu" && \
 	echo "  DONE" || echo "  FAIL"
 )
 
