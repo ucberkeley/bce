@@ -43,7 +43,7 @@ vbox:
 	PACKER_LOG=100 PACKER_LOG_PATH=packer.log PACKER_NO_COLOR=1 \
 	packer build -only=virtualbox-iso \
         -var bce_host_audio=$(BCE_HOST_AUDIO) \
-        -var bce_user=oski \
+        -var bce_user=ubuntu \
 		$(JSON) 2>&1 | tee packer-$@.log
 
 clean:

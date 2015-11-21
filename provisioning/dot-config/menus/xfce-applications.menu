@@ -8,7 +8,7 @@
 	<Exclude>
 		<Filename>xfhelp4.desktop</Filename>
 	</Exclude>
-	<AppDir>/home/oski/.local/share/applications</AppDir>
+	<AppDir>/home/ubuntu/.local/share/applications</AppDir>
 	<Menu>
 		<Name>Development</Name>
 		<Include>
@@ -17,14 +17,14 @@
 			<Filename>python2.7.desktop</Filename>
 			<Filename>python3.4.desktop</Filename>
 		</Include>
-		<AppDir>/home/oski/.local/share/applications</AppDir>
+		<AppDir>/home/ubuntu/.local/share/applications</AppDir>
 	</Menu>
 	<Menu>
 		<Name>Settings</Name>
 		<Exclude>
 			<Filename>xfce-xfcalendar-settings.desktop</Filename>
 		</Exclude>
-		<AppDir>/home/oski/.local/share/applications</AppDir>
+		<AppDir>/home/ubuntu/.local/share/applications</AppDir>
 		<Exclude>
 			<Filename>xfce-settings-manager.desktop</Filename>
 			<Filename>xfce4-accessibility-settings.desktop</Filename>
@@ -58,11 +58,11 @@
 		<Exclude>
 			<Filename>gigolo.desktop</Filename>
 		</Exclude>
-		<AppDir>/home/oski/.local/share/applications</AppDir>
+		<AppDir>/home/ubuntu/.local/share/applications</AppDir>
 	</Menu>
 	<Menu>
 		<Name>Office</Name>
-		<AppDir>/home/oski/.local/share/applications</AppDir>
+		<AppDir>/home/ubuntu/.local/share/applications</AppDir>
 		<Exclude>
 			<Filename>evince.desktop</Filename>
 			<Filename>xfcalendar.desktop</Filename>
@@ -74,14 +74,14 @@
 		<Exclude>
 			<Filename>globaltime.desktop</Filename>
 		</Exclude>
-		<AppDir>/home/oski/.local/share/applications</AppDir>
+		<AppDir>/home/ubuntu/.local/share/applications</AppDir>
 	</Menu>
 	<Menu>
 		<Name>Graphics</Name>
 		<Exclude>
 			<Filename>libreoffice-draw.desktop</Filename>
 		</Exclude>
-		<AppDir>/home/oski/.local/share/applications</AppDir>
+		<AppDir>/home/ubuntu/.local/share/applications</AppDir>
 		<Exclude>
 			<Filename>gv.desktop</Filename>
 		</Exclude>
@@ -91,7 +91,7 @@
 		<Exclude>
 			<Filename>libreoffice-math.desktop</Filename>
 		</Exclude>
-		<AppDir>/home/oski/.local/share/applications</AppDir>
+		<AppDir>/home/ubuntu/.local/share/applications</AppDir>
 	</Menu>
 	<Exclude>
 		<Filename>exo-mail-reader.desktop</Filename>
