@@ -1,4 +1,4 @@
-APT_MIRROR=mirrors.ocf.berkeley.edu
+APT_MIRROR=mirror.us.leaseweb.net
 
 echo "BCE: Change to a (usually) faster apt mirror..."
 sed -i -e "s/us.archive.ubuntu.com/${APT_MIRROR}/" \
