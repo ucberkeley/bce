@@ -51,6 +51,7 @@ spam
 stringr
 tidyr
 tm
+xgboost
 xlsx
 xlsxjars
 xtable
