@@ -30,9 +30,11 @@ maps
 mda
 mgcv
 munsell
+openNLP
 plyr
 proto
 pROC
+qdap
 randomForest
 rbenchmark
 RColorBrewer
@@ -44,9 +46,11 @@ ROCR
 rpart
 RSQLite
 scales
+SnowballC
 spam
 stringr
 tidyr
+tm
 xlsx
 xlsxjars
 xtable
