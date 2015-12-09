@@ -41,6 +41,7 @@ RColorBrewer
 Rcpp
 readstata13
 reshape2
+RhpcBLASctl
 rJava
 ROCR
 rpart
