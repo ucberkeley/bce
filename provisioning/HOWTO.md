@@ -26,16 +26,16 @@ To create an Amazon EC2 AMI, set your Amazon security credentials and then run:
 
     $ make ec2
 
+or for an AMI that will work with cfncluster:
+
+   $ make ec2-cfn
+
 Amazon credentials can be set on the command line or by editing the BCE json file. To set on the command line run:
 
     $ export AWS_ACCESS_KEY_ID=YYY
     $ export AWS_SECRET_ACCESS_KEY=ZZZ
 
 More information on building to ec2 is available on the [packer ec2 help page](https://www.packer.io/docs/builders/amazon-ebs.html)
-
-Note that currently when you start up a VM from the resulting AMI, you will
-need to first login as the 'ubuntu' user and set up SSH keys for the 'oski'
-user, which is the user provisioned by BCE.
 
 Notes on provisioning
 =====================

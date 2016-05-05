@@ -71,8 +71,8 @@ manual_install_conda_packages
 # conda install pp
 # conda pipbuild pp
 echo "BCE: Installing parallel python..."
-PP_VERSION=1.6.4
-pip install --allow-external pp --allow-unverified pp pp==${PP_VERSION} && \
+PP_VERSION=1.6.5
+pip install --allow-external pp pp==${PP_VERSION} && \
 echo "  DONE" || echo "  FAIL"
 
 echo "BCE: Installing python 3.4 packages with conda..."

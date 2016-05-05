@@ -10,6 +10,10 @@ echo "deb ${R_REPO}/bin/linux/ubuntu ${U_CODE}/" >> \
 	/etc/apt/sources.list.d/mran.list && \
 gpg --keyserver keyserver.ubuntu.com --recv-key E084DAB9 && \
 gpg -a --export E084DAB9 | sudo apt-key add - && \
+echo -n | openssl s_client -connect mran.revolutionanalytics.com:443 | \
+  sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | \
+  tee '/usr/local/share/ca-certificates/mran.revolutionanalytics.com.crt' && \
+update-ca-certificates && \
 ( echo "  DONE" ; etckeeper commit "$msg" ) || echo "  FAIL"
 
 msg="BCE: Install R."

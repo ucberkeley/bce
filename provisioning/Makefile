@@ -1,4 +1,4 @@
-JSON=BCE-2015-fall.json
+JSON=BCE-2016-spring.json
 
 # Detect host operating system
 UNAME := $(shell uname)
@@ -27,7 +27,14 @@ all: vbox ec2
 # enter creds in ~/.aws/credentials.
 ec2:
 	PACKER_LOG=100 PACKER_LOG_PATH=packer.log PACKER_NO_COLOR=1 \
-	packer build -only=amazon-ebs \
+	packer build -only=amazon-base \
+        -var bce_host_audio=none \
+        -var bce_user=ubuntu \
+		$(JSON) 2>&1 | tee packer-$@.log 
+
+ec2-cfn:
+	PACKER_LOG=100 PACKER_LOG_PATH=packer.log PACKER_NO_COLOR=1 \
+	packer build -only=amazon-cfn \
         -var bce_host_audio=none \
         -var bce_user=ubuntu \
 		$(JSON) 2>&1 | tee packer-$@.log 
