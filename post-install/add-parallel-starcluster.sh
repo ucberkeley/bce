@@ -10,10 +10,10 @@
 
 nodes=`grep -Eo node[[:digit:]]{3} /etc/hosts`
 for node in $nodes; do
-    ssh $node adduser oski sudo
+#    ssh $node adduser oski sudo
     scp add-parallel-tools.sh $node:/tmp/.
-    ssh $node bash /tmp/add-parallel-tools.sh >& /home/oski/add-parallel-$node.log
+    ssh $node bash /tmp/add-parallel-tools.sh >& /home/ubuntu/add-parallel-$node.log
 done
 
-echo -e "master\n$nodes" > /home/oski/.hosts
-chown -R oski:oski /home/oski/.hosts
+echo -e "master\n$nodes" > /home/ubuntu/.hosts
+chown -R ubuntu:ubuntu /home/ubuntu/.hosts

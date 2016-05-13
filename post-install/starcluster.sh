@@ -13,8 +13,8 @@ starcluster put mycluster modify-for-aws.sh .
 starcluster sshmaster mycluster bash modify-for-aws.sh
 
 # add parallel tools to the master node
-starcluster put -u oski mycluster add-parallel-tools.sh .
-starcluster sshmaster -u oski mycluster sudo bash add-parallel-tools.sh 
+starcluster put -u oski mycluster add-parallel-tools-2015-spring.sh .
+starcluster sshmaster -u oski mycluster sudo bash add-parallel-tools-2015-spring.sh 
 
 # add parallel tools to the worker nodes
 starcluster put -u oski mycluster add-parallel-starcluster.sh .
