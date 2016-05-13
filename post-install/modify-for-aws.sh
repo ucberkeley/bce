@@ -9,14 +9,6 @@
 export DEBIAN_PRIORITY=high
 export DEBIAN_FRONTEND=noninteractive
 
-# setup oski user with admin privileges and for passwordless SSH
-# deprecated as of BCE-2015-fall
-adduser oski sudo
-if [ ! -e /home/oski/.ssh ]; then 
-    cp -pr /home/ubuntu/.ssh /home/oski
-    chown -R oski:oski /home/oski/.ssh
-fi
-
 # add a few useful software packages
 git config --global user.email "bce@lists.berkeley.edu"
 git config --global user.name "BCE Release Team"

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# This whole script runs as root.
+
 # copy this file to (or paste the contents into) a
 # text file called add-parallel-tools.sh on the VM
 # run this script as follows: 
@@ -9,14 +11,14 @@
 export DEBIAN_PRIORITY=high
 export DEBIAN_FRONTEND=noninteractive
 
-# install fast linear algebra package and MPI functionality
+# install MPI and related functionality
+
 # we install openMPI from source because Ubuntu-packaged version (1.6.5)
 # has bug in MPI_Comm_spawn affecting Rmpi
+
 git config --global user.email "bce@lists.berkeley.edu"
 git config --global user.name "BCE Release Team"
 
-apt-get update
-apt-get install -y libopenblas-base # libopenmpi-dev openmpi-bin
 
 MPI_VERSION=1.8.4
 mkdir /usr/local/openmpi
@@ -34,14 +36,8 @@ echo 'export PATH=${PATH}:/usr/local/openmpi/bin' >> /etc/bash.bashrc
 export PATH=${PATH}:/usr/local/openmpi/bin
 
 # install parallelization packages for Python
-HOME=/root pip install multiprocessing mpi4py
-
-PP_VERSION=1.6.4
-cd /tmp
-wget http://www.parallelpython.com/downloads/pp/pp-${PP_VERSION}.tar.gz
-tar -xvzf pp-${PP_VERSION}.tar.gz
-cd pp-${PP_VERSION}
-python setup.py install
+# conda install mpi4py
+sudo -u ${BCE_USER} conda install --yes --use-local mpi4py
 
 # install parallelization packages for R
 cat <<EOF > /tmp/R-packages.txt
@@ -54,5 +50,5 @@ pbdDMAT
 pbdMPI
 EOF
 
-Rscript -e "pkgs <- scan('/tmp/R-packages.txt', what = 'char'); install.packages(pkgs, repos = 'http://cran.cnr.berkeley.edu')"
+Rscript -e "pkgs <- scan('/tmp/R-packages.txt', what = 'char'); install.packages(pkgs)"
 
