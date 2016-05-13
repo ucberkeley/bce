@@ -21,6 +21,13 @@
               "delete_on_termination": true
           }
       ],
+      "ami_block_device_mappings": [
+          {
+              "device_name": "/dev/sda1",
+              "volume_size": 15,
+              "delete_on_termination": true
+          }
+      ],
       "tags": {
           "OS_Version": "Ubuntu",
           "Release": "14.04"

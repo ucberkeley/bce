@@ -1,5 +1,6 @@
 R_REPO="https://mran.revolutionanalytics.com/snapshot/2015-10-07"
 R_PKGS="/tmp/packages/R-packages.txt"
+R_MPI_PKGS="/tmp/packages/R-mpi-packages.txt"
 
 #U_CODE="utopic"
 U_CODE=$(lsb_release -c -s)
@@ -36,6 +37,16 @@ echo "$msg"
 Rscript -e \
 	"install.packages(scan('${R_PKGS}', what='char'), repos='${R_REPO}')" && \
 echo "  DONE" || echo "  FAIL"
+
+#if [ "${PACKER_BUILDER_NAME}" == "amazon-cfn" ]; then  # is PACKER_BUILDER_NAME not being set - my experiment suggested not - Chris 5/9/16
+if [ "${PACKER_BUILDER_TYPE}" == "amazon-ebs" ]; then 
+msg="BCE: Install R MPI-related packages."
+echo "$msg"
+Rscript -e \
+	"install.packages(scan('${R_MPI_PKGS}', what='char'), repos='${R_REPO}')" && \
+echo "  DONE" || echo "  FAIL"
+fi
+
 
 echo "BCE: Add R to Development menu."
 sed -i \

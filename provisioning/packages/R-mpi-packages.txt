@@ -1,0 +1,7 @@
+doMPI
+rlecuyer
+pbdDEMO
+pbdSLAP
+pbdBASE
+pbdDMAT
+pbdMPI

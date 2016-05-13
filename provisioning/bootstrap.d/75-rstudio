@@ -1,4 +1,6 @@
-echo "BCE: Installing RStudio and RStudio Server..."
+
+msg="BCE: Installing RStudio and RStudio Server..."
+echo "$msg"
 RS_V=0.99.484
 
 for URL in \
