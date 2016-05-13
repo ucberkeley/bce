@@ -28,7 +28,7 @@ To create an Amazon EC2 AMI, set your Amazon security credentials and then run:
 
 or for an AMI that will work with cfncluster:
 
-   $ make ec2-cfn
+    $ make ec2-cfn
 
 Note that the CFN build requests a volume size of 15 Gb or it runs out of disk building the AMI; this 15 Gb then gets baked in as the default when using the AMI to start an instance. 
 

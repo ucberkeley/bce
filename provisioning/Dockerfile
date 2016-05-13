@@ -3,7 +3,7 @@ MAINTAINER Carl Boettiger <cboettig@gmail.com>
 
 ## Set environment
 ENV TERM xterm
-ENV BCE_USER oski
+ENV BCE_USER ubuntu
 ENV BCE_VERSION 2015-fall
 
 ## Set Locales
@@ -35,7 +35,7 @@ RUN cd /tmp && \
 		lsb-release \
 		nano \
 		sudo && \
-	bzr whoami "Oski Bear <oski@berkeley.edu>" && \
+	bzr whoami "BCE Release Team <bce@lists.berkeley.edu>" && \
 	debconf-set-selections < debconf.selections && \
 	bash /tmp/bootstrap-bce.sh 
 

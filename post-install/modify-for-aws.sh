@@ -10,6 +10,7 @@ export DEBIAN_PRIORITY=high
 export DEBIAN_FRONTEND=noninteractive
 
 # setup oski user with admin privileges and for passwordless SSH
+# deprecated as of BCE-2015-fall
 adduser oski sudo
 if [ ! -e /home/oski/.ssh ]; then 
     cp -pr /home/ubuntu/.ssh /home/oski
