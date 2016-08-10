@@ -1,14 +1,12 @@
 # Pycharm
 echo "BCE: Downloading PyCharm to /opt"
-#PYCHARM_DIST=pycharm-community-4.0.6
-PYCHARM_DIST=pycharm-educational-1.0.1
-PYCHARM_DIST_SHORT=pycharm-edu-1.0.1 # really
+PYCHARM_DIST=pycharm-edu-2.0.4
 PYCHARM_URL=http://download.jetbrains.com/python/${PYCHARM_DIST}.tar.gz
 curl -L -O ${PYCHARM_URL}
 tar -C /opt -xzf ${PYCHARM_DIST}.tar.gz && \
-chown -R ${BCE_USER}:${BCE_USER} /opt/${PYCHARM_DIST_SHORT} && \
+chown -R ${BCE_USER}:${BCE_USER} /opt/${PYCHARM_DIST} && \
 rm ${PYCHARM_DIST}.tar.gz && \
-( cd /usr/local/bin && ln -s /opt/${PYCHARM_DIST_SHORT}/bin/pycharm.sh ) && \
+( cd /usr/local/bin && ln -s /opt/${PYCHARM_DIST}/bin/pycharm.sh ) && \
 echo "  DONE" || echo "  FAIL"
 
 # This gets overwritten by itself if the user accepts the defaults when
@@ -20,8 +18,8 @@ echo "BCE: Create PyCharm launcher in panel menu..."
 Version=0.1
 Type=Application
 Name=PyCharm Educational Edition
-Icon=/opt/${PYCHARM_DIST_SHORT}/bin/pycharm.png
-Exec="/opt/${PYCHARM_DIST_SHORT}/bin/pycharm.sh" %f
+Icon=/opt/${PYCHARM_DIST}/bin/pycharm.png
+Exec="/opt/${PYCHARM_DIST}/bin/pycharm.sh" %f
 Comment=PyCharm Installation
 Categories=Development;IDE;
 Terminal=false
