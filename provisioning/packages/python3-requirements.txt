@@ -1,7 +1,5 @@
-# BeautifulSoup does not install cleanly via pip and currently is not
-# requested by any BCE leader.
-# BeautifulSoup==3.2.1
 Cython==0.21.1
+datascience==0.5.20
 ipython[notebook]==2.3.1
 jinja2==2.7.3
 lxml==3.4.1

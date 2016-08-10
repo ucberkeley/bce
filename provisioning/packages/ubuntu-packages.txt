@@ -52,7 +52,6 @@ gv
 gedit
 gedit-plugins
 gedit-developer-plugins
-gedit-r-plugin
 gedit-source-code-browser-plugin
 vim
 

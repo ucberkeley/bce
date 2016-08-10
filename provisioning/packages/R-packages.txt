@@ -18,6 +18,7 @@ ggplot2
 glmnet
 gridExtra
 gtable
+haven
 Hmisc
 inline
 iterators
@@ -31,6 +32,7 @@ mda
 mgcv
 munsell
 openNLP
+pbdZMQ
 plyr
 proto
 pROC
@@ -40,6 +42,7 @@ rbenchmark
 RColorBrewer
 Rcpp
 readstata13
+repr
 reshape2
 RhpcBLASctl
 rJava

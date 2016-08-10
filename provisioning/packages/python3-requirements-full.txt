@@ -1,5 +1,6 @@
 certifi==14.5.14
 Cython==0.21.1
+datascience==0.5.20
 decorator==3.4.0
 docutils==0.12
 ipython[notebook]==2.3.1
