@@ -2,12 +2,14 @@ caret
 chron
 class
 colorspace
+cvAUC
 DBI
 devtools
 dichromat
 digest
 doMC
 doParallel
+doSNOW
 dplyr
 earth
 e1071
@@ -32,6 +34,7 @@ mda
 mgcv
 munsell
 openNLP
+party
 pbdZMQ
 plyr
 proto
@@ -41,6 +44,7 @@ randomForest
 rbenchmark
 RColorBrewer
 Rcpp
+reader
 readstata13
 repr
 reshape2
@@ -53,6 +57,7 @@ scales
 SnowballC
 spam
 stringr
+SuperLearner
 tidyr
 tm
 xgboost
