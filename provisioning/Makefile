@@ -1,4 +1,4 @@
-JSON=BCE-2016-spring.json
+JSON=BCE-2016-fall.json
 
 # Detect host operating system
 UNAME := $(shell uname)
@@ -21,6 +21,9 @@ endif
 
 
 all: vbox ec2
+
+validate:
+	packer validate $(JSON)
 
 # https://www.packer.io/docs/builders/amazon.html
 # Set AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY environment variables or
