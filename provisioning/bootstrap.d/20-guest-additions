@@ -24,5 +24,4 @@ if [ "${PACKER_BUILDER_TYPE}" == "virtualbox-iso" ]; then
     # XXX We break logical chaining here, because it's never working!
     eject /mnt && \
     ( echo "  DONE" ; etckeeper commit "$msg" ) || echo "  FAIL"
-    #echo "  DONE" || echo "FAIL (but not really?):" $msg
 fi
