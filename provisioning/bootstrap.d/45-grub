@@ -3,14 +3,14 @@
 if [ "${PACKER_BUILDER_TYPE}" == "amazon-ebs" ]; then return ; fi
 
 # Hide the grub boot menu
-# Enable plymouth splash screen
+# Enable plymouth splash screen (disabled due to plymouth/drm issue)
+#	-e '/^GRUB_CMDLINE_LINUX_DEFAULT=/ s/"$/ splash"/' \
 # Configure plymouth's video mode
+#	-e '/^#GRUB_GFXMODE=/ a GRUB_GFX_PAYLOAD_LINUX=800x600-32' \
 msg="BCE: Configure grub"
 echo "$msg"
 sed -i \
 	-e '/GRUB_HIDDEN_TIMEOUT=/ s/^#//' \
-	-e '/^GRUB_CMDLINE_LINUX_DEFAULT=/ s/"$/ splash"/' \
-	-e '/^#GRUB_GFXMODE=/ a GRUB_GFX_PAYLOAD_LINUX=800x600-32' \
 	/etc/default/grub && \
 /usr/sbin/update-grub && \
 ( echo "  DONE" ; etckeeper commit "$msg" ) || echo "  FAIL"
