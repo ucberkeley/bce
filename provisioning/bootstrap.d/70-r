@@ -1,4 +1,4 @@
-R_REPO="https://mran.revolutionanalytics.com/snapshot/2015-10-07"
+R_REPO="https://mran.revolutionanalytics.com/snapshot/2016-06-22"
 R_PKGS="/tmp/packages/R-packages.txt"
 R_MPI_PKGS="/tmp/packages/R-mpi-packages.txt"
 
