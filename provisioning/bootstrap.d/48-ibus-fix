@@ -1,0 +1,4 @@
+# https://bugs.launchpad.net/ubuntu/+source/ibus/+bug/1611523
+echo "BCE: Fixing ibus-setup bug"
+sed -e '/python3/s# # /usr/bin/#' /usr/bin/ibus-setup
+echo "  DONE" || echo "  FAIL"
