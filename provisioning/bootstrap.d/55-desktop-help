@@ -27,6 +27,7 @@ chmod +x ${DESKTOP_FILE} && \
 echo "  DONE" || echo "  FAIL"
 
 msg="BCE: Creating BCE desktop help icon..."
+echo $msg
 ( cat <<EOF > /etc/cron.d/update-bce-docs
 # Retrieve and cache a valid copy of BCE documentation for off-line access.
 
