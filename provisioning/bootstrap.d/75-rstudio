@@ -1,7 +1,5 @@
-
-msg="BCE: Installing RStudio and RStudio Server..."
-echo "$msg"
-RS_V=0.99.484
+echo "BCE: Installing RStudio and RStudio Server..."
+RS_V=0.99.902
 
 for URL in \
 	"http://download1.rstudio.org/rstudio-${RS_V}-amd64.deb" \
