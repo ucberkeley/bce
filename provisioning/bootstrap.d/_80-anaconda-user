@@ -2,38 +2,8 @@
 # separate conda invocations within separate sudos, the "activate" will only
 # exist as long as sudo's subshell.
 
-function manual_install_conda_packages() {
-
-	arg=$1
-
-	if [ -z "$arg" -o "$arg" == "2" ]; then
-		# These pipbuild packages are not compatible with Python 3.
-		pb="rpy2==2.5.6 singledispatch==3.4.0.3"
-
-		# Not available via conda yet
-		echo "BCE: Installing packages with conda pipbuild..."
-
-		for pv in $pb ; do
-			p=${pv/==*/}
-			v=${pv/*==/}
-
-			echo "BCE:   ${pv}"
-			conda pipbuild ${p}	--release ${v}
-			conda install --yes --use-local ${pv}
-		done && \
-		echo "  DONE" || echo "  FAIL"
-	fi
-
-	# These do not pipbuild cleanly
-	PIPINSTALL="sklearn-pandas==0.0.9 datascience==0.3.dev21"
-
-	for pi in ${PIPINSTALL} ; do
-		pip install ${pi}
-	done
-}
-
 # Main
-url="http://repo.continuum.io/miniconda/Miniconda-3.9.1-Linux-x86_64.sh"
+url="http://repo.continuum.io/miniconda/Miniconda3-4.0.5-Linux-x86_64.sh"
 install_script="$(basename ${url})"
 
 if [ ! -f /tmp/${install_script} ]; then
@@ -47,47 +17,53 @@ bash /tmp/${install_script} -b && \
 echo "  DONE" || echo "  FAIL"
 
 # We default to Anaconda. 
-echo "BCE: Prepending miniconda to PATH..."
+echo "BCE: Prepending miniconda3 to PATH..."
 (
 	echo
 	echo '# BCE: Added by bootstrap'
-	echo 'export PATH=${HOME}/miniconda/bin:${PATH}'
+	echo 'export PATH=${HOME}/miniconda3/bin:${PATH}'
 ) | tee -a ${HOME}/.bashrc ${HOME}/.profile
 
-source ${HOME}/miniconda/bin/activate ${HOME}/miniconda
+source ${HOME}/miniconda3/bin/activate ${HOME}/miniconda3
 
 # These can only be in the root environment
-echo "BCE: Installing python 2.7 packages with conda..."
-conda install --yes conda==3.13.0 conda-build==1.13.0 conda-env==2.1.4
+echo "BCE: Installing python3 packages with conda..."
+for p in $(cat /tmp/packages/conda-requirements-py35.txt); do
+	conda install --yes ${p}
+done && \
+echo "  DONE" || echo "  FAIL"
+
+for p in $(cat /tmp/packages/pip-requirements-py35.txt); do
+	pip install ${p}
+done && \
+echo "  DONE" || echo "  FAIL"
+
+echo "BCE: Installing python2 packages with conda..."
+conda create --yes -n py27 python=2.7 && \
+source activate py27
 
 for p in $(cat /tmp/packages/conda-requirements-py27.txt); do
 	conda install --yes ${p}
 done && \
 echo "  DONE" || echo "  FAIL"
 
-manual_install_conda_packages
+echo "BCE: Installing python 2.7 packages with conda..."
+for p in $(cat /tmp/packages/pip-requirements-py27.txt); do
+	pip install ${p}
+done && \
+echo "  DONE" || echo "  FAIL"
 
 # All of these fail
 # conda install pp
 # conda pipbuild pp
-echo "BCE: Installing parallel python..."
+echo "BCE: Installing parallel python for python2..."
 PP_VERSION=1.6.5
-pip install --allow-external pp pp==${PP_VERSION} && \
+pip install --allow-external pp --allow-unverified pp pp==${PP_VERSION} && \
 echo "  DONE" || echo "  FAIL"
 
-echo "BCE: Installing python 3.4 packages with conda..."
-conda create --yes -n py34 python=3.4 && \
-source activate py34
-for p in $(cat /tmp/packages/conda-requirements-py34.txt); do
-	conda install --yes ${p}
-done && \
-echo "  DONE" || echo "  FAIL"
-
-echo "BCE: Update IPython profile to include Python 3.4 kernel..."
+echo "BCE: Update IPython profile to include Python 2.7 kernel..."
 ipython kernelspec install-self --user && \
 echo "  DONE" || echo "  FAIL"
-
-manual_install_conda_packages 3.4
 
 echo "BCE: Deleting binstar token..."
 rm -f "${HOME}/.config/binstar/https%3A%2F%2Fapi.binstar.org.token" && \
