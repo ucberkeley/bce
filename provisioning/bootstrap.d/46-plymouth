@@ -1,13 +1,18 @@
+# This doesn't work on recent Debian/Ubuntu
+# https://www.virtualbox.org/ticket/14503#comment:1
+# https://forums.virtualbox.org/viewtopic.php?f=3&t=69765
+return
+
 if [ "${PACKER_BUILDER_TYPE}" == "amazon-ebs" ]; then return ; fi
 
 msg="BCE: Configure plymouth"
 echo "$msg"
-cp -a /tmp/bce /lib/plymouth/themes/ && \
+cp -a /tmp/bce /usr/share/plymouth/themes/ && \
 echo "FRAMEBUFFER=y" > /etc/initramfs-tools/conf.d/splash && \
 update-alternatives --install \
-	/lib/plymouth/themes/default.plymouth default.plymouth \
-	/lib/plymouth/themes/bce/bce.plymouth 200 && \
+	/usr/share/plymouth/themes/default.plymouth default.plymouth \
+	/usr/share/plymouth/themes/bce/bce.plymouth 200 && \
 update-alternatives --set default.plymouth \
-	/lib/plymouth/themes/bce/bce.plymouth && \
+	/usr/share/plymouth/themes/bce/bce.plymouth && \
 /usr/sbin/update-initramfs -u && \
 ( echo "  DONE" ; etckeeper commit "$msg" ) || echo "  FAIL"
