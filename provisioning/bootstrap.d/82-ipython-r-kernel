@@ -5,7 +5,7 @@
 msg="BCE: Install IR packages."
 echo "$msg"
 Rscript -e \
-	"install.packages(c('rzmq', 'IRkernel', 'IRdisplay'), repos = c('http://irkernel.github.io/', getOption('repos')), type='source')" && \
+	"install.packages(c('rzmq', 'IRkernel', 'IRdisplay'), repos = c('https://irkernel.github.io/', getOption('repos')), type='source')" && \
 echo "  DONE" || echo "  FAIL"
 
 msg="BCE: Install IR kernel spec."
