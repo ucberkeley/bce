@@ -9,6 +9,7 @@ cssselect==0.9.1
 cython==0.24
 idna==2.1
 ipython==4.2.0
+ipyparallel==5.2.0
 jinja2==2.8
 jsonschema==2.5.1
 jupyter==1.0.0

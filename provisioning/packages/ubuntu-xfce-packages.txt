@@ -1,0 +1,8 @@
+# Minimal XFCE4 environment
+thunar-vcs-plugin
+thunar-archive-plugin
+thunar-media-tags-plugin
+lightdm
+xfce4
+xfce4-terminal
+xubuntu-default-settings

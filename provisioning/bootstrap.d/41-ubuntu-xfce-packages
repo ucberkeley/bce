@@ -1,0 +1,15 @@
+# don't pull in xfce packages (in particular lightdm, as that
+# pulls in upstart and causes problems in starting CFNcluster instances)
+if [ "${PACKER_BUILDER_TYPE}" == "amazon-ebs" ]; then
+        echo "  SKIP"
+        return
+fi
+
+echo "BCE: Installing Ubuntu XFCE-related packages..."
+# The grep bit allows us to have comments in the packages file
+$APT_GET install --fix-missing \
+         $(grep '^[^#]' /tmp/packages/ubuntu-xfce-packages.txt) && \
+# help avoid running out of disk space
+$APT_GET clean && \
+         echo "  DONE"  || echo "  FAIL"
+
