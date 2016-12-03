@@ -7,6 +7,11 @@
 
   "builders": [
     {
+        "type": "docker",
+        "image": "ubuntu:16.04",
+        "commit": true
+    },
+    {
       "type": "amazon-ebs",
       "name": "amazon-cfn",
       "ami_name": "BCE-{{user `bce_version`}}-cfncluster-preview",
