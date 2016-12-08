@@ -11,3 +11,17 @@ export DESKTOP_DIR="/home/${BCE_USER}/.local/share/applications"
 
 echo "Environment:"
 env
+
+if [ "${PACKER_BUILDER_TYPE}" == "docker" ]; then
+        $APT_GET update
+	$APT_GET install sudo rsync
+	mkdir /tmp/ubuntu
+	rsync -av /home/ubuntu /tmp/
+	rm -rf /home/ubuntu 	
+	adduser --disabled-password --gecos " " ubuntu 
+	rsync -av /tmp/ubuntu/ /home/ubuntu/
+	chown -R ubuntu /home/ubuntu
+	$APT_GET install nano apt-transport-https
+fi
+
+

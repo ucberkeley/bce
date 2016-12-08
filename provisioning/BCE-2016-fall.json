@@ -171,12 +171,12 @@
     {
       "type": "file",
       "source": "packages",
-      "destination": "/tmp/packages"
+      "destination": "/tmp"
     },
     {
       "type": "file",
       "source": "bootstrap.d",
-      "destination": "/tmp/bootstrap.d"
+      "destination": "/tmp"
     },
     {
       "type": "shell",
@@ -185,7 +185,7 @@
                            "DEBIAN_FRONTEND=noninteractive",
 			   "BCE_USER={{user `bce_user`}}",
 			   "BCE_VERSION={{user `bce_version`}}"],
-      "execute_command": "echo '{{user `bce_user`}}' | {{ .Vars }} sudo -E -S bash '{{ .Path }}'"
+      "execute_command": "echo '{{user `bce_user`}}' | {{ .Vars }} bash '{{ .Path }}'"
     },
     {
       "type": "file",

@@ -1,6 +1,7 @@
 # The grub video mode increases the boot resolution from 640x480.
 
 if [ "${PACKER_BUILDER_TYPE}" == "amazon-ebs" ]; then return ; fi
+if [ "${PACKER_BUILDER_TYPE}" == "docker" ]; then return; fi
 
 # Hide the grub boot menu
 # Enable plymouth splash screen (disabled due to plymouth/drm issue)
