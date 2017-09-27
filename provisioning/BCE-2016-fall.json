@@ -9,7 +9,12 @@
     {
         "type": "docker",
         "image": "ubuntu:16.04",
-        "commit": true
+        "commit": true,
+	"changes": [
+		"WORKDIR /tmp",
+		"ONBUILD RUN useradd ubuntu",
+		"ONBUILD RUN mkdir /home/ubuntu"
+        ]
     },
     {
       "type": "amazon-ebs",
